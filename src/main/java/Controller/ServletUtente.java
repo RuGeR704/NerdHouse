@@ -1,11 +1,13 @@
+package Controller;
+
 import java.io.IOException;
 import java.io.PrintWriter;
-import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.*;
+import jakarta.servlet.annotation.WebServlet;
+import jakarta.servlet.http.*;
 
-@WebServlet("/Servletutente")
-public class Servletutente extends HttpServlet {
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
+@WebServlet("/ServletUtente")
+public class ServletUtente extends HttpServlet {
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
 
         String nome = request.getParameter("nome");
         String cognome = request.getParameter("cognome");
@@ -28,6 +30,10 @@ public class Servletutente extends HttpServlet {
         out.println("<p>ID: " + id + "</p>");
         out.println("<p>Telefono: " + telefono + "</p>");
         out.println("</body></html>");
+    }
+
+    public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        doGet(request, response);
     }
 }
 
