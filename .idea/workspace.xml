@@ -9,9 +9,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e68e6447-583a-4dc7-bf39-39fcf0f11fef" name="Changes" comment="creazione beans">
+    <list default="true" id="e68e6447-583a-4dc7-bf39-39fcf0f11fef" name="Changes" comment="correzione servlet">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Servletutente.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controller/ServletUtente.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/login.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Controller/ServletUtente.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controller/RegistrationServlet.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/index.jsp" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -79,6 +81,7 @@
 }</component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\Rafus\IdeaProjects\russo-disalvio-greco_pj\src\main\webapp" />
       <recent name="C:\Users\Rafus\IdeaProjects\russo-disalvio-greco_pj\src\main\java\Controller" />
     </key>
   </component>
@@ -140,7 +143,7 @@
       <updated>1747141778903</updated>
       <workItem from="1747141780035" duration="1367000" />
       <workItem from="1747145339125" duration="3348000" />
-      <workItem from="1747149459891" duration="548000" />
+      <workItem from="1747149459891" duration="3530000" />
     </task>
     <task id="LOCAL-00001" summary="inizio progetto">
       <option name="closed" value="true" />
@@ -158,7 +161,15 @@
       <option name="project" value="LOCAL" />
       <updated>1747148255472</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="correzione servlet">
+      <option name="closed" value="true" />
+      <created>1747150042639</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1747150042639</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -178,6 +189,7 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="inizio progetto" />
     <MESSAGE value="creazione beans" />
-    <option name="LAST_COMMIT_MESSAGE" value="creazione beans" />
+    <MESSAGE value="correzione servlet" />
+    <option name="LAST_COMMIT_MESSAGE" value="correzione servlet" />
   </component>
 </project>

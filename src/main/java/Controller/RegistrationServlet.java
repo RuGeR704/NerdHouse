@@ -5,8 +5,8 @@ import java.io.PrintWriter;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.*;
 
-@WebServlet("/ServletUtente")
-public class ServletUtente extends HttpServlet {
+@WebServlet(name = "RegistrationServlet", value = "/servlet-registrazione")
+public class RegistrationServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
 
         String nome = request.getParameter("nome");
