@@ -4,6 +4,7 @@ import java.math.BigInteger;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.sql.Date;
 import java.time.LocalDate;
 
 public class Utente {
@@ -13,7 +14,7 @@ public class Utente {
     private String email;
     private String password;
     private String indirizzo;
-    private LocalDate dataNascita;
+    private Date dataNascita;
     private String telefono;
 
     public int getId() {
@@ -72,11 +73,11 @@ public class Utente {
         this.indirizzo = indirizzo;
     }
 
-    public LocalDate getDataNascita() {
+    public Date getDataNascita() {
         return dataNascita;
     }
 
-    public void setDataNascita(LocalDate dataNascita) {
+    public void setDataNascita(Date dataNascita) {
         this.dataNascita = dataNascita;
     }
 

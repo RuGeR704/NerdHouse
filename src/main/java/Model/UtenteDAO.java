@@ -1,0 +1,74 @@
+package Model;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
+public class UtenteDAO {
+
+    public void doSave(Utente utente) throws SQLException {
+
+        try (Connection con = ConPool.getConnection()) {
+            PreparedStatement ps = con.prepareStatement("INSERT INTO Utente (Nome, Cognome, Email, Password, Data_Nascita, Indirizzo, Telefono) VALUES(?,?,?,?,?,?,?)");
+            ps.setString(1, utente.getNome());
+            ps.setString(2, utente.getCognome());
+            ps.setString(3, utente.getEmail());
+            ps.setString(4, utente.getPassword());
+            ps.setDate(5, utente.getDataNascita());
+            ps.setString(6, utente.getIndirizzo());
+            ps.setString(7, utente.getTelefono());
+
+            int rows = ps.executeUpdate();
+            System.out.println("Righe inserite: " + rows);
+            if (rows != 1) {
+                throw new RuntimeException("INSERT ERROR");
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+    }
+
+    public Utente doRetrieveByUsernamePassword(String username, String password) throws SQLException {
+        String query = "SELECT * FROM Utente WHERE username = ? AND password = SHA1(?)";
+
+        ResultSet rs = null;
+        Utente utente = null;
+
+        try (Connection con = ConPool.getConnection()) {
+
+            PreparedStatement ps = con.prepareStatement(query);
+            //Imposta i parametri nella query
+            ps.setString(1, username);
+            ps.setString(2, password);
+
+            //Esecuzione query
+            rs = ps.executeQuery();
+
+            //Se ci sono risultati allora crea l'oggetto UTENTE
+            if (rs.next()) {
+                utente = new Utente();
+                utente.setId(rs.getInt("id"));
+                utente.setNome(rs.getString("nome"));
+                utente.setCognome(rs.getString("cognome"));
+                utente.setEmail(rs.getString("email"));
+                utente.setPassword(rs.getString("password"));
+                utente.setDataNascita(rs.getDate("data_nascita"));
+                utente.setIndirizzo(rs.getString("indirizzo"));
+                utente.setTelefono(rs.getString("telefono"));
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } finally {
+            try {
+                if (rs != null) {
+                    rs.close();
+                }
+            } catch (SQLException ex) {
+                throw new RuntimeException(ex);
+            }
+        }
+        return utente;
+    }
+}
