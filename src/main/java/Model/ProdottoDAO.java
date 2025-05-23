@@ -1,0 +1,108 @@
+package Model;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+
+public class ProdottoDAO {
+
+    public Prodotto doRetrieveById(int id) {
+
+        try(Connection con = ConPool.getConnection()) {
+            String query = "SELECT * FROM PRODOTTO WHERE ID_Prodotto = ?";
+            PreparedStatement ps = con.prepareStatement(query);
+
+            //Imposta ID Prodotto
+            ps.setInt(1, id);
+
+            //Creazione prodotto dal database
+            ResultSet rs = ps.executeQuery();
+            rs.next();
+
+            Prodotto prodotto = new Prodotto();
+            prodotto.setId_prodotto(rs.getInt("ID_Prodotto"));
+            prodotto.setTitolo(rs.getString("Titolo"));
+            prodotto.setDescrizione(rs.getString("Descrizione"));
+            prodotto.setPrezzo(rs.getFloat("Prezzo"));
+            prodotto.setAutore(rs.getString("Autore"));
+            prodotto.setDataUscita(rs.getDate("DataUscita"));
+            prodotto.setEditore(rs.getString("Editore"));
+            prodotto.setDisponibilità(rs.getBoolean("Disponibilita"));
+            prodotto.setLingua(rs.getString("Lingua"));
+            prodotto.setId_categoria(rs.getInt("Id_categoria"));
+
+            return prodotto;
+
+        } catch (SQLException e) {
+            throw new RuntimeException();
+        }
+    }
+
+    public List<Prodotto> doRetrieveAll() {
+
+        try(Connection con = ConPool.getConnection()) {
+            String query = "SELECT Titolo, Prezzo, Descrizione, Lingua, Prezzo, Data_Uscita, Editore, Disponibilità, ID_Categoria  FROM PRODOTTO";
+            ResultSet rs = con.prepareStatement(query).executeQuery();
+
+            List<Prodotto> prodotti = new ArrayList<Prodotto>();
+
+            //Creazione lista prodotti
+            while (rs.next()) {
+                Prodotto prodotto = new Prodotto();
+                prodotto.setId_prodotto(rs.getInt("ID_Prodotto"));
+                prodotto.setTitolo(rs.getString("Titolo"));
+                prodotto.setPrezzo(rs.getFloat("Prezzo"));
+                prodotto.setDescrizione(rs.getString("Descrizione"));
+                prodotto.setLingua(rs.getString("Lingua"));
+                prodotto.setPrezzo(rs.getFloat("Prezzo"));
+                prodotto.setDataUscita(rs.getDate("DataUscita"));
+                prodotto.setEditore(rs.getString("Editore"));
+                prodotto.setDisponibilità(rs.getBoolean("Disponibilita"));
+                prodotto.setId_categoria(rs.getInt("Id_categoria"));
+                prodotti.add(prodotto);
+            }
+
+            return prodotti;
+
+        } catch (SQLException e){
+            throw new RuntimeException();
+        }
+    }
+
+    public List<Prodotto> doRetrievebyCategoria(int ID_categoria) {
+
+        try(Connection con = ConPool.getConnection()) {
+            String query = "SELECT * FROM PRODOTTO WHERE Id_categoria = ?";
+            PreparedStatement ps = con.prepareStatement(query);
+            ps.setInt(1, ID_categoria);
+
+            ResultSet rs = ps.executeQuery();
+
+            List<Prodotto> prodotti = new ArrayList<Prodotto>();
+
+            //Creazione lista prodotti
+            while (rs.next()) {
+                Prodotto prodotto = new Prodotto();
+                prodotto.setId_prodotto(rs.getInt("ID_Prodotto"));
+                prodotto.setTitolo(rs.getString("Titolo"));
+                prodotto.setPrezzo(rs.getFloat("Prezzo"));
+                prodotto.setDescrizione(rs.getString("Descrizione"));
+                prodotto.setLingua(rs.getString("Lingua"));
+                prodotto.setPrezzo(rs.getFloat("Prezzo"));
+                prodotto.setDataUscita(rs.getDate("DataUscita"));
+                prodotto.setEditore(rs.getString("Editore"));
+                prodotto.setDisponibilità(rs.getBoolean("Disponibilita"));
+                prodotto.setId_categoria(rs.getInt("Id_categoria"));
+                prodotti.add(prodotto);
+            }
+
+            return prodotti;
+
+        } catch (SQLException e) {
+            throw new RuntimeException();
+        }
+    }
+}

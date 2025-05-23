@@ -1,5 +1,6 @@
 package Model;
 
+import java.sql.Date;
 import java.time.LocalDate;
 
 public class Prodotto {
@@ -10,7 +11,7 @@ public class Prodotto {
     private double prezzo;
     private String lingua;
     private String autore;
-    private LocalDate dataUscita;
+    private Date dataUscita;
     private String editore;
     private boolean disponibilità;
 
@@ -70,11 +71,11 @@ public class Prodotto {
         this.autore = autore;
     }
 
-    public LocalDate getDataUscita() {
+    public Date getDataUscita() {
         return dataUscita;
     }
 
-    public void setDataUscita(LocalDate dataUscita) {
+    public void setDataUscita(Date dataUscita) {
         this.dataUscita = dataUscita;
     }
 
