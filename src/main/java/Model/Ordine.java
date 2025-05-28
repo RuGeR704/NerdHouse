@@ -6,6 +6,7 @@ public class Ordine {
     private String pagamento;
     private String indirizzoOrdine;
     private String stato;
+    private String Data_Ordine;
 
     public int getId_utente() {
         return id_utente;
@@ -45,5 +46,13 @@ public class Ordine {
 
     public void setStato(String stato) {
         this.stato = stato;
+    }
+
+    public String getData_Ordine() {
+        return pagamento;
+    }
+
+    public void setData_Ordine(String Data_Ordine) {
+        this.Data_Ordine = Data_Ordine;
     }
 }
