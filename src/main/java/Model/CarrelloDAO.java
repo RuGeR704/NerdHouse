@@ -1,7 +1,4 @@
-package Model.DAO;
-
-import Model.Bean.Carrello;
-import Model.Connessione.ConPool;
+package Model;
 
 import java.sql.*;
 import java.util.ArrayList;
