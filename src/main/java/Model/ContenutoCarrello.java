@@ -3,7 +3,7 @@ package Model;
 public class ContenutoCarrello {
     private int idCarrello;
     private int idProdotto;
-    private int quantità;
+    private int quantita;
 
     public int getIdCarrello() {
         return idCarrello;
@@ -21,11 +21,11 @@ public class ContenutoCarrello {
         this.idProdotto = idProdotto;
     }
 
-    public int getQuantità() {
-        return quantità;
+    public int getQuantita() {
+        return quantita;
     }
 
-    public void setQuantità(int quantità) {
-        this.quantità = quantità;
+    public void setQuantita(int quantita) {
+        this.quantita = quantita;
     }
 }

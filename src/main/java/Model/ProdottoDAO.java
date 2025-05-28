@@ -30,7 +30,7 @@ public class ProdottoDAO {
             prodotto.setAutore(rs.getString("Autore"));
             prodotto.setDataUscita(rs.getDate("DataUscita"));
             prodotto.setEditore(rs.getString("Editore"));
-            prodotto.setDisponibilità(rs.getBoolean("Disponibilita"));
+            prodotto.setDisponibilita(rs.getBoolean("Disponibilita"));
             prodotto.setLingua(rs.getString("Lingua"));
             prodotto.setId_categoria(rs.getInt("Id_categoria"));
 
@@ -60,7 +60,7 @@ public class ProdottoDAO {
                 prodotto.setPrezzo(rs.getFloat("Prezzo"));
                 prodotto.setDataUscita(rs.getDate("DataUscita"));
                 prodotto.setEditore(rs.getString("Editore"));
-                prodotto.setDisponibilità(rs.getBoolean("Disponibilita"));
+                prodotto.setDisponibilita(rs.getBoolean("Disponibilita"));
                 prodotto.setId_categoria(rs.getInt("Id_categoria"));
                 prodotti.add(prodotto);
             }
@@ -94,7 +94,7 @@ public class ProdottoDAO {
                 prodotto.setPrezzo(rs.getFloat("Prezzo"));
                 prodotto.setDataUscita(rs.getDate("DataUscita"));
                 prodotto.setEditore(rs.getString("Editore"));
-                prodotto.setDisponibilità(rs.getBoolean("Disponibilita"));
+                prodotto.setDisponibilita(rs.getBoolean("Disponibilita"));
                 prodotto.setId_categoria(rs.getInt("Id_categoria"));
                 prodotti.add(prodotto);
             }

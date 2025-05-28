@@ -32,7 +32,7 @@ public class ContenutoWishlistDAO {
                     prodotto.setDataUscita(rs.getDate("Data_Uscita"));
                     prodotto.setDescrizione(rs.getString("Descrizione"));
                     prodotto.setEditore(rs.getString("Editore"));
-                    prodotto.setDisponibilità(rs.getBoolean("Disponibilita"));
+                    prodotto.setDisponibilita(rs.getBoolean("Disponibilita"));
                     prodotto.setId_categoria(rs.getInt("ID_Categoria"));
 
                     prodotti.add(prodotto);

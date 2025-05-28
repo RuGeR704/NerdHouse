@@ -1,49 +1,78 @@
 package Model;
 
 import java.sql.*;
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
 public class ContenutoCarrelloDAO {
 
-    public List<Prodotto> doRetrieveProdottiByIdCarrello(int idCarrello) {
-        List<Prodotto> prodotti = new ArrayList<>();
+    public void doSave(int idCarrello, int idProdotto, int quantita) {
+        String sql = "INSERT INTO Contenuto_Carrello (ID_Carrello, ID_Prodotto, Quantita) VALUES (?, ?, ?)";
+        try (Connection con = ConPool.getConnection();
+             PreparedStatement ps = con.prepareStatement(sql)) {
+            ps.setInt(1, idCarrello);
+            ps.setInt(2, idProdotto);
+            ps.setInt(3, quantita);
+            ps.executeUpdate();
+        } catch (SQLException e) {
+            throw new RuntimeException("Errore nel salvataggio del contenuto del carrello", e);
+        }
+    }
 
-        String sql = """
-            SELECT p.*
-            FROM Contenuto_Carrello cc
-            JOIN Prodotto p ON cc.ID_Prodotto = p.ID_Prodotto
-            WHERE cc.ID_Carrello = ?
-        """;
+    public void doUpdate(int idCarrello, int idProdotto, int nuovaQuantita) {
+        String sql = "UPDATE Contenuto_Carrello SET Quantita = ? WHERE ID_Carrello = ? AND ID_Prodotto = ?";
+        try (Connection con = ConPool.getConnection();
+             PreparedStatement ps = con.prepareStatement(sql)) {
+            ps.setInt(1, nuovaQuantita);
+            ps.setInt(2, idCarrello);
+            ps.setInt(3, idProdotto);
+            ps.executeUpdate();
+        } catch (SQLException e) {
+            throw new RuntimeException("Errore nell'aggiornamento del contenuto del carrello", e);
+        }
+    }
 
-        try (Connection conn = ConPool.getConnection();
-             PreparedStatement stmt = conn.prepareStatement(sql)) {
+    public void doDelete(int idCarrello, int idProdotto) {
+        String sql = "DELETE FROM Contenuto_Carrello WHERE ID_Carrello = ? AND ID_Prodotto = ?";
+        try (Connection con = ConPool.getConnection();
+             PreparedStatement ps = con.prepareStatement(sql)) {
+            ps.setInt(1, idCarrello);
+            ps.setInt(2, idProdotto);
+            ps.executeUpdate();
+        } catch (SQLException e) {
+            throw new RuntimeException("Errore nella rimozione del prodotto dal carrello", e);
+        }
+    }
 
-            stmt.setInt(1, idCarrello);
-
-            try (ResultSet rs = stmt.executeQuery()) {
+    public List<ContenutoCarrello> doRetrieveByCarrelloId(int idCarrello) {
+        List<ContenutoCarrello> contenuti = new ArrayList<>();
+        String sql = "SELECT ID_Prodotto, Quantita FROM Contenuto_Carrello WHERE ID_Carrello = ?";
+        try (Connection con = ConPool.getConnection();
+             PreparedStatement ps = con.prepareStatement(sql)) {
+            ps.setInt(1, idCarrello);
+            try (ResultSet rs = ps.executeQuery()) {
                 while (rs.next()) {
-                    Prodotto prodotto = new Prodotto();
-                    prodotto.setId_prodotto(rs.getInt("ID_Prodotto"));
-                    prodotto.setTitolo(rs.getString("Titolo"));
-                    prodotto.setPrezzo(rs.getDouble("Prezzo"));
-                    prodotto.setLingua(rs.getString("Lingua"));
-                    prodotto.setAutore(rs.getString("Autore"));
-                    prodotto.setDataUscita(rs.getDate("Data_Uscita").toLocalDate());
-                    prodotto.setDescrizione(rs.getString("Descrizione"));
-                    prodotto.setEditore(rs.getString("Editore"));
-                    prodotto.setDisponibilità(rs.getBoolean("Disponibilita"));
-                    prodotto.setId_categoria(rs.getInt("ID_Categoria"));
-
-                    prodotti.add(prodotto);
+                    ContenutoCarrello c = new ContenutoCarrello();
+                    c.setIdCarrello(idCarrello);
+                    c.setIdProdotto(rs.getInt("ID_Prodotto"));
+                    c.setQuantita(rs.getInt("quantita"));
+                    contenuti.add(c);
                 }
             }
-
         } catch (SQLException e) {
-            e.printStackTrace(); // Usa un logger in ambienti reali
+            throw new RuntimeException("Errore nel recupero del contenuto del carrello", e);
         }
+        return contenuti;
+    }
 
-        return prodotti;
+    public void doDeleteAllByCarrelloId(int idCarrello) {
+        String sql = "DELETE FROM Contenuto_Carrello WHERE ID_Carrello = ?";
+        try (Connection con = ConPool.getConnection();
+             PreparedStatement ps = con.prepareStatement(sql)) {
+            ps.setInt(1, idCarrello);
+            ps.executeUpdate();
+        } catch (SQLException e) {
+            throw new RuntimeException("Errore nella cancellazione di tutti i contenuti del carrello", e);
+        }
     }
 }

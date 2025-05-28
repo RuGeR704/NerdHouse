@@ -8,12 +8,12 @@ public class Prodotto {
     private int id_categoria;
     private String titolo;
     private String descrizione;
-    private double prezzo;
+    private double prezzo;;
     private String lingua;
     private String autore;
     private Date dataUscita;
     private String editore;
-    private boolean disponibilità;
+    private boolean disponibilita;
 
     public int getId_prodotto() {
         return id_prodotto;
@@ -88,10 +88,10 @@ public class Prodotto {
     }
 
     public boolean isDisponibilità() {
-        return disponibilità;
+        return disponibilita;
     }
 
-    public void setDisponibilità(boolean disponibilità) {
-        this.disponibilità = disponibilità;
+    public void setDisponibilita(boolean disponibilita) {
+        this.disponibilita = disponibilita;
     }
 }
