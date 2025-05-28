@@ -1,58 +1,31 @@
 package Model;
 
+import java.sql.Timestamp;
+
 public class Ordine {
-    private int id_utente;
-    private int id_prodotto;
+    private int idUtente;
+    private int idProdotto;
     private String pagamento;
     private String indirizzoOrdine;
     private String stato;
-    private String Data_Ordine;
+    private Timestamp dataOrdine;
 
-    public int getId_utente() {
-        return id_utente;
-    }
+    // Getter e Setter
+    public int getIdUtente() { return idUtente; }
+    public void setIdUtente(int idUtente) { this.idUtente = idUtente; }
 
-    public void setId_utente(int id_utente) {
-        this.id_utente = id_utente;
-    }
+    public int getIdProdotto() { return idProdotto; }
+    public void setIdProdotto(int idProdotto) { this.idProdotto = idProdotto; }
 
-    public int getId_prodotto() {
-        return id_prodotto;
-    }
+    public String getPagamento() { return pagamento; }
+    public void setPagamento(String pagamento) { this.pagamento = pagamento; }
 
-    public void setId_prodotto(int id_prodotto) {
-        this.id_prodotto = id_prodotto;
-    }
+    public String getIndirizzoOrdine() { return indirizzoOrdine; }
+    public void setIndirizzoOrdine(String indirizzoOrdine) { this.indirizzoOrdine = indirizzoOrdine; }
 
-    public String getPagamento() {
-        return pagamento;
-    }
+    public String getStato() { return stato; }
+    public void setStato(String stato) { this.stato = stato; }
 
-    public void setPagamento(String pagamento) {
-        this.pagamento = pagamento;
-    }
-
-    public String getIndirizzoOrdine() {
-        return indirizzoOrdine;
-    }
-
-    public void setIndirizzoOrdine(String indirizzoOrdine) {
-        this.indirizzoOrdine = indirizzoOrdine;
-    }
-
-    public String getStato() {
-        return stato;
-    }
-
-    public void setStato(String stato) {
-        this.stato = stato;
-    }
-
-    public String getData_Ordine() {
-        return pagamento;
-    }
-
-    public void setData_Ordine(String Data_Ordine) {
-        this.Data_Ordine = Data_Ordine;
-    }
+    public Timestamp getDataOrdine() { return dataOrdine; }
+    public void setDataOrdine(Timestamp dataOrdine) { this.dataOrdine = dataOrdine; }
 }
