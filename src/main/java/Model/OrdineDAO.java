@@ -1,4 +1,4 @@
-package model;
+package Model;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -11,12 +11,12 @@ public class OrdineDAO {
             PreparedStatement ps = con.prepareStatement(
                     "INSERT INTO Ordine (ID_Utente, ID_Prodotto, Pagamento, Indirizzo_Ordine, Stato, Data_Ordine) VALUES (?, ?, ?, ?, ?, ?)"
             );
-            ps.setInt(1, ordine.getIdUtente());
-            ps.setInt(2, ordine.getIdProdotto());
+            ps.setInt(1, ordine.getId_utente());
+            ps.setInt(2, ordine.getId_prodotto());
             ps.setString(3, ordine.getPagamento());
             ps.setString(4, ordine.getIndirizzoOrdine());
             ps.setString(5, ordine.getStato());
-            ps.setTimestamp(6, ordine.getDataOrdine());
+            ps.setTimestamp(6, ordine.getData_Ordine());
             ps.executeUpdate();
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -33,7 +33,7 @@ public class OrdineDAO {
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
                 Ordine o = new Ordine();
-                o.setIdUtente(rs.getInt("ID_Utente"));
+                o.setId_utente(rs.getInt("ID_Utente"));
                 o.setIdProdotto(rs.getInt("ID_Prodotto"));
                 o.setPagamento(rs.getString("Pagamento"));
                 o.setIndirizzoOrdine(rs.getString("Indirizzo_Ordine"));
