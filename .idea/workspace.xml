@@ -9,16 +9,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e68e6447-583a-4dc7-bf39-39fcf0f11fef" name="Changes" comment="CategoriaDAO e ProdottoDAO">
-      <change afterPath="$PROJECT_DIR$/src/main/java/Controller/UserAreaServlet.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/AreaUtente.jsp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/css/styles.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/registrazione.html" afterDir="false" />
+    <list default="true" id="e68e6447-583a-4dc7-bf39-39fcf0f11fef" name="Changes" comment="inizio css e AreaUtente, poi rifinitura login e registrazione">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/AreaUtente.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/AreaUtente.jsp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/error.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/error.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/home.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/login.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/login.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/login.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/login.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/registrazione.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/registrazione.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -63,33 +59,33 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "JavaScript Debug.AreaUtente.jsp.executor": "Run",
-    "JavaScript Debug.error.jsp.executor": "Run",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "Tomcat Server.AreaUtente.jsp.executor": "Run",
-    "Tomcat Server.Tomcat .executor": "Run",
-    "git-widget-placeholder": "main",
-    "ignore.virus.scanning.warn.message": "true",
-    "kotlin-language-version-configured": "true",
-    "list.type.of.created.stylesheet": "CSS",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "project.structure.last.edited": "Modules",
-    "project.structure.proportion": "0.0",
-    "project.structure.side.proportion": "0.0",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;JavaScript Debug.AreaUtente.jsp.executor&quot;: &quot;Run&quot;,
+    &quot;JavaScript Debug.error.jsp.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;Tomcat Server.AreaUtente.jsp.executor&quot;: &quot;Run&quot;,
+    &quot;Tomcat Server.Tomcat .executor&quot;: &quot;Run&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;list.type.of.created.stylesheet&quot;: &quot;CSS&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   },
-  "keyToStringList": {
-    "DatabaseDriversLRU": [
-      "mysql"
+  &quot;keyToStringList&quot;: {
+    &quot;DatabaseDriversLRU&quot;: [
+      &quot;mysql&quot;
     ]
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\Rafus\IdeaProjects\russo-disalvio-greco_pj\src\main\webapp" />
@@ -215,7 +211,8 @@
       <workItem from="1748505247581" duration="29000" />
       <workItem from="1749817788668" duration="104000" />
       <workItem from="1750079357005" duration="474000" />
-      <workItem from="1750671494352" duration="12654000" />
+      <workItem from="1750671494352" duration="12769000" />
+      <workItem from="1750699869177" duration="689000" />
     </task>
     <task id="LOCAL-00001" summary="inizio progetto">
       <option name="closed" value="true" />
@@ -257,7 +254,15 @@
       <option name="project" value="LOCAL" />
       <updated>1747316085029</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="inizio css e AreaUtente, poi rifinitura login e registrazione">
+      <option name="closed" value="true" />
+      <created>1750690269631</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1750690269631</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -280,6 +285,7 @@
     <MESSAGE value="correzione servlet" />
     <MESSAGE value="servlet registrazione + html" />
     <MESSAGE value="UtenteDAO, pagina di successo per la registrazione, pagina di errore, pagina di login(da continuare), ConPool per la connessione al database (cambiare username e password del database altrimenti è impossibile accedere)" />
-    <option name="LAST_COMMIT_MESSAGE" value="UtenteDAO, pagina di successo per la registrazione, pagina di errore, pagina di login(da continuare), ConPool per la connessione al database (cambiare username e password del database altrimenti è impossibile accedere)" />
+    <MESSAGE value="inizio css e AreaUtente, poi rifinitura login e registrazione" />
+    <option name="LAST_COMMIT_MESSAGE" value="inizio css e AreaUtente, poi rifinitura login e registrazione" />
   </component>
 </project>

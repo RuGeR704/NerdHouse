@@ -31,12 +31,12 @@
         </div>
 
         <div class="botton-item">
-            <a href="#"><i class="fas fa-star"></i></a>
+            <a href="#"><i class="fas fa-star" title="Wishlist"></i></a>
             <span class="botton-label">Wishlist</span>
         </div>
 
         <div class="botton-item">
-            <a href="#"><i class="fas fa-shopping-cart"></i></a>
+            <a href="#"><i class="fas fa-shopping-cart" title="Carrello"></i></a>
             <span class="botton-label">Carrello</span>
         </div>
     </div>
