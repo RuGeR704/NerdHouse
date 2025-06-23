@@ -1,0 +1,204 @@
+/* Stili base */
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+}
+
+.login-page {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: gold;
+    min-height: calc(90vh - 80px); /* togli l’altezza dell’header se necessario */
+    padding: 40px 0;
+}
+
+
+header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 20px;
+    background-color: #121212;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    position: relative;
+}
+
+.logo {
+    font-size: 1.5em;
+    font-weight: bold;
+}
+
+.logo img {
+    height: 90px;
+    width: auto;
+}
+
+/* Barra di ricerca */
+.search-bar {
+    position: relative;
+    width: 100%;
+    max-width: 700px;
+}
+
+.search-bar i {
+    position: absolute;
+    top: 50%;
+    left: 12px;
+    transform: translateY(-50%);
+    color: #999;
+    font-size: 1em;
+}
+
+.search-bar input {
+    width: 100%;
+    padding: 8px 12px 8px 36px; /* padding sinistro per l'icona */
+    border: 5px solid #ccc;
+    border-radius: 20px;
+    border-color: gold;
+    font-size: 1em;
+}
+
+/* Contenitore principale delle icone */
+.header-botton {
+    display: flex;
+    gap: 16px;
+    align-items: center;
+}
+
+/* Contenitore singola icona + label */
+.botton-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    cursor: pointer;
+}
+
+/* Label sotto le icone */
+.botton-label {
+    font-size: 0.8em;
+    margin-top: 4px;
+    color: #555;
+}
+
+/* Icone generiche */
+.header-botton i {
+    color: darkred;
+    font-size: 2.5em;
+    transition: color 0.3s ease;
+}
+
+/* Hover su tutte le icone */
+.header-botton i:hover {
+    color: gold;
+}
+
+/* Login */
+.login-container {
+    background-color: #fff;
+    padding: 40px 30px;
+    border-radius: 10px;
+    box-shadow: 0 0 12px rgba(0,0,0,0.1);
+    width: 300px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+}
+
+.login-container h2 {
+    margin-bottom: 20px;
+    color: #333;
+}
+
+.login-container input {
+    width: 100%;
+    padding: 10px;
+    margin: 8px 0;
+    border: 4px solid #ccc;
+    border-radius: 10px;
+    box-sizing: border-box;
+}
+
+.login-container button {
+    width: 100%;
+    padding: 10px;
+    margin-top: 12px;
+    background-color: darkred;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.login-container button:hover {
+    background-color: #aa0000;
+}
+
+.register-message {
+    margin-top: 15px;
+    font-size: 0.9em;
+    color: #555;
+}
+
+.register-message a {
+    color: darkred;
+    text-decoration: none;
+}
+
+.register-message a:hover {
+    text-decoration: underline;
+}
+
+/* Registrazione */
+
+.register-container {
+    background-color: #ffffff;
+    padding: 40px 30px;
+    border-radius: 10px;
+    box-shadow: 0 0 12px rgba(0,0,0,0.1);
+    width: 500px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+}
+
+.register-container h2 {
+    margin-bottom: 20px;
+    color: #333;
+}
+
+.register-container h1 {
+    font-size: 2.2em;
+    font-weight: 700;
+    color: #000000;
+    margin-bottom: 20px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.register-container input {
+    width: 100%;
+    padding: 10px;
+    margin: 8px 0;
+    border: 4px solid #ccc;
+    border-radius: 10px;
+    box-sizing: border-box;
+}
+
+.register-container button {
+    width: 100%;
+    padding: 10px;
+    margin-top: 12px;
+    background-color: darkred;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.register-container button:hover {
+    background-color: #aa0000;
+}
