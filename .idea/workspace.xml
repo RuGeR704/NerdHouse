@@ -9,12 +9,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e68e6447-583a-4dc7-bf39-39fcf0f11fef" name="Changes" comment="inizio css e AreaUtente, poi rifinitura login e registrazione">
+    <list default="true" id="e68e6447-583a-4dc7-bf39-39fcf0f11fef" name="Changes" comment="Logo aggiornato">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/AreaUtente.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/AreaUtente.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/error.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/error.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/login.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/login.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/registrazione.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/registrazione.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/css/styles.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/css/styles.css" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -212,7 +209,7 @@
       <workItem from="1749817788668" duration="104000" />
       <workItem from="1750079357005" duration="474000" />
       <workItem from="1750671494352" duration="12769000" />
-      <workItem from="1750699869177" duration="689000" />
+      <workItem from="1750699869177" duration="2646000" />
     </task>
     <task id="LOCAL-00001" summary="inizio progetto">
       <option name="closed" value="true" />
@@ -262,7 +259,15 @@
       <option name="project" value="LOCAL" />
       <updated>1750690269631</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="Logo aggiornato">
+      <option name="closed" value="true" />
+      <created>1750700632048</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1750700632048</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -286,6 +291,7 @@
     <MESSAGE value="servlet registrazione + html" />
     <MESSAGE value="UtenteDAO, pagina di successo per la registrazione, pagina di errore, pagina di login(da continuare), ConPool per la connessione al database (cambiare username e password del database altrimenti è impossibile accedere)" />
     <MESSAGE value="inizio css e AreaUtente, poi rifinitura login e registrazione" />
-    <option name="LAST_COMMIT_MESSAGE" value="inizio css e AreaUtente, poi rifinitura login e registrazione" />
+    <MESSAGE value="Logo aggiornato" />
+    <option name="LAST_COMMIT_MESSAGE" value="Logo aggiornato" />
   </component>
 </project>

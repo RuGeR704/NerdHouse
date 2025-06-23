@@ -8,9 +8,13 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: gold;
-    min-height: calc(90vh - 80px); /* togli l’altezza dell’header se necessario */
+    min-height: calc(90vh - 80px);
     padding: 40px 0;
+    background-image: url("../images/sfondo.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-attachment: fixed;
 }
 
 
@@ -96,7 +100,7 @@ header {
 
 /* Login */
 .login-container {
-    background-color: #fff;
+    background-color: #121212;
     padding: 40px 30px;
     border-radius: 10px;
     box-shadow: 0 0 12px rgba(0,0,0,0.1);
@@ -108,7 +112,7 @@ header {
 
 .login-container h2 {
     margin-bottom: 20px;
-    color: #333;
+    color: white;
 }
 
 .login-container input {
@@ -154,28 +158,34 @@ header {
 /* Registrazione */
 
 .register-container {
-    background-color: #ffffff;
+    background-color: #121212;
     padding: 40px 30px;
     border-radius: 10px;
     box-shadow: 0 0 12px rgba(0,0,0,0.1);
     width: 500px;
-    text-align: center;
     display: flex;
     flex-direction: column;
 }
 
 .register-container h2 {
     margin-bottom: 20px;
-    color: #333;
+    color: #cccccc;
+    text-align: center;
 }
 
 .register-container h1 {
     font-size: 2.2em;
     font-weight: 700;
-    color: #000000;
+    color: gold;
     margin-bottom: 20px;
-    text-transform: uppercase;
     letter-spacing: 1px;
+    text-align: center;
+}
+
+.register-container label {
+    color: #cccccc;
+    margin-bottom: 0px;
+    text-align: left;
 }
 
 .register-container input {
