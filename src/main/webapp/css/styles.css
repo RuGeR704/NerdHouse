@@ -22,6 +22,12 @@ img {
     background-attachment: fixed;
 }
 
+.user-area {
+    display: flex;
+    min-height: 100vh;
+    font-family: sans-serif;
+}
+
 header {
     display: flex;
     align-items: center;
@@ -251,6 +257,61 @@ header {
 
 .register-success-dialog a:hover {
     text-decoration-line: underline;
+}
+
+/* Menu laterale Area Utente */
+.user-menu {
+    width: 220px;
+    background-color: #333;
+    color: white;
+    padding: 20px;
+    box-shadow: 2px 0 5px rgba(0,0,0,0.2);
+}
+
+.user-menu h2 {
+    color: gold;
+    font-size: 2em;
+    margin-bottom: 20px;
+}
+
+.user-menu ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+.user-menu li {
+    margin-bottom: 2px;
+}
+
+.user-menu li a {
+    display: block;
+    padding: 8px 16px;
+    text-decoration: none;
+}
+
+.user-menu li a:hover {
+    color: gold;
+    background-color: darkred;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.user-menu a {
+    color: white;
+    text-decoration-line: none;
+}
+
+/* Contenuto del menu */
+.content {
+    flex: 1;
+    padding: 40px;
+    background-color: #f9f9f9;
+}
+
+.content h3 {
+    color: #d84315;
+    margin-bottom: 20px;
 }
 
 /* Responsive */

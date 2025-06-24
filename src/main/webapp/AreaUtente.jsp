@@ -43,8 +43,44 @@
         </div>
     </header>
 
-    <div class="try">
-        <a href="./WEB-INF/error.jsp">Prova errore</a>
+    <div class="user-area">
+
+        <nav class="user-menu">
+            <h2>Ciao, ${utente.nome}</h2>
+            <ul>
+                <li><a href="#dati">Dati personali</a></li>
+                <li><a href="#ordini">I miei ordini</a></li>
+                <li><a href="#pagamenti">Metodi di pagamento</a></li>
+                <li><a href="logout">Logout</a></li>
+            </ul>
+        </nav>
+
+        <div class="content">
+            <section id="dati">
+
+                <h3>Dati personali</h3>
+                <p>
+                    <strong>Nome:</strong> ${utente.nome} <br>
+                    <strong>Cognome:</strong> ${utente.cognome} <br>
+                    <strong>Email:</strong> ${utente.email} <br>
+                    <strong>Data di Nascita:</strong> ${utente.dataNascita} <br>
+                    <strong>Telefono:</strong> ${utente.telefono}
+                </p>
+            </section>
+
+            <section id="ordini">
+                <h3>I tuoi ordini</h3>
+
+                <p>Qui compariranno i tuoi ordini.</p>
+            </section>
+
+            <section id="pagamenti">
+                <h3>I tuoi metodi di pagamento</h3>
+
+                <p>Qui compariranno i tuoi metodi di pagamento</p>
+            </section>
+
+        </div>
     </div>
 
 </body>
