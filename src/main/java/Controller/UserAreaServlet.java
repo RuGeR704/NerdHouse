@@ -18,10 +18,14 @@ public class UserAreaServlet extends HttpServlet {
         HttpSession session = request.getSession(false);
 
         if (session != null && session.getAttribute("utente") != null) {
-            request.getRequestDispatcher("areaUtente.jsp").forward(request, response);
+            request.getRequestDispatcher("AreaUtente.jsp").forward(request, response);
         } else {
             request.getRequestDispatcher("/WEB-INF/login.jsp").forward(request, response);
         }
+    }
+
+    public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        doGet(request, response);
     }
 }
 

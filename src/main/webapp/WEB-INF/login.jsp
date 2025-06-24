@@ -11,6 +11,7 @@
     <title>Login | Nerd House</title>
     <link rel="stylesheet" href="./css/styles.css" type="text/css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
 
@@ -26,7 +27,7 @@
 
     <div class="header-botton">
         <div class="botton-item">
-            <a href="AreaUtente.jsp"><i class="fas fa-user user-icon" title="Accedi"></i></a>
+            <a href="userServlet"><i class="fas fa-user user-icon" title="Accedi"></i></a>
             <span class="botton-label">Accedi</span>
         </div>
 
@@ -50,6 +51,12 @@
             <input type="password" name="password" placeholder="Password" required>
             <button type="submit">Login</button>
         </form>
+
+        <% String errore = (String) request.getAttribute("errore");
+            if (errore != null) { %>
+        <p style="color: red;"><%= errore %></p>
+        <% } %>
+
         <p class="register-message">
             Non sei ancora registrato? <a href="registrazione.html">Registrati qui!</a>
         </p>

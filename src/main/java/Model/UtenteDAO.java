@@ -30,8 +30,8 @@ public class UtenteDAO {
 
     }
 
-    public Utente doRetrieveByUsernamePassword(String username, String password) throws SQLException {
-        String query = "SELECT * FROM Utente WHERE username = ? AND password = SHA1(?)";
+    public Utente doRetrieveByUsernamePassword(String email, String password) throws SQLException {
+        String query = "SELECT * FROM Utente WHERE Email = ? AND password = SHA1(?)";
 
         ResultSet rs = null;
         Utente utente = null;
@@ -40,7 +40,7 @@ public class UtenteDAO {
 
             PreparedStatement ps = con.prepareStatement(query);
             //Imposta i parametri nella query
-            ps.setString(1, username);
+            ps.setString(1, email);
             ps.setString(2, password);
 
             //Esecuzione query
@@ -49,7 +49,7 @@ public class UtenteDAO {
             //Se ci sono risultati allora crea l'oggetto UTENTE
             if (rs.next()) {
                 utente = new Utente();
-                utente.setId(rs.getInt("id"));
+                utente.setId(rs.getInt("id_utente"));
                 utente.setNome(rs.getString("nome"));
                 utente.setCognome(rs.getString("cognome"));
                 utente.setEmail(rs.getString("email"));
