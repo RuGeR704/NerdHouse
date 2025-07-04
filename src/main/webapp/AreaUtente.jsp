@@ -48,24 +48,52 @@
         <nav class="user-menu">
             <h2>Ciao, ${utente.nome}</h2>
             <ul>
-                <li><a href="#dati">Dati personali</a></li>
-                <li><a href="#ordini">I miei ordini</a></li>
-                <li><a href="#pagamenti">Metodi di pagamento</a></li>
+                <li><a href="#" onclick="showSection('dati')">Dati personali</a></li>
+                <li><a href="#" onclick="showSection('ordini')">I miei ordini</a></li>
+                <li><a href="#" onclick="showSection('pagamenti')">Metodi di pagamento</a></li>
                 <li><a href="logout">Logout</a></li>
             </ul>
         </nav>
 
         <div class="content">
-            <section id="dati">
+            <section id="dati" class="dati-personali">
 
                 <h3>Dati personali</h3>
-                <p>
-                    <strong>Nome:</strong> ${utente.nome} <br>
-                    <strong>Cognome:</strong> ${utente.cognome} <br>
-                    <strong>Email:</strong> ${utente.email} <br>
-                    <strong>Data di Nascita:</strong> ${utente.dataNascita} <br>
-                    <strong>Telefono:</strong> ${utente.telefono}
-                </p>
+
+                <div id="dati-statici">
+                    <p><strong>Nome:</strong> ${utente.nome}</p>
+                    <p><strong>Cognome:</strong> ${utente.cognome}</p>
+                    <p><strong>Email:</strong> ${utente.email}</p>
+                    <p><strong>Data di Nascita:</strong> ${utente.dataNascita}</p>
+                    <p><strong>Telefono:</strong> ${utente.telefono}</p>
+
+                    <button onclick="mostraForm()">Modifica</button>
+                </div>
+
+                <form id="dati-form" action="aggiornaUtente" method="post" style="display: none">
+                    <div class="form-box">
+                        <label><strong>Nome</strong></label> <br>
+                        <input type="text" name="nome" value="${utente.nome}" required>
+                    </div>
+                    <div class="form-box">
+                        <label><strong>Cognome</strong></label> <br>
+                        <input type="text" name="cognome" value="${utente.cognome}" required>
+                    </div>
+                    <div class="form-box">
+                        <label><strong>Email</strong></label> <br>
+                        <input type="email" name="email" value="${utente.email}" required>
+                    </div>
+                    <div class="form-box">
+                        <label><strong>Data di Nascita</strong></label> <br>
+                        <input type="date" name="dataNascita" value="${utente.dataNascita}" required>
+                    </div>
+                    <div class="form-box">
+                        <label><strong>Telefono</strong></label> <br>
+                        <input type="text" name="telefono" value="${utente.telefono}">
+                    </div>
+                    <button type="submit">Salva modifiche</button>
+                    <button type="button" onclick="annullaModifica()">Annulla</button>
+                </form>
             </section>
 
             <section id="ordini">
@@ -88,6 +116,30 @@
             <p>&copy; 2025 Nerd House | Tutti i diritti riservati.</p>
         </div>
     </footer>
+
+    <script>
+        function showSection(id) {
+            const sections = document.querySelectorAll('.content section');
+            sections.forEach(section => section.style.display = 'none');
+            document.getElementById(id).style.display = 'block';
+        }
+
+        // Mostra la prima sezione all'avvio
+        window.onload = function () {
+            showSection('dati');
+        };
+
+        function mostraForm() {
+            document.getElementById("dati-statici").style.display = "none";
+            document.getElementById("dati-form").style.display = "block";
+        }
+
+        function annullaModifica() {
+            document.getElementById("dati-form").reset(); // Reset del form
+            document.getElementById("dati-form").style.display = "none";
+            document.getElementById("dati-statici").style.display = "block";
+        }
+    </script>
 
 </body>
 </html>
