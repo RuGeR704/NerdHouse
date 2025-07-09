@@ -2,28 +2,28 @@ package Model;
 
 import java.sql.Timestamp;
 
-public class Ordine {
-    private int idOrdine;
-    private int idUtente;
+public class OrdineDettaglio {
+    private int idProdotto;
+    private String titoloProdotto;
     private String pagamento;
     private String indirizzoOrdine;
     private String stato;
     private Timestamp dataOrdine;
 
-    public int getIdOrdine() {
-        return idOrdine;
+    public int getIdProdotto() {
+        return idProdotto;
     }
 
-    public void setIdOrdine(int idOrdine) {
-        this.idOrdine = idOrdine;
+    public void setIdProdotto(int idProdotto) {
+        this.idProdotto = idProdotto;
     }
 
-    public int getIdUtente() {
-        return idUtente;
+    public String getTitoloProdotto() {
+        return titoloProdotto;
     }
 
-    public void setIdUtente(int idUtente) {
-        this.idUtente = idUtente;
+    public void setTitoloProdotto(String titoloProdotto) {
+        this.titoloProdotto = titoloProdotto;
     }
 
     public String getPagamento() {
