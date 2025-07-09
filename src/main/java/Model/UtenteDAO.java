@@ -30,6 +30,27 @@ public class UtenteDAO {
 
     }
 
+    public void doUpdate(Utente utente) throws SQLException {
+
+        try (Connection con = ConPool.getConnection()) {
+            PreparedStatement ps = con.prepareStatement(
+                    "UPDATE utente SET nome = ?, cognome = ?, email = ?, telefono = ?, data_nascita = ? WHERE id_utente = ?"
+            );
+            ps.setString(1, utente.getNome());
+            ps.setString(2, utente.getCognome());
+            ps.setString(3, utente.getEmail());
+            ps.setString(4, utente.getTelefono());
+            ps.setDate(5, utente.getDataNascita());
+            ps.setInt(6, utente.getId());
+
+            ps.executeUpdate();
+        } catch (SQLException e) {
+            throw new RuntimeException("Errore durante l'aggiornamento dell'utente", e);
+        }
+
+    }
+
+
     public Utente doRetrieveByUsernamePassword(String email, String password) throws SQLException {
         String query = "SELECT * FROM Utente WHERE Email = ? AND password = SHA1(?)";
 

@@ -24,7 +24,7 @@ img {
 
 .user-area {
     display: flex;
-    min-height: 100vh;
+    min-height: 80vh;
     font-family: sans-serif;
 }
 
@@ -325,8 +325,26 @@ footer {
     margin-bottom: 20px;
 }
 
-/* Responsive */
+/* Dati personali */
 
+.dati-personali {
+    display: none;
+}
+
+.form-box {
+    background: white;
+    padding: 15px;
+    border: 1px solid #ccc;
+    margin-bottom: 15px;
+    border-radius: 5px;
+}
+
+.form-box label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+/* Responsive */
 @media (max-width: 768px) {
     header {
         flex-direction: column;

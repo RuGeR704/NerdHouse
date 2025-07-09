@@ -9,15 +9,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e68e6447-583a-4dc7-bf39-39fcf0f11fef" name="Changes" comment="creazione di LogoutServlet + creazione del corpo di AreaUtente con css, menu e sezioni">
+    <list default="true" id="e68e6447-583a-4dc7-bf39-39fcf0f11fef" name="Changes" comment="footer">
+      <change afterPath="$PROJECT_DIR$/src/main/java/Controller/AggiornaUtenteServlet.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Model/ConPool.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Model/ConPool.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Model/UtenteDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Model/UtenteDAO.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/webapp/AreaUtente.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/AreaUtente.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/RegistrationSuccess.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/RegistrationSuccess.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/error.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/error.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/login.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/login.jsp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/webapp/css/styles.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/css/styles.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/registrazione.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/registrazione.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -216,7 +214,8 @@
       <workItem from="1750079357005" duration="474000" />
       <workItem from="1750671494352" duration="12769000" />
       <workItem from="1750699869177" duration="2814000" />
-      <workItem from="1750750683333" duration="10490000" />
+      <workItem from="1750750683333" duration="10765000" />
+      <workItem from="1751633335348" duration="5846000" />
     </task>
     <task id="LOCAL-00001" summary="inizio progetto">
       <option name="closed" value="true" />
@@ -298,7 +297,15 @@
       <option name="project" value="LOCAL" />
       <updated>1750761115972</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="footer">
+      <option name="closed" value="true" />
+      <created>1750762294991</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1750762294991</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -326,6 +333,7 @@
     <MESSAGE value="Cambio colore box login e registrazione + sfondo delle pagine" />
     <MESSAGE value="creazione di LoginServlet + rifinitura css delle pagine di registrazione" />
     <MESSAGE value="creazione di LogoutServlet + creazione del corpo di AreaUtente con css, menu e sezioni" />
-    <option name="LAST_COMMIT_MESSAGE" value="creazione di LogoutServlet + creazione del corpo di AreaUtente con css, menu e sezioni" />
+    <MESSAGE value="footer" />
+    <option name="LAST_COMMIT_MESSAGE" value="footer" />
   </component>
 </project>
