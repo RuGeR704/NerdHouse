@@ -4,16 +4,17 @@
     <!-- imposta caratteri accentati -->
     <meta charset="UTF-8">
     <title>NERD HOUSE</title>
+
     <style>
         .title-container {
             display: flex;
             align-items: center;
             justify-content: center;
             gap: 10px;  /* spazio tra elementi */
-            margin: 40px 40px 0 40px; /* sopra sinistra destra */
+            margin: 40px 40px 0 40px;
         }
 
-        .info{     /* info */
+        .info { /* barra info */
             background-color: black;
             color: white;
             border: black;
@@ -21,126 +22,195 @@
             padding: 15px;
             width: 1230px;
             margin: 5px auto;
-            font-family:Arial, sans-serif;
-            box-shadow: black;
-            word-spacing:20px;
+            font-family: Arial, sans-serif;
+            word-spacing: 20px;
         }
 
-        .title-box {
-        /* box nera */
+        .title-box { /* box nera titolo */
             border: 3px solid black;
-            padding: 20px 40px; /*spazio interno*/
-            border-radius: 10px; /*spigoli arrotondati*/
-            background-color: black; /*colore box*/
+            padding: 20px 40px;
+            border-radius: 10px;
+            background-color: black;
         }
 
         .nerd {
-            color: yellow; /* colore scritta */
+            color: yellow; /* colore "NERD" */
         }
 
         .house {
-            color: red; /*colore scritta*/
+            color: red; /* colore "HOUSE" */
         }
 
-        h1 { /* titolo */
-            font-size: 3em; /* grandezza carattere */
-            font-family: Arial, sans-serif; /* tipo di carattere */
+        h1 { /* titolo principale */
+            font-size: 3em;
+            font-family: Arial, sans-serif;
             margin: 0;
         }
 
-        img.logo-home { /* logo */
-            width: 130px; /* grandezza logo a sinistra */
+        img.logo-home {
+            width: 130px;
         }
 
-        img.account-icon { /* icona account */
-            width: 150px; /* grandezza */
-            cursor: pointer; /* tipo di cursore */
+        img.account-icon { /* icona */
+            width: 150px;
+            cursor: pointer;
         }
 
         a.account-link {
             display: flex;
-            align-items: center; /* allinea il testo al centro */
+            align-items: center;
         }
 
-        .search-container {
+        .search-container { /* barra nera per info */
             margin: 30px auto;
             width: 320px;
             text-align: center;
         }
 
-
-
-        ul#resultList {
-            margin: 20px 40px;
-            padding: 0;
-            list-style: none;
-            font-family: Arial, sans-serif;
-        }
-
-        ul#resultList li {
-            padding: 8px 0;
-        }
-
-        input[type="text"] {
-            border: 1px solid #555;         /* bordo */
+        input[type="text"] {  /*barra di ricerca*/
+            border: 1px solid #555;
             width: 320px;
-            padding: 10px 10px 10px 40px;  /* spazio a sinistra per l’icona */
+            padding: 10px 10px 10px 40px;
             font-size: 1em;
             border-radius: 5px;
-            background-image: url('https://cdn-icons-png.flaticon.com/512/622/622669.png'); /* lente */
+            background-image: url('https://cdn-icons-png.flaticon.com/512/622/622669.png');
             background-repeat: no-repeat;
             background-size: 20px 20px;
             background-position: 10px center;
         }
 
+        .tag-filter {
+            margin: 20px 0;
+            text-align: center;
+        }
+
+        .tag-filter button {
+            margin: 5px;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+            background-color: #ddd;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .tag-filter button.active {
+            background-color: #333;
+            color: white;
+        }
+
+        ul#resultList { /*richiude tutto tra quadrati*/
+            margin: 20px 40px;
+            padding: 0;
+            list-style: none;
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-wrap: wrap; /* permette di andare a capo se la rigna non basta*/
+            gap: 20px;
+        }
+
+        ul#resultList li {  /* impostazioni del rettangolo dei prodotti */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            padding: 10px;
+            width: 200px;
+            background-color: #f9f9f9;
+            box-shadow: 2px 2px 5px rgba(0,0,0,0.1);
+        }
+
+        ul#resultList img { /* impostazioni immagini prodotto*/
+            width: 150px;
+            height: auto;
+            border-radius: 5px;
+        }
     </style>
 </head>
+
 <body>
 
 <div class="info"> <!-- barra di info -->
     <span id="telefono" style="color:white; cursor:pointer; text-decoration:underline;">Telefono</span>
-    <a href="mailto:nerdhouse@email.com" style="color:white; cursor:pointer; ">Email </a>
-
+    <a href="mailto:nerdhouse@email.com" style="color:white; cursor:pointer;">Email</a>
 </div>
 
-<div class="title-container">
-    <img class="logo-home" src="png?ex=686d0964&is=686bb7e4&hm=70b2fe1a002d59fe56d98f9486707552049ab7e9937faefe3c55a3fcb9667e1c&=&format=webp&quality=lossless" alt="Logo Nerd House">
+<div class="title-container"> <!-- logo sito -->
+    <img class="logo-home" src="" alt="Logo Nerd House">
     <div class="title-box">
-        <h1>
-            <span class="nerd">NERD</span> <span class="house">HOUSE</span>
-        </h1>
+        <h1><span class="nerd">NERD</span> <span class="house">HOUSE</span></h1>
     </div>
-    <a href="index.html" class="account-link">
-        <img class="account-icon" src="https://sdmntprpolandcentral.oaiusercontent.com/files/00000000-1ec0-620a-b819-bfa1b1a0e025/raw?se=2025-06-14T15%3A35%3A30Z&sp=r&sv=2024-08-04&sr=b&scid=0e3616a1-c409-552d-b15c-a3c9253931c1&skoid=76024c37-11e2-4c92-aa07-7e519fbe2d0f&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2025-06-14T08%3A55%3A50Z&ske=2025-06-15T08%3A55%3A50Z&sks=b&skv=2024-08-04&sig=mxIn1%2BGR25i41A/cJVGvY/DOhDoPbve10AG5Mw3vQUI%3D" alt="Account">
+     <!-- logo account -->
+    <a href="userServlet" class="account-link">
+        <img class="account-icon" src="https://cdn-icons-png.flaticon.com/512/847/847969.png" alt="Account">
     </a>
+
 </div>
 
-<!-- Barra di ricerca centrata -->
-<div class="search-container" >
+<div class="search-container">
     <input type="text" id="searchInput" placeholder="Cerca nella lista...">
 </div>
 
+<ul id="resultList"> <!-- lista prodotti -->
+    <li data-tags="maglietta starwars">
+        <img src="https://png.pngtree.com/png-vector/20241102/ourmid/pngtree-premium-black-t-shirt-mockup-png-image_14226805.png" alt="T-shirt Star Wars">
+        <div>
+            <strong>T-shirt Star Wars</strong><br>
+            <small>€19.99</small>
+        </div>
+    </li>
 
+    <li data-tags="maglietta starwars ">
+        <img src="https://png.pngtree.com/png-vector/20241102/ourmid/pngtree-premium-black-t-shirt-mockup-png-image_14226805.png" alt="Maglietta ">
+        <div>
+            <strong>Maglietta  </strong><br>
+            <small>€19.99</small>
+        </div>
+    </li>
+</ul>
 
-<script>
-    const searchInput = document.getElementById('searchInput'); <!-- cerca gli elemnti nella barra di ricerca -->
-    const listItems = document.querySelectorAll('#resultList li');
+<div class="tag-filter">
+    <button data-filter="all" class="active">Tutti</button>
+    <button data-filter="maglietta">Magliette</button>
+    <button data-filter="starwars">Star Wars</button>
+    <button data-filter="accessori">Accessori</button>
+</div>
 
-    searchInput.addEventListener('keyup', () => { /* rimane in ascolto finche qualcuno non digita sulla barra di ricerca*/
-        const query = searchInput.value.toLowerCase(); /* ricerca minuziosa per i caratteri maiuscoli e minuscoli */
-        listItems.forEach(item => {
-            const text = item.textContent.toLowerCase(); /* prende le scritte e le converte in minuscole*/
-            item.style.display = text.includes(query) ? '' : 'none'; /* se trova qualcosa lo mostra altrimenti esce errore*/
-        });
+<script> <!-- script per filtro tag e ricerca -->
+const searchInput = document.getElementById('searchInput'); <!--input barra di ricerca-->
+const buttons = document.querySelectorAll('.tag-filter button');
+const listItems = document.querySelectorAll('#resultList li'); <!--prende tutto cio che sta nel id=resultlist-->
+let activeTag = 'all';
+
+buttons.forEach(btn => { <!-- mette attivo il pulsannte che noi usiamo -->
+    btn.addEventListener('click', () => {
+        buttons.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        activeTag = btn.dataset.filter;
+        filterItems();
     });
+});
+
+searchInput.addEventListener('input', filterItems);
+
+function filterItems() {
+    const q = searchInput.value.toLowerCase();
+    listItems.forEach(li => {
+        const textMatch = li.textContent.toLowerCase().includes(q);
+        const tags = li.dataset.tags.split(' ');
+        const tagMatch = (activeTag === 'all' || tags.includes(activeTag));
+        li.style.display = (textMatch && tagMatch) ? '' : 'none';
+    });
+}
 </script>
 
-<script>
-    document.getElementById('telefono').onclick = function() {
-        alert('Il nostro numero è: +39 089 456 7890');
-    }
+<script> <!-- script telefono -->
+document.getElementById('telefono').onclick = function() {
+    alert('Il nostro numero è: +39 089 456 7890');
+}
 </script>
-
 
 </body>
 </html>
