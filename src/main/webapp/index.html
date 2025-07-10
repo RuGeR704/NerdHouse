@@ -1,83 +1,146 @@
 <!DOCTYPE html>
 <html lang="it">
 <head>
+    <!-- imposta caratteri accentati -->
     <meta charset="UTF-8">
     <title>NERD HOUSE</title>
     <style>
-
-
-
         .title-container {
             display: flex;
             align-items: center;
-            justify-content: flex-start;
-            gap: 10px;
-            margin: 40px 40px 0 40px;
+            justify-content: center;
+            gap: 10px;  /* spazio tra elementi */
+            margin: 40px 40px 0 40px; /* sopra sinistra destra */
+        }
 
+        .info{     /* info */
+            background-color: black;
+            color: white;
+            border: black;
+            border-radius: 15px;
+            padding: 15px;
+            width: 1230px;
+            margin: 5px auto;
+            font-family:Arial, sans-serif;
+            box-shadow: black;
+            word-spacing:20px;
         }
 
         .title-box {
+        /* box nera */
             border: 3px solid black;
-            padding: 20px 40px;
-            border-radius: 10px;
-            background-color: black;
-
-
+            padding: 20px 40px; /*spazio interno*/
+            border-radius: 10px; /*spigoli arrotondati*/
+            background-color: black; /*colore box*/
         }
 
         .nerd {
-            color: yellow;
+            color: yellow; /* colore scritta */
         }
 
         .house {
-            color: red;
+            color: red; /*colore scritta*/
         }
 
-        h1 {
-            font-size: 3em;
-            font-family: Arial, sans-serif;
+        h1 { /* titolo */
+            font-size: 3em; /* grandezza carattere */
+            font-family: Arial, sans-serif; /* tipo di carattere */
             margin: 0;
         }
 
-        img {
-            height: auto;
+        img.logo-home { /* logo */
+            width: 130px; /* grandezza logo a sinistra */
         }
 
-        img.logo-home {
-            width: 130px
-        }
-
-        img.account-icon {
-            width: 150px;
-            cursor: pointer;
+        img.account-icon { /* icona account */
+            width: 150px; /* grandezza */
+            cursor: pointer; /* tipo di cursore */
         }
 
         a.account-link {
             display: flex;
-            align-items: center;
+            align-items: center; /* allinea il testo al centro */
+        }
+
+        .search-container {
+            margin: 30px auto;
+            width: 320px;
+            text-align: center;
+        }
+
+
+
+        ul#resultList {
+            margin: 20px 40px;
+            padding: 0;
+            list-style: none;
+            font-family: Arial, sans-serif;
+        }
+
+        ul#resultList li {
+            padding: 8px 0;
+        }
+
+        input[type="text"] {
+            border: 1px solid #555;         /* bordo */
+            width: 320px;
+            padding: 10px 10px 10px 40px;  /* spazio a sinistra per l’icona */
+            font-size: 1em;
+            border-radius: 5px;
+            background-image: url('https://cdn-icons-png.flaticon.com/512/622/622669.png'); /* lente */
+            background-repeat: no-repeat;
+            background-size: 20px 20px;
+            background-position: 10px center;
         }
 
     </style>
 </head>
 <body>
 
-<div class="title-container">
-    <!-- Immagine casa a sinistra -->
-    <img class="logo-home" src="https://media.discordapp.net/attachments/1371839391282102409/1383054514097098772/logo_home.png?ex=684d6564&is=684c13e4&hm=a0fe45fbff0ec87ab1006d7867e29fe15b552585358a23245f13be053fea60d0&=&format=webp&quality=lossless"
-         alt="Logo Nerd House">
+<div class="info"> <!-- barra di info -->
+    <span id="telefono" style="color:white; cursor:pointer; text-decoration:underline;">Telefono</span>
+    <a href="mailto:nerdhouse@email.com" style="color:white; cursor:pointer; ">Email </a>
 
-    <!-- Titolo al centro con riquadro -->
+</div>
+
+<div class="title-container">
+    <img class="logo-home" src="png?ex=686d0964&is=686bb7e4&hm=70b2fe1a002d59fe56d98f9486707552049ab7e9937faefe3c55a3fcb9667e1c&=&format=webp&quality=lossless" alt="Logo Nerd House">
     <div class="title-box">
         <h1>
             <span class="nerd">NERD</span> <span class="house">HOUSE</span>
         </h1>
     </div>
-
-
-    <a href="AreaUtente.jsp" class="account-link">
+    <a href="index.html" class="account-link">
         <img class="account-icon" src="https://sdmntprpolandcentral.oaiusercontent.com/files/00000000-1ec0-620a-b819-bfa1b1a0e025/raw?se=2025-06-14T15%3A35%3A30Z&sp=r&sv=2024-08-04&sr=b&scid=0e3616a1-c409-552d-b15c-a3c9253931c1&skoid=76024c37-11e2-4c92-aa07-7e519fbe2d0f&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2025-06-14T08%3A55%3A50Z&ske=2025-06-15T08%3A55%3A50Z&sks=b&skv=2024-08-04&sig=mxIn1%2BGR25i41A/cJVGvY/DOhDoPbve10AG5Mw3vQUI%3D" alt="Account">
     </a>
 </div>
+
+<!-- Barra di ricerca centrata -->
+<div class="search-container" >
+    <input type="text" id="searchInput" placeholder="Cerca nella lista...">
+</div>
+
+
+
+<script>
+    const searchInput = document.getElementById('searchInput'); <!-- cerca gli elemnti nella barra di ricerca -->
+    const listItems = document.querySelectorAll('#resultList li');
+
+    searchInput.addEventListener('keyup', () => { /* rimane in ascolto finche qualcuno non digita sulla barra di ricerca*/
+        const query = searchInput.value.toLowerCase(); /* ricerca minuziosa per i caratteri maiuscoli e minuscoli */
+        listItems.forEach(item => {
+            const text = item.textContent.toLowerCase(); /* prende le scritte e le converte in minuscole*/
+            item.style.display = text.includes(query) ? '' : 'none'; /* se trova qualcosa lo mostra altrimenti esce errore*/
+        });
+    });
+</script>
+
+<script>
+    document.getElementById('telefono').onclick = function() {
+        alert('Il nostro numero è: +39 089 456 7890');
+    }
+</script>
+
 
 </body>
 </html>
