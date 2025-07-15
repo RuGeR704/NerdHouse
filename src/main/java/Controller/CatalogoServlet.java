@@ -15,7 +15,7 @@ public class CatalogoServlet extends HttpServlet {
         ProdottoDAO dao = new ProdottoDAO();
         List<Prodotto> prodotti = dao.doRetrieveAll();
         request.setAttribute("prodotti", prodotti);
-        RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/catalogo.jsp");
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/shop.jsp");
         dispatcher.forward(request, response);
     }
 }

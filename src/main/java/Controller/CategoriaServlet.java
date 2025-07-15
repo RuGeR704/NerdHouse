@@ -1,5 +1,7 @@
 package Controller;
 
+import Model.Categoria;
+import Model.CategoriaDAO;
 import Model.Prodotto;
 import Model.ProdottoDAO;
 
@@ -18,16 +20,15 @@ public class CategoriaServlet extends HttpServlet {
         String lingua = request.getParameter("lingua");
         String editore = request.getParameter("editore");
 
-        ProdottoDAO prodottoDAO = new ProdottoDAO();
-        List<Prodotto> prodotti = prodottoDAO.doRetrievebyCategoria(idCategoria);
+        // Recupera la categoria per il nome da visualizzare
+        CategoriaDAO categoriaDAO = new CategoriaDAO();
+        Categoria categoria = categoriaDAO.doRetrieveByID(idCategoria);
+        request.setAttribute("nomeCategoria", categoria.getNome());
+        request.setAttribute("categoria", categoria);
 
-        // Filtraggio base lato Java (opzionale: puoi spostarlo in query SQL per efficienza)
-        if (lingua != null && !lingua.isEmpty()) {
-            prodotti.removeIf(p -> !p.getLingua().equalsIgnoreCase(lingua));
-        }
-        if (editore != null && !editore.isEmpty()) {
-            prodotti.removeIf(p -> !p.getEditore().equalsIgnoreCase(editore));
-        }
+        // Recupera i prodotti filtrati già con la query SQL
+        ProdottoDAO prodottoDAO = new ProdottoDAO();
+        List<Prodotto> prodotti = prodottoDAO.doRetrieveByCategoria(idCategoria, lingua, editore);
 
         request.setAttribute("prodotti", prodotti);
         request.getRequestDispatcher("/WEB-INF/jsp/catalogoCategoria.jsp").forward(request, response);
