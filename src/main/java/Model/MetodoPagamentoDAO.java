@@ -60,8 +60,6 @@ public class MetodoPagamentoDAO {
         List<MetodoPagamento> metodiPagamento = new ArrayList<>();
         int idUtente = utente.getId();
 
-        System.out.println("DEBUG: idUtente passato al DAO: " + idUtente);
-
         try(Connection con = ConPool.getConnection()) {
             PreparedStatement ps = con.prepareStatement("SELECT * FROM MetodiPagamento WHERE id_utente = ?");
 
@@ -69,8 +67,6 @@ public class MetodoPagamentoDAO {
 
             ResultSet rs = ps.executeQuery();
             while(rs.next()) {
-                System.out.println("DEBUG: Metodo pagamento trovato - id_metodo: " + rs.getInt("id_metodo") +
-                        ", tipo: " + rs.getString("tipo_metodo"));
                 MetodoPagamento metodoPagamento = new MetodoPagamento();
                 metodoPagamento.setId_metodo(rs.getInt("id_metodo"));
                 metodoPagamento.setId_utente(rs.getInt("id_utente"));
@@ -86,7 +82,6 @@ public class MetodoPagamentoDAO {
             ex.printStackTrace();
         }
 
-        System.out.println("DEBUG: Totale metodi recuperati: " + metodiPagamento.size());
         return metodiPagamento;
     }
 

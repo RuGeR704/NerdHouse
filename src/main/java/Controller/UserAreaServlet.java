@@ -21,22 +21,11 @@ public class UserAreaServlet extends HttpServlet {
     public void doGet(HttpServletRequest request, HttpServletResponse response)
             throws IOException, ServletException {
 
-        System.out.println("In doGet");
         HttpSession session = request.getSession(false);
 
-        System.out.println("Sessione: " + session);
-        if (session != null) {
-            System.out.println("Attributo 'utente': " + session.getAttribute("utente"));
-        }
-
-        System.out.println("Prima dell'if");
         if (session != null && session.getAttribute("utente") != null) {
 
-            System.out.println("Dopo l'if");
-
             Utente utente = (Utente) session.getAttribute("utente");
-
-            System.out.println("ID Utente:" + utente.getId());
 
             MetodoPagamentoDAO dao = new MetodoPagamentoDAO();
 
