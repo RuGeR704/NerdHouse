@@ -15,32 +15,35 @@ import java.sql.SQLException;
 @WebServlet(name="LoginServlet", value="/login")
 public class LoginServlet extends HttpServlet {
 
-    public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
 
         String email = request.getParameter("email");
         String password = request.getParameter("password");
 
         UtenteDAO dao = new UtenteDAO();
-        Utente utente = new Utente();
+        Utente utente = null;
 
         try {
             utente = dao.doRetrieveByUsernamePassword(email, password);
-
-            if (utente != null) {
-                HttpSession session = request.getSession();
-                session.setAttribute("utente", utente);
-                response.sendRedirect("AreaUtente.jsp");
-            }
-            else {
-                request.setAttribute("errore", "Email o password non corretti");
-                request.getRequestDispatcher("/WEB-INF/login.jsp").forward(request, response);
-            }
         } catch (SQLException e) {
             e.printStackTrace();
         }
+
+        if (utente != null) {
+            HttpSession session = request.getSession();
+            session.setAttribute("utente", utente);
+            response.sendRedirect(request.getContextPath() + "/userServlet");
+        } else {
+            request.setAttribute("errore", "Email o password non corretti");
+            request.getRequestDispatcher("/WEB-INF/login.jsp").forward(request, response);
+        }
     }
 
-    public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
-        doGet(request, response);
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        request.getRequestDispatcher("/WEB-INF/login.jsp").forward(request, response);
     }
 }

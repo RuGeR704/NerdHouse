@@ -325,12 +325,39 @@ footer {
     margin-bottom: 20px;
 }
 
+.content button {
+    border: none;
+    padding: 12px 24px;
+    font-size: 16px;
+    border-radius: 25px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    background-color: darkred;
+    transition: background 0.3s ease;
+}
+
+.content button:hover {
+    background-color: gold;
+}
+
+.content input {
+    width: 25%;
+    padding: 10px;
+    margin: 8px 0;
+    border: 4px solid #ccc;
+    border-radius: 10px;
+    box-sizing: border-box;
+}
 /* Dati personali */
 
 .dati-personali {
     display: none;
 }
 
+.dati-statici p{
+    display: inline-block;
+    margin-right: 20px;
+    padding: 10px;
+}
 .form-box {
     background: white;
     padding: 15px;
@@ -344,6 +371,82 @@ footer {
     margin-bottom: 5px;
     font-weight: bold;
 }
+
+/* Metodi di pagamento */
+
+#overlayForm {
+    position:absolute;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    background:rgba(0,0,0,0.5);
+    z-index: 1;
+}
+
+#overlayForm input:not(#scadenza) {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 12px;
+    box-sizing: border-box;
+    font-size: 16px;
+}
+
+#scadenza {
+    width: 80px;
+    padding: 8px;
+    margin-bottom: 12px;
+    box-sizing: border-box;
+    font-size: 16px;
+}
+
+/* Stile generale tabella */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 15px;
+    font-family: Arial, sans-serif;
+    background-color: #fff;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+/* Intestazioni */
+thead th {
+    background-color: gold;
+    color: black;
+    text-align: left;
+    padding: 12px 15px;
+    font-size: 1rem;
+    border-bottom: 2px solid darkred;
+}
+
+/* Celle del corpo */
+tbody td {
+    padding: 8px 12px;
+    border-bottom: 1px solid #ddd;
+    font-size: 0.95rem;
+    color: #333;
+}
+
+/* Riga hover */
+tbody tr:hover {
+    background-color: #f1f9f1;
+    cursor: default;
+}
+
+/* Stato attivo/disattivo */
+.status-attivo {
+    color: green;
+    font-weight: bold;
+}
+
+.status-disattivo {
+    color: #c62828;
+    font-weight: bold;
+}
+
 /* Responsive */
 @media (max-width: 768px) {
     header {
