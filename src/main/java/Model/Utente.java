@@ -65,6 +65,10 @@ public class Utente {
         }
     }
 
+    public void setHashedPassword(String password) {
+        this.password = password;
+    }
+
     public String getIndirizzo() {
         return indirizzo;
     }

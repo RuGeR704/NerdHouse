@@ -17,10 +17,8 @@
   <link rel="stylesheet" href="<%= baseURL %>/css/styles.css" type="text/css">
 </head>
 <body>
-<jsp:include page="/WEB-INF/fragments/header.jsp" />
 
 <main class="ordini-container">
-  <h2>I miei ordini</h2>
 
   <% if (ordini == null || ordini.isEmpty()) { %>
   <p>Non hai ancora effettuato ordini.</p>
@@ -50,6 +48,5 @@
   <% } %>
 </main>
 
-<jsp:include page="/WEB-INF/fragments/footer.jsp" />
 </body>
 </html>

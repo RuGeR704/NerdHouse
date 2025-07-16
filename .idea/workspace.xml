@@ -9,13 +9,26 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e68e6447-583a-4dc7-bf39-39fcf0f11fef" name="Changes" comment="footer">
-      <change afterPath="$PROJECT_DIR$/src/main/java/Controller/AggiornaUtenteServlet.java" afterDir="false" />
+    <list default="true" id="e68e6447-583a-4dc7-bf39-39fcf0f11fef" name="Changes" comment="AggiornaUtenteServlet + AreaUtente sistemata, con script JS">
+      <change afterPath="$PROJECT_DIR$/src/main/java/Controller/AggiornaPasswordServlet.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/Controller/AggiungiPagamentoServlet.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/Controller/RimuoviPagamentoServlet.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/Model/MetodoPagamento.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/Model/MetodoPagamentoDAO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/AreaUtente.jsp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Controller/AggiornaUtenteServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controller/AggiornaUtenteServlet.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Controller/LoginServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controller/LoginServlet.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Controller/LogoutServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controller/LogoutServlet.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Controller/UserAreaServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controller/UserAreaServlet.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Model/ConPool.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Model/ConPool.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Model/Utente.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Model/Utente.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Model/UtenteDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Model/UtenteDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/AreaUtente.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/AreaUtente.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/AreaUtente.jsp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/ordini.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/ordini.jsp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/webapp/css/styles.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/css/styles.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/registrazione.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/registrazione.jsp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -34,6 +47,22 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="GitLabMergeRequestFiltersHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPENED&quot;,
+    &quot;assignee&quot;: {
+      &quot;type&quot;: &quot;org.jetbrains.plugins.gitlab.mergerequest.ui.filters.GitLabMergeRequestsFiltersValue.MergeRequestsMemberFilterValue.MergeRequestsAssigneeFilterValue&quot;,
+      &quot;username&quot;: &quot;g.russo274&quot;,
+      &quot;fullname&quot;: &quot;GERARDO RUSSO&quot;
+    }
+  }
+}</component>
+  <component name="GitLabMergeRequestsSettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;first&quot;: &quot;https://gitlab.com/g4660/tsw_progetti/tsw24_25/russo-disalvio-greco_pj.git&quot;,
+    &quot;second&quot;: &quot;bf7da5f8-f0ad-4812-ac2d-4dd0f71e5c08&quot;
+  }
+}</component>
   <component name="LogFilters">
     <option name="FILTER_ERRORS" value="false" />
     <option name="FILTER_WARNINGS" value="false" />
@@ -89,13 +118,13 @@
 }</component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\Users\Rafus\IdeaProjects\russo-disalvio-greco_pj\src\main\webapp" />
       <recent name="C:\Users\Rafus\IdeaProjects\russo-disalvio-greco_pj\src\main\webapp\WEB-INF" />
+      <recent name="C:\Users\Rafus\IdeaProjects\russo-disalvio-greco_pj\src\main\webapp" />
       <recent name="C:\Users\Rafus\IdeaProjects\russo-disalvio-greco_pj\src\main\java\Controller" />
     </key>
   </component>
   <component name="RunManager" selected="Tomcat Server.Tomcat ">
-    <configuration name="AreaUtente.jsp" type="JavascriptDebugType" temporary="true" nameIsGenerated="true" uri="http://localhost:8080/russo_disalvio_greco_pj_war_exploded/AreaUtente.jsp">
+    <configuration name="AreaUtente.jsp" type="JavascriptDebugType" temporary="true" nameIsGenerated="true" uri="http://localhost:8080/russo_disalvio_greco_pj_war_exploded/WEB-INF/AreaUtente.jsp">
       <method v="2" />
     </configuration>
     <configuration name="error.jsp" type="JavascriptDebugType" temporary="true" nameIsGenerated="true" uri="http://localhost:8080/russo_disalvio_greco_pj_war_exploded/WEB-INF/error.jsp">
@@ -156,6 +185,24 @@
       <predefined_log_file id="Tomcat Manager" />
       <predefined_log_file id="Tomcat Host Manager" />
       <predefined_log_file id="Tomcat Localhost Access" />
+      <RunnerSettings RunnerId="Debug">
+        <option name="DEBUG_PORT" value="53762" />
+      </RunnerSettings>
+      <ConfigurationWrapper VM_VAR="JAVA_OPTS" RunnerId="Debug">
+        <option name="USE_ENV_VARIABLES" value="true" />
+        <STARTUP>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </STARTUP>
+        <SHUTDOWN>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </SHUTDOWN>
+      </ConfigurationWrapper>
       <ConfigurationWrapper VM_VAR="JAVA_OPTS" RunnerId="Run">
         <option name="USE_ENV_VARIABLES" value="true" />
         <STARTUP>
@@ -215,7 +262,13 @@
       <workItem from="1750671494352" duration="12769000" />
       <workItem from="1750699869177" duration="2814000" />
       <workItem from="1750750683333" duration="10765000" />
-      <workItem from="1751633335348" duration="5846000" />
+      <workItem from="1751633335348" duration="6119000" />
+      <workItem from="1751720034820" duration="2693000" />
+      <workItem from="1751965101196" duration="13139000" />
+      <workItem from="1752136432102" duration="17462000" />
+      <workItem from="1752477089871" duration="8664000" />
+      <workItem from="1752504807899" duration="213000" />
+      <workItem from="1752567084285" duration="4488000" />
     </task>
     <task id="LOCAL-00001" summary="inizio progetto">
       <option name="closed" value="true" />
@@ -305,7 +358,15 @@
       <option name="project" value="LOCAL" />
       <updated>1750762294991</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="AggiornaUtenteServlet + AreaUtente sistemata, con script JS">
+      <option name="closed" value="true" />
+      <created>1751641191527</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1751641191527</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -334,6 +395,7 @@
     <MESSAGE value="creazione di LoginServlet + rifinitura css delle pagine di registrazione" />
     <MESSAGE value="creazione di LogoutServlet + creazione del corpo di AreaUtente con css, menu e sezioni" />
     <MESSAGE value="footer" />
-    <option name="LAST_COMMIT_MESSAGE" value="footer" />
+    <MESSAGE value="AggiornaUtenteServlet + AreaUtente sistemata, con script JS" />
+    <option name="LAST_COMMIT_MESSAGE" value="AggiornaUtenteServlet + AreaUtente sistemata, con script JS" />
   </component>
 </project>

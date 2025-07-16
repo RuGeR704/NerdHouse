@@ -50,6 +50,27 @@ public class UtenteDAO {
 
     }
 
+    public void doUpdatePassword(Utente utente, String newPassword) throws SQLException {
+        int idUtente = utente.getId();
+
+        try (Connection con = ConPool.getConnection()) {
+            PreparedStatement ps = con.prepareStatement("UPDATE utente SET password = ? WHERE id_utente = ?");
+
+            ps.setString(1, newPassword);
+            ps.setInt(2, idUtente);
+
+            int updated = ps.executeUpdate();
+
+            if (updated == 1) {
+                utente.setHashedPassword(newPassword);
+            } else {
+                throw new SQLException("Nessuna riga aggiornata, ID utente non trovato.");
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException("Errore durante l'aggiornamento dell'utente", e);
+        }
+    }
+
 
     public Utente doRetrieveByUsernamePassword(String email, String password) throws SQLException {
         String query = "SELECT * FROM Utente WHERE Email = ? AND password = SHA1(?)";
@@ -74,7 +95,7 @@ public class UtenteDAO {
                 utente.setNome(rs.getString("nome"));
                 utente.setCognome(rs.getString("cognome"));
                 utente.setEmail(rs.getString("email"));
-                utente.setPassword(rs.getString("password"));
+                utente.setHashedPassword(rs.getString("password"));
                 utente.setDataNascita(rs.getDate("data_nascita"));
                 utente.setIndirizzo(rs.getString("indirizzo"));
                 utente.setTelefono(rs.getString("telefono"));

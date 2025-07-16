@@ -44,7 +44,8 @@ public class AggiornaUtenteServlet extends HttpServlet {
         }
 
         session.setAttribute("utente", utente);
-        response.sendRedirect("AreaUtente.jsp");
+        request.getRequestDispatcher("/WEB-INF/AreaUtente.jsp").forward(request, response);
+
     }
 
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
