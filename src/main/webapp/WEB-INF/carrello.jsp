@@ -6,11 +6,12 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ page import="Model.Prodotto, java.util.List" %>
+<%@ page import="Model.ContenutoCarrello, Model.Prodotto" %>
+<%@ page import="java.util.List" %>
 <%
-  List<Prodotto> prodotti = (List<Prodotto>) request.getAttribute("prodotti");
-  double totale = (Double) request.getAttribute("totale");
+  List<ContenutoCarrello> carrello = (List<ContenutoCarrello>) request.getAttribute("carrello");
   String baseURL = request.getContextPath();
+  float totale = 0;
 %>
 <html>
 <head>
@@ -21,24 +22,57 @@
 
 <jsp:include page="/WEB-INF/fragments/header.jsp" />
 
-<main>
-  <h2>Il tuo Carrello</h2>
+<main class="content">
+  <h1>Il tuo Carrello</h1>
 
-  <% if (prodotti.isEmpty()) { %>
+  <% if (carrello == null || carrello.isEmpty()) { %>
   <p>Il tuo carrello è vuoto.</p>
   <% } else { %>
-  <ul class="cart-list">
-    <% for (Prodotto p : prodotti) { %>
-    <li>
-      <strong><%= p.getTitolo() %></strong> - €<%= p.getPrezzo() %>
-      <form action="rimuoviDalCarrello" method="post" style="display:inline;">
-        <input type="hidden" name="idProdotto" value="<%= p.getId_prodotto() %>">
-        <button type="submit"><i class="fas fa-trash"></i></button>
-      </form>
-    </li>
+  <table>
+    <thead>
+    <tr>
+      <th>Prodotto</th>
+      <th>Immagine</th>
+      <th>Prezzo unitario</th>
+      <th>Quantità</th>
+      <th>Totale</th>
+      <th>Rimuovi</th>
+    </tr>
+    </thead>
+    <tbody>
+    <% for (ContenutoCarrello item : carrello) {
+      Prodotto prodotto = item.getProdotto();
+      double prezzo = prodotto.getPrezzo();
+      int quantita = item.getQuantita();
+      double subtotale = prezzo * quantita;
+      totale += subtotale;
+    %>
+    <tr>
+      <td>
+        <a href="dettaglioProdotto?idProdotto=<%= prodotto.getId_prodotto() %>">
+          <%= prodotto.getTitolo() %>
+        </a>
+      </td>
+      <td>
+        <img src="<%= prodotto.getImmagine() %>" alt="Immagine prodotto" style="width:100px;">
+      </td>
+      <td>€ <%= String.format("%.2f", prezzo) %></td>
+      <td><%= quantita %></td>
+      <td>€ <%= String.format("%.2f", subtotale) %></td>
+      <td>
+        <form action="RimuoviDalCarrelloServlet" method="post">
+          <input type="hidden" name="idProdotto" value="<%= prodotto.getId_prodotto() %>">
+          <button type="submit">Rimuovi</button>
+        </form>
+      </td>
+    </tr>
     <% } %>
-  </ul>
-  <p><strong>Totale: €<%= totale %></strong></p>
+    </tbody>
+  </table>
+  <h2>Totale carrello: € <%= String.format("%.2f", totale) %></h2>
+  <form action="checkout" method="get">
+    <button type="submit">Procedi al Checkout</button>
+  </form>
   <% } %>
 
 </main>

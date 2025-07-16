@@ -15,32 +15,41 @@
 <head>
   <title><%= prodotto.getTitolo() %> | Nerd House</title>
   <link rel="stylesheet" href="<%=baseURL%>/css/styles.css" type="text/css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
 <body>
 
 <jsp:include page="/WEB-INF/fragments/header.jsp" />
 
-<main class="product-detail">
-  <div class="product-container">
-    <h2><%= prodotto.getTitolo() %></h2>
-    <p><strong>Autore:</strong> <%= prodotto.getAutore() %></p>
-    <p><strong>Lingua:</strong> <%= prodotto.getLingua() %></p>
-    <p><strong>Prezzo:</strong> € <%= prodotto.getPrezzo() %></p>
-    <p><strong>Data di uscita:</strong> <%= prodotto.getDataUscita() %></p>
-    <p><strong>Descrizione:</strong> <%= prodotto.getDescrizione() %></p>
-    <p><strong>Editore:</strong> <%= prodotto.getEditore() %></p>
-    <p><strong>Disponibilità:</strong> <%= prodotto.isDisponibilità() ? "Disponibile" : "Non disponibile" %></p>
+<main class="prodotto-dettaglio">
+  <div class="prodotto-container">
+    <div class="immagine-prodotto">
+      <img src="<%= prodotto.getImmagine() %>" alt="Immagine prodotto" style="max-width: 300px;">
+    </div>
+    <div class="dettagli-prodotto">
+      <h1><%= prodotto.getTitolo() %></h1>
+      <p><strong>Descrizione:</strong> <%= prodotto.getDescrizione() %></p>
+      <p><strong>Prezzo:</strong> € <%= String.format("%.2f", prodotto.getPrezzo()) %></p>
+      <p><strong>Lingua:</strong> <%= prodotto.getLingua() %></p>
+      <p><strong>Editore:</strong> <%= prodotto.getEditore() %></p>
+      <p><strong>Data uscita:</strong> <%= prodotto.getDataUscita() %></p>
+      <p><strong>Disponibilità:</strong>
+        <% if (prodotto.isDisponibilità()) { %>
+        <span style="color:green;">Disponibile</span>
+        <% } else { %>
+        <span style="color:red;">Non disponibile</span>
+        <% } %>
+      </p>
 
-    <form action="aggiungiCarrello" method="post" style="display:inline-block;">
-      <input type="hidden" name="idProdotto" value="<%= prodotto.getId_prodotto() %>">
-      <button type="submit"><i class="fas fa-cart-plus"></i> Aggiungi al Carrello</button>
-    </form>
+      <form action="aggiungiCarrello" method="post" style="display:inline;">
+        <input type="hidden" name="idProdotto" value="<%= prodotto.getId_prodotto() %>">
+        <button type="submit">Aggiungi al Carrello</button>
+      </form>
 
-    <form action="aggiungiWishlist" method="post" style="display:inline-block;">
-      <input type="hidden" name="idProdotto" value="<%= prodotto.getId_prodotto() %>">
-      <button type="submit"><i class="fas fa-star"></i> Aggiungi a Wishlist</button>
-    </form>
+      <form action="aggiungiWishlist" method="post" style="display:inline;">
+        <input type="hidden" name="idProdotto" value="<%= prodotto.getId_prodotto() %>">
+        <button type="submit">Aggiungi alla Wishlist</button>
+      </form>
+    </div>
   </div>
 </main>
 
