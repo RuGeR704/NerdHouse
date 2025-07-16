@@ -3,7 +3,7 @@
 <head>
   <!-- imposta caratteri accentati -->
   <meta charset="UTF-8">
-  <title>NERD HOUSE</title>
+  <title>NerdHouse</title>
 
   <style>
     .title-container {
@@ -222,7 +222,7 @@
 <script>
   // script telefono
   document.getElementById('telefono').onclick = function() {
-    alert('Il nostro numero è: +39 089 456 7890');
+    alert('Il nostro numero: +39 089 456 7890');
   }
 </script>
 
