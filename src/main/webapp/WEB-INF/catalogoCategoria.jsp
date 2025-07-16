@@ -46,7 +46,7 @@
 
     <div class="product-grid">
         <% for (Prodotto p : prodotti) { %>
-        <div class="product-card">
+        <div class="product-card" data-id="<%= p.getId_prodotto() %>">
             <h3>
                 <a href="dettaglioProdotto?idProdotto=<%= p.getId_prodotto() %>"><%= p.getTitolo() %></a>
             </h3>
@@ -62,5 +62,27 @@
 </main>
 
 <jsp:include page="/WEB-INF/fragments/footer.jsp" />
+
+<script>
+    const immaginiProdotti = {
+        1: "images/prodotto1.jpg",
+        2: "images/prodotto2.jpg",
+        3: "images/prodotto3.jpg",
+        // altri ID
+    };
+
+    document.addEventListener("DOMContentLoaded", function() {
+        document.querySelectorAll(".product-card").forEach(card => {
+            const id = card.getAttribute("data-id");
+            const imgSrc = immaginiProdotti[id] || "images/default.jpg";
+            const img = document.createElement("img");
+            img.src = imgSrc;
+            img.alt = "Immagine prodotto";
+            img.style.width = "150px";
+            card.prepend(img);
+        });
+    });
+</script>
+
 </body>
 </html>

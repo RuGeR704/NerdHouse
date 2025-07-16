@@ -43,10 +43,10 @@
   <section style="flex: 1; display: flex; flex-wrap: wrap; gap: 20px;">
     <% if (prodotti != null && !prodotti.isEmpty()) {
       for (Prodotto p : prodotti) { %>
-    <div style="flex: 1 1 200px; border: 2px solid #ddd; border-radius: 10px; padding: 15px; max-width: 250px; background: #fff;">
+    <div class="product-card" data-id="<%= p.getId_prodotto() %>" style="flex: 1 1 200px; border: 2px solid #ddd; border-radius: 10px; padding: 15px; max-width: 250px; background: #fff;">
       <h3 style="color: black;"><%= p.getTitolo() %></h3>
       <p><%= p.getDescrizione() %></p>
-      <p style="font-weight: bold; color: red;">Prezzo: € <%= p.getPrezzo() %></p>
+      <p style="font-weight: bold; color: red;">Prezzo: € <%= String.format("%.2f", p.getPrezzo()) %></p>
       <form action="aggiungiCarrello" method="post">
         <input type="hidden" name="idProdotto" value="<%= p.getId_prodotto() %>">
         <button type="submit">Aggiungi al Carrello</button>
@@ -55,6 +55,7 @@
         <input type="hidden" name="idProdotto" value="<%= p.getId_prodotto() %>">
         <button type="submit">Aggiungi a Wishlist</button>
       </form>
+      <a href="dettaglioProdotto?idProdotto=<%= p.getId_prodotto() %>">Dettagli</a>
     </div>
     <% }} else { %>
     <p>Nessun prodotto trovato.</p>
@@ -63,5 +64,27 @@
 </main>
 
 <jsp:include page="/WEB-INF/fragments/footer.jsp" />
+
+<script>
+  const immaginiProdotti = {
+    1: "<%= baseURL %>/images/prodotto1.jpg",
+    2: "<%= baseURL %>/images/prodotto2.jpg",
+    3: "<%= baseURL %>/images/prodotto3.jpg",
+    // aggiungi altri prodotti
+  };
+
+  document.addEventListener("DOMContentLoaded", function() {
+    document.querySelectorAll(".product-card").forEach(card => {
+      const id = card.getAttribute("data-id");
+      const img = immaginiProdotti[id] || "<%= baseURL %>/images/default.jpg";
+      const imgElement = document.createElement("img");
+      imgElement.src = img;
+      imgElement.alt = "Immagine prodotto";
+      imgElement.style.width = "150px";
+      card.prepend(imgElement);
+    });
+  });
+</script>
+
 </body>
 </html>

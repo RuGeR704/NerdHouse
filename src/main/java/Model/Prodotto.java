@@ -14,7 +14,6 @@ public class Prodotto {
     private Date dataUscita;
     private String editore;
     private boolean disponibilita;
-    private String immagine;
 
     public int getId_prodotto() {
         return id_prodotto;
@@ -94,13 +93,5 @@ public class Prodotto {
 
     public void setDisponibilita(boolean disponibilita) {
         this.disponibilita = disponibilita;
-    }
-
-    public String getImmagine() {
-        return immagine;
-    }
-
-    public void setImmagine(String immagine) {
-        this.immagine = immagine;
     }
 }

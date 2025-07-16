@@ -23,7 +23,7 @@
 <main class="prodotto-dettaglio">
   <div class="prodotto-container">
     <div class="immagine-prodotto">
-      <img src="<%= prodotto.getImmagine() %>" alt="Immagine prodotto" style="max-width: 300px;">
+      <img id="img-prodotto" style="max-width: 300px;">
     </div>
     <div class="dettagli-prodotto">
       <h1><%= prodotto.getTitolo() %></h1>
@@ -54,5 +54,18 @@
 </main>
 
 <jsp:include page="/WEB-INF/fragments/footer.jsp" />
+
+<script>
+  const immaginiProdotti = {
+    1: "<%=baseURL%>/images/prodotto1.jpg",
+    2: "<%=baseURL%>/images/prodotto2.jpg",
+    3: "<%=baseURL%>/images/prodotto3.jpg"
+  };
+
+  const idProdotto = <%= prodotto.getId_prodotto() %>;
+  const img = document.getElementById("img-prodotto");
+  img.src = immaginiProdotti[idProdotto] || "<%=baseURL%>/images/default.jpg";
+</script>
+
 </body>
 </html>

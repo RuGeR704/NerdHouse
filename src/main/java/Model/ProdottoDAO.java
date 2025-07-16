@@ -25,7 +25,6 @@ public class ProdottoDAO {
                 prodotto.setDisponibilita(rs.getBoolean("Disponibilita"));
                 prodotto.setLingua(rs.getString("Lingua"));
                 prodotto.setId_categoria(rs.getInt("Id_categoria"));
-                prodotto.setImmagine(rs.getString("Immagine")); //
                 return prodotto;
             } else {
                 return null;
@@ -54,7 +53,6 @@ public class ProdottoDAO {
                 prodotto.setDisponibilita(rs.getBoolean("Disponibilita"));
                 prodotto.setLingua(rs.getString("Lingua"));
                 prodotto.setId_categoria(rs.getInt("Id_categoria"));
-                prodotto.setImmagine(rs.getString("Immagine")); //
                 prodotti.add(prodotto);
             }
             return prodotti;
@@ -89,7 +87,6 @@ public class ProdottoDAO {
                 prodotto.setDisponibilita(rs.getBoolean("Disponibilita"));
                 prodotto.setLingua(rs.getString("Lingua"));
                 prodotto.setId_categoria(rs.getInt("Id_categoria"));
-                prodotto.setImmagine(rs.getString("Immagine"));
                 prodotti.add(prodotto);
             }
         } catch (SQLException e) {
@@ -118,7 +115,6 @@ public class ProdottoDAO {
                 prodotto.setDisponibilita(rs.getBoolean("Disponibilita"));
                 prodotto.setLingua(rs.getString("Lingua"));
                 prodotto.setId_categoria(rs.getInt("Id_categoria"));
-                prodotto.setImmagine(rs.getString("Immagine"));
                 prodotti.add(prodotto);
             }
             return prodotti;

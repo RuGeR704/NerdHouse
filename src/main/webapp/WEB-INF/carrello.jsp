@@ -11,7 +11,7 @@
 <%
   List<ContenutoCarrello> carrello = (List<ContenutoCarrello>) request.getAttribute("carrello");
   String baseURL = request.getContextPath();
-  float totale = 0;
+  double totale = 0;
 %>
 <html>
 <head>
@@ -53,9 +53,7 @@
           <%= prodotto.getTitolo() %>
         </a>
       </td>
-      <td>
-        <img src="<%= prodotto.getImmagine() %>" alt="Immagine prodotto" style="width:100px;">
-      </td>
+      <td><img id="img-<%= prodotto.getId_prodotto() %>" style="width:100px;"></td>
       <td>€ <%= String.format("%.2f", prezzo) %></td>
       <td><%= quantita %></td>
       <td>€ <%= String.format("%.2f", subtotale) %></td>
@@ -78,5 +76,21 @@
 </main>
 
 <jsp:include page="/WEB-INF/fragments/footer.jsp" />
+
+<script>
+  const immaginiProdotti = {
+    1: "<%=baseURL%>/images/prodotto1.jpg",
+    2: "<%=baseURL%>/images/prodotto2.jpg",
+    3: "<%=baseURL%>/images/prodotto3.jpg"
+  };
+
+  <% for (ContenutoCarrello item : carrello) { %>
+  const imgTag<%= item.getProdotto().getId_prodotto() %> = document.getElementById("img-<%= item.getProdotto().getId_prodotto() %>");
+  if (imgTag<%= item.getProdotto().getId_prodotto() %>) {
+    imgTag<%= item.getProdotto().getId_prodotto() %>.src = immaginiProdotti[<%= item.getProdotto().getId_prodotto() %>] || "<%=baseURL%>/images/default.jpg";
+  }
+  <% } %>
+</script>
+
 </body>
 </html>
