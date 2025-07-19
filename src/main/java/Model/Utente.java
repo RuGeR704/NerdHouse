@@ -16,6 +16,7 @@ public class Utente {
     private String indirizzo;
     private Date dataNascita;
     private String telefono;
+    private boolean isAdmin;
 
     public int getId() {
         return id;
@@ -91,5 +92,13 @@ public class Utente {
 
     public void setTelefono(String telefono) {
         this.telefono = telefono;
+    }
+
+    public boolean isAdmin() {
+        return isAdmin;
+    }
+
+    public void setAdmin(boolean admin) {
+        isAdmin = admin;
     }
 }

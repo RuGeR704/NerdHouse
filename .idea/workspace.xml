@@ -9,26 +9,23 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e68e6447-583a-4dc7-bf39-39fcf0f11fef" name="Changes" comment="AggiornaUtenteServlet + AreaUtente sistemata, con script JS">
-      <change afterPath="$PROJECT_DIR$/src/main/java/Controller/AggiornaPasswordServlet.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/Controller/AggiungiPagamentoServlet.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/Controller/RimuoviPagamentoServlet.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/Model/MetodoPagamento.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/Model/MetodoPagamentoDAO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/AreaUtente.jsp" afterDir="false" />
+    <list default="true" id="e68e6447-583a-4dc7-bf39-39fcf0f11fef" name="Changes" comment="Aggiunta navbar all'header (3)">
+      <change afterPath="$PROJECT_DIR$/src/main/java/Controller/AggiungiProdottoServlet.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/Controller/CartCountServlet.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/Controller/InitServlet.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/Controller/ModificaProdottoServlet.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/Controller/RimuoviProdottoServlet.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Controller/AggiornaUtenteServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controller/AggiornaUtenteServlet.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Controller/LoginServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controller/LoginServlet.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Controller/LogoutServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controller/LogoutServlet.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Controller/UserAreaServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controller/UserAreaServlet.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Model/ConPool.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Model/ConPool.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Model/ProdottoDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Model/ProdottoDAO.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Model/Utente.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Model/Utente.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Model/UtenteDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Model/UtenteDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/AreaUtente.jsp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/ordini.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/ordini.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/RegistrationSuccess.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/RegistrationSuccess.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/error.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/error.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/fragments/header.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/fragments/header.jsp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/webapp/css/styles.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/css/styles.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/registrazione.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/registrazione.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/shop.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/shop.jsp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -268,7 +265,11 @@
       <workItem from="1752136432102" duration="17462000" />
       <workItem from="1752477089871" duration="8664000" />
       <workItem from="1752504807899" duration="213000" />
-      <workItem from="1752567084285" duration="4488000" />
+      <workItem from="1752567084285" duration="11356000" />
+      <workItem from="1752669354288" duration="7536000" />
+      <workItem from="1752734263249" duration="20965000" />
+      <workItem from="1752826777090" duration="2212000" />
+      <workItem from="1752915335890" duration="1831000" />
     </task>
     <task id="LOCAL-00001" summary="inizio progetto">
       <option name="closed" value="true" />
@@ -366,7 +367,39 @@
       <option name="project" value="LOCAL" />
       <updated>1751641191527</updated>
     </task>
-    <option name="localTasksCounter" value="13" />
+    <task id="LOCAL-00013" summary="Aggiunta dei Metodi di Pagamento + completamento Area Utente">
+      <option name="closed" value="true" />
+      <created>1752571737970</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1752571737970</updated>
+    </task>
+    <task id="LOCAL-00014" summary="Rimozione log di debug">
+      <option name="closed" value="true" />
+      <created>1752572161270</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1752572161270</updated>
+    </task>
+    <task id="LOCAL-00015" summary="Aggiunta navbar all'header + rifinimenti vari">
+      <option name="closed" value="true" />
+      <created>1752678181003</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1752678181003</updated>
+    </task>
+    <task id="LOCAL-00016" summary="Aggiunta navbar all'header (2)">
+      <option name="closed" value="true" />
+      <created>1752678574166</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1752678574166</updated>
+    </task>
+    <option name="localTasksCounter" value="17" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -396,6 +429,10 @@
     <MESSAGE value="creazione di LogoutServlet + creazione del corpo di AreaUtente con css, menu e sezioni" />
     <MESSAGE value="footer" />
     <MESSAGE value="AggiornaUtenteServlet + AreaUtente sistemata, con script JS" />
-    <option name="LAST_COMMIT_MESSAGE" value="AggiornaUtenteServlet + AreaUtente sistemata, con script JS" />
+    <MESSAGE value="Aggiunta dei Metodi di Pagamento + completamento Area Utente" />
+    <MESSAGE value="Rimozione log di debug" />
+    <MESSAGE value="Aggiunta navbar all'header + rifinimenti vari" />
+    <MESSAGE value="Aggiunta navbar all'header (2)" />
+    <option name="LAST_COMMIT_MESSAGE" value="Aggiunta navbar all'header (2)" />
   </component>
 </project>

@@ -99,6 +99,7 @@ public class UtenteDAO {
                 utente.setDataNascita(rs.getDate("data_nascita"));
                 utente.setIndirizzo(rs.getString("indirizzo"));
                 utente.setTelefono(rs.getString("telefono"));
+                utente.setAdmin(rs.getBoolean("is_admin"));
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
