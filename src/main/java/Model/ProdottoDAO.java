@@ -7,11 +7,13 @@ import java.util.List;
 public class ProdottoDAO {
 
 
-    public void doSave(Prodotto prodotto) {
+    public int doSave(Prodotto prodotto) {
+        int generatedID = -1;
+
         String sql = "INSERT INTO prodotto (titolo, descrizione, prezzo, autore, data_Uscita, lingua, editore) VALUES (?, ?, ?, ?, ?, ?, ?)";
 
         try (Connection con = ConPool.getConnection();
-             PreparedStatement ps = con.prepareStatement(sql)) {
+             PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
 
             ps.setString(1, prodotto.getTitolo());
             ps.setString(2, prodotto.getDescrizione());
@@ -23,10 +25,17 @@ public class ProdottoDAO {
 
             ps.executeUpdate();
 
+            ResultSet rs = ps.getGeneratedKeys();
+            if(rs.next()) {
+                generatedID = rs.getInt(1);
+            }
+
         } catch (SQLException e) {
             e.printStackTrace();
             throw new RuntimeException("Errore durante il salvataggio del prodotto", e);
         }
+
+        return generatedID;
     }
 
     public void doUpdate(Prodotto p) throws SQLException {
@@ -86,6 +95,9 @@ public class ProdottoDAO {
             ResultSet rs = ps.executeQuery();
 
             List<Prodotto> prodotti = new ArrayList<>();
+
+            ImmagineProdottoDAO immagineDAO = new ImmagineProdottoDAO();
+
             while (rs.next()) {
                 Prodotto prodotto = new Prodotto();
                 prodotto.setId_prodotto(rs.getInt("ID_Prodotto"));
@@ -98,6 +110,10 @@ public class ProdottoDAO {
                 prodotto.setDisponibilita(rs.getBoolean("Disponibilita"));
                 prodotto.setLingua(rs.getString("Lingua"));
                 prodotto.setId_categoria(rs.getInt("Id_categoria"));
+
+                List<ImmagineProdotto> immagini = immagineDAO.doRetrieveByProdotto(prodotto.getId_prodotto());
+                prodotto.setImmagini(immagini);
+
                 prodotti.add(prodotto);
             }
             return prodotti;
@@ -168,13 +184,32 @@ public class ProdottoDAO {
         }
     }
 
-    public boolean doDelete(int id) {
-        try (Connection con = ConPool.getConnection()) {
-            PreparedStatement ps = con.prepareStatement("DELETE FROM prodotto WHERE id_prodotto = ?");
-            ps.setInt(1, id);
-            return ps.executeUpdate() > 0;
-        } catch (SQLException e) {
-            throw new RuntimeException("Errore durante l'eliminazione del prodotto", e);
-        }
+    public void doDelete(int idProdotto) {
+            Connection con = null;
+            PreparedStatement ps = null;
+
+            try {
+                con = ConPool.getConnection();
+
+                // 1. Elimina immagini associate
+                ps = con.prepareStatement("DELETE FROM immagine_prodotto WHERE ID_Prodotto = ?");
+                ps.setInt(1, idProdotto);
+                ps.executeUpdate();
+                ps.close();
+
+                // 2. Elimina il prodotto
+                ps = con.prepareStatement("DELETE FROM prodotto WHERE ID_Prodotto = ?");
+                ps.setInt(1, idProdotto);
+                ps.executeUpdate();
+            } catch (SQLException e) {
+                throw new RuntimeException("Errore durante l'eliminazione del prodotto", e);
+            } finally {
+                try {
+                    if (ps != null) ps.close();
+                    if (con != null) con.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
     }
 }

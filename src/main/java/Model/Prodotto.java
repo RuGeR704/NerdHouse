@@ -2,6 +2,7 @@ package Model;
 
 import java.sql.Date;
 import java.time.LocalDate;
+import java.util.List;
 
 public class Prodotto {
     private int id_prodotto;
@@ -14,6 +15,7 @@ public class Prodotto {
     private Date dataUscita;
     private String editore;
     private boolean disponibilita;
+    private List<ImmagineProdotto> immagini;
 
     public int getId_prodotto() {
         return id_prodotto;
@@ -93,5 +95,13 @@ public class Prodotto {
 
     public void setDisponibilita(boolean disponibilita) {
         this.disponibilita = disponibilita;
+    }
+
+    public List<ImmagineProdotto> getImmagini() {
+        return immagini;
+    }
+
+    public void setImmagini(List<ImmagineProdotto> immagini) {
+        this.immagini = immagini;
     }
 }

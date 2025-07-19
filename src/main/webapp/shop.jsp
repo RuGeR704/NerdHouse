@@ -8,6 +8,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page import="Model.Prodotto, java.util.List" %>
 <%@ page import="Model.Prodotto, java.util.List, Model.Utente" %>
+<%@ page import="Model.ImmagineProdotto" %>
 
 <%
   List<Prodotto> prodotti = (List<Prodotto>) application.getAttribute("prodotti");
@@ -21,6 +22,8 @@
   <title>Shop | Nerd House</title>
   <link rel="stylesheet" href="<%= baseURL %>/css/styles.css" type="text/css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tiny-slider/2.9.4/tiny-slider.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/tiny-slider/2.9.4/min/tiny-slider.js"></script>
 </head>
 <body>
 
@@ -57,19 +60,42 @@
   <!-- Prodotti -->
   <section style="flex: 1; display: flex; flex-wrap: wrap; gap: 20px;">
     <% if (prodotti != null && !prodotti.isEmpty()) {
-      for (Prodotto p : prodotti) { %>
+      for (Prodotto p : prodotti) {
+    %>
+
     <div class="product-card" data-id="<%= p.getId_prodotto() %>" style="flex: 1 1 200px; border: 2px solid #ddd; border-radius: 10px; padding: 15px; max-width: 250px; background: #fff;">
+
+      <div class="product-images my-slider" id="slider-<%= p.getId_prodotto() %>">
+        <%
+          List<ImmagineProdotto> immagini = new Model.ImmagineProdottoDAO().doRetrieveByProdotto(p.getId_prodotto());
+          if (immagini != null && !immagini.isEmpty()) {
+            for (ImmagineProdotto img : immagini) {
+        %>
+        <div><img class="img-prodotto" src="<%= request.getContextPath() + img.getPercorsoImmagine() %>" style="width: 100%;" /></div>
+        <%
+          }
+        } else {
+        %>
+        <div><img src="<%= baseURL %>/images/default.jpg" style="width: 100%;" /></div>
+        <% } %>
+      </div>
+
       <h3 style="color: black;"><%= p.getTitolo() %></h3>
+
       <p><%= p.getDescrizione() %></p>
+
       <p style="font-weight: bold; color: red;">Prezzo: € <%= String.format("%.2f", p.getPrezzo()) %></p>
+
       <form action="aggiungiCarrello" method="post">
         <input type="hidden" name="idProdotto" value="<%= p.getId_prodotto() %>">
         <button type="submit">Aggiungi al Carrello</button>
       </form>
+
       <form action="aggiungiWishlist" method="post">
         <input type="hidden" name="idProdotto" value="<%= p.getId_prodotto() %>">
         <button type="submit">Aggiungi a Wishlist</button>
       </form>
+
       <a href="dettaglioProdotto?idProdotto=<%= p.getId_prodotto() %>">Dettagli</a>
 
       <% if (utente != null && utente.isAdmin()) { %>
@@ -80,6 +106,7 @@
           <button type="submit" style="background: none; border: none; color: red; cursor: pointer; padding: 0;">Rimuovi</button>
         </form>
       </div>
+
       <% } %>
 
     </div>
@@ -93,8 +120,10 @@
   <div id="aggiungiForm" style="display: none;">
     <div id="formContainer">
       <span class="close" onclick="chiudiOverlayAggiungi()">&times;</span>
-      <form action="<%= baseURL %>/aggiungiProdotto" method="post">
+      <form action="<%= baseURL %>/aggiungiProdotto" method="post" enctype="multipart/form-data">
         <h2>Aggiungi Prodotto</h2>
+        <strong>Immagini prodotto:</strong>
+        <input type="file" name="immagini[]" multiple accept="image/*"><br><br>
         <strong>Titolo:</strong> <input type="text" name="titolo" required><br><br>
         <strong>Descrizione:</strong> <textarea name="descrizione" required></textarea><br><br>
         <strong>Prezzo:</strong> <input type="number" name="prezzo" step="0.01" required><br><br>
@@ -135,12 +164,6 @@
 <jsp:include page="/WEB-INF/fragments/footer.jsp" />
 
 <script>
-  const immaginiProdotti = {
-    1: "<%= baseURL %>/images/prodotto1.jpg",
-    2: "<%= baseURL %>/images/prodotto2.jpg",
-    3: "<%= baseURL %>/images/prodotto3.jpg",
-
-  };
 
   document.addEventListener("DOMContentLoaded", function() {
     document.querySelectorAll(".product-card").forEach(card => {
@@ -221,6 +244,20 @@
     }
   });
 
+  //Slider immagini
+  document.addEventListener("DOMContentLoaded", function () {
+    document.querySelectorAll(".my-slider").forEach(slider => {
+      tns({
+        container: slider,
+        items: 1,
+        slideBy: "page",
+        autoplay: true,
+        controls: false,
+        nav: false,
+        autoplayButtonOutput: false
+      });
+    });
+  });
 
 </script>
 
