@@ -12,7 +12,7 @@
     .banner-container {
       position: relative;
       width: 100%;
-      height: 500px;
+      height: 800px;
       overflow: hidden;
     }
 
@@ -27,7 +27,7 @@
       height: 100%;
       display: none;
       object-fit: fill;
-      transition: opacity 5s ease-in-out;
+      transition: opacity 300s ease-in-out;
     }
 
     .banner-slider img.active {
@@ -38,7 +38,7 @@
       position: absolute;
       top: 50%;
       transform: translateY(-50%);
-      font-size: 30px;
+      font-size: 60px;
       background: rgba(0,0,0,0.5);
       color: white;
       border: none;
@@ -81,7 +81,7 @@
   <div class="banner-slider" id="slider">
     <img src="<%= request.getContextPath() %>/images/prodotti/AOT.png" alt="aot" class="slide active">
     <img src="<%= request.getContextPath() %>/images/prodotti/DANDADAN.png" alt="dandadan" class="slide">
-    <img src="<%= request.getContextPath() %>/images/prodotti/LUFFY.png" alt="luffy" class="slide">
+    <img src="<%= request.getContextPath() %>/images/prodotti/LUFFy.png" alt="luffy" class="slide">
   </div>
 
   <button id="prevBtn" class="arrow left" aria-label="immagine precedente" title="Precedente">&#10094;</button>
