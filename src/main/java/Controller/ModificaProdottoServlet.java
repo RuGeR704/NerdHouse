@@ -55,7 +55,6 @@ public class ModificaProdottoServlet extends HttpServlet {
         }
     }
 
-
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -72,6 +71,7 @@ public class ModificaProdottoServlet extends HttpServlet {
                     : null;
             String lingua = request.getParameter("lingua");
             String editore = request.getParameter("editore");
+            int idCategoria = Integer.parseInt(request.getParameter("idCategoria"));  // <-- aggiunto
 
             Prodotto p = new Prodotto();
             p.setId_prodotto(id);
@@ -82,6 +82,7 @@ public class ModificaProdottoServlet extends HttpServlet {
             p.setDataUscita(dataUscita);
             p.setLingua(lingua);
             p.setEditore(editore);
+            p.setId_categoria(idCategoria);  // <-- aggiunto
 
             ProdottoDAO dao = new ProdottoDAO();
             dao.doUpdate(p);

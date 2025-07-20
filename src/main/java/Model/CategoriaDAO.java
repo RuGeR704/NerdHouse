@@ -1,58 +1,58 @@
 package Model;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
 public class CategoriaDAO {
 
     public Categoria doRetrieveByID(int id) {
-
-        try(Connection con = ConPool.getConnection()) {
-            String sql = "SELECT * FROM categoria WHERE idCategoria = ?";
-            PreparedStatement ps = con.prepareStatement(sql);
-
-            //Inserisco ID categoria nella query
+        try (Connection con = ConPool.getConnection()) {
+            PreparedStatement ps = con.prepareStatement("SELECT * FROM categoria WHERE id_categoria = ?");
             ps.setInt(1, id);
-
-            //Creo la categoria dal database
             ResultSet rs = ps.executeQuery();
-
-            rs.next();
-
-            Categoria cat = new Categoria();
-            cat.setIdCategoria(rs.getInt("idCategoria"));
-            cat.setNome(rs.getString("nome"));
-            cat.setTipo(rs.getString("tipo"));
-
-            return cat;
+            if (rs.next()) {
+                Categoria cat = new Categoria();
+                cat.setIdCategoria(rs.getInt("id_categoria"));
+                cat.setNome(rs.getString("nome"));
+                cat.setTipo(rs.getString("tipo"));
+                return cat;
+            }
+            return null;
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
     }
 
-    public List<Categoria> doRetrieveAll() {
-
-        try(Connection con = ConPool.getConnection()) {
-            String query = "SELECT * FROM categoria";
-            ResultSet rs = con.createStatement().executeQuery(query);
-
-            List<Categoria> categorie = new ArrayList<Categoria>();
-
-            while(rs.next()) {
-                Categoria cat = new Categoria();
-                cat.setIdCategoria(rs.getInt("idCategoria"));
-                cat.setNome(rs.getString("nome"));
-                cat.setTipo(rs.getString("tipo"));
-                categorie.add(cat);
+    public Categoria doRetrieveByNome(String nome) {
+        try (Connection con = ConPool.getConnection()) {
+            PreparedStatement ps = con.prepareStatement("SELECT * FROM categoria WHERE nome = ?");
+            ps.setString(1, nome);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                Categoria categoria = new Categoria();
+                categoria.setIdCategoria(rs.getInt("id_categoria"));
+                categoria.setNome(rs.getString("nome"));
+                categoria.setTipo(rs.getString("tipo"));
+                return categoria;
             }
+            return null;
+        } catch (SQLException e) {
+            throw new RuntimeException("Errore nel recuperare la categoria per nome", e);
+        }
+    }
 
-            return categorie;
-        } catch(SQLException e) {
+    public List<String> doRetrieveAllTipi() {
+        List<String> tipi = new ArrayList<>();
+        try (Connection con = ConPool.getConnection();
+             PreparedStatement ps = con.prepareStatement("SELECT DISTINCT tipo FROM categoria WHERE tipo IS NOT NULL AND tipo <> ''")) {
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                tipi.add(rs.getString("tipo"));
+            }
+        } catch (SQLException e) {
             throw new RuntimeException(e);
         }
+        return tipi;
     }
 }
