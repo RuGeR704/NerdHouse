@@ -1,230 +1,160 @@
+<%@ page contentType="text/html; charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <html lang="it">
 <head>
-  <!-- imposta caratteri accentati -->
   <meta charset="UTF-8">
   <title>NerdHouse</title>
 
+  <link rel="stylesheet" href="./css/styles.css" type="text/css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
   <style>
-    .title-container {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 10px;  /* spazio tra elementi */
-      margin: 40px 40px 0 40px;
+    .banner-container {
+      position: relative;
+      width: 100%;
+      height: 800px;
+      overflow: hidden;
     }
 
-    .info { /* barra info */
-      background-color: black;
+    .banner-slider {
+      position: relative;
+      width: 100%;
+      height: 100%;
+    }
+
+    .banner-slider img {
+      width: 100%;
+      height: 100%;
+      display: none;
+      object-fit: fill;
+      transition: opacity 300s ease-in-out;
+    }
+
+    .banner-slider img.active {
+      display: block;
+    }
+
+    .arrow {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 60px;
+      background: rgba(0,0,0,0.5);
       color: white;
-      border: black;
-      border-radius: 15px;
-      padding: 15px;
-      width: 1230px;
-      margin: 5px auto;
-      font-family: Arial, sans-serif;
-      word-spacing: 20px;
-    }
-
-    .title-box { /* box nera titolo */
-      border: 3px solid black;
-      padding: 20px 40px;
-      border-radius: 10px;
-      background-color: black;
-    }
-
-    .nerd {
-      color: yellow; /* colore "NERD" */
-    }
-
-    .house {
-      color: red; /* colore "HOUSE" */
-    }
-
-    h1 { /* titolo principale */
-      font-size: 3em;
-      font-family: Arial, sans-serif;
-      margin: 0;
-    }
-
-    img.logo-home {
-      width: 130px;
-    }
-
-    img.account-icon { /* icona */
-      width: 150px;
-      cursor: pointer;
-    }
-
-    a.account-link {
-      display: flex;
-      align-items: center;
-    }
-
-    .search-container { /* barra nera per info */
-      margin: 30px auto;
-      width: 320px;
-      text-align: center;
-    }
-
-    input[type="text"] {  /*barra di ricerca*/
-      border: 1px solid #555;
-      width: 320px;
-      padding: 10px 10px 10px 40px;
-      font-size: 1em;
-      border-radius: 5px;
-      background-image: url('https://cdn-icons-png.flaticon.com/512/622/622669.png');
-      background-repeat: no-repeat;
-      background-size: 20px 20px;
-      background-position: 10px center;
-    }
-
-    .tag-filter {
-      margin: 20px 0;
-      text-align: center;
-    }
-
-    .tag-filter button {
-      margin: 5px;
-      padding: 10px 15px;
       border: none;
-      border-radius: 5px;
-      background-color: #ddd;
       cursor: pointer;
-      font-weight: bold;
-    }
-
-    .tag-filter button.active {
-      background-color: #333;
-      color: white;
-    }
-
-    ul#resultList { /*richiude tutto tra quadrati*/
-      margin: 20px 40px;
-      padding: 0;
-      list-style: none;
-      font-family: Arial, sans-serif;
-      display: flex;
-      flex-wrap: wrap; /* permette di andare a capo se la riga non basta */
-      gap: 20px;
-    }
-
-    ul#resultList li {  /* impostazioni del rettangolo dei prodotti */
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 10px;
-      border: 1px solid #ccc;
-      border-radius: 10px;
       padding: 10px;
-      width: 200px;
-      background-color: #f9f9f9;
-      box-shadow: 2px 2px 5px rgba(0,0,0,0.1);
+      z-index: 10;
+      border-radius: 50%;
     }
 
-    ul#resultList img { /* impostazioni immagini prodotto */
-      width: 150px;
-      height: auto;
-      border-radius: 5px;
+    .arrow.left { left: 10px; }
+    .arrow.right { right: 10px; }
+
+    .dots {
+      position: absolute;
+      bottom: 15px;
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      gap: 10px;
     }
 
-    a.product-link {
-      text-decoration: none;
-      color: inherit;
+    .dot {
+      width: 12px;
+      height: 12px;
+      background: #ddd;
+      border-radius: 50%;
+      cursor: pointer;
+    }
+
+    .dot.active {
+      background: #333;
     }
   </style>
 </head>
 
 <body>
+<jsp:include page="/WEB-INF/fragments/header.jsp" />
 
-<div class="info"> <!-- barra di info -->
-  <span id="telefono" style="color:white; cursor:pointer; text-decoration:underline;">Telefono</span>
-  <a href="mailto:nerdhouse@email.com" style="color:white; cursor:pointer;">Email</a>
-</div>
-
-<div class="title-container"> <!-- logo sito -->
-  <img class="logo-home" src="" alt="Logo Nerd House">
-  <div class="title-box">
-    <h1><span class="nerd">NERD</span> <span class="house">HOUSE</span></h1>
+<div class="banner-container">
+  <div class="banner-slider" id="slider">
+    <img src="<%= request.getContextPath() %>/images/prodotti/AOT.png" alt="aot" class="slide active">
+    <img src="<%= request.getContextPath() %>/images/prodotti/DANDADAN.png" alt="dandadan" class="slide">
+    <img src="<%= request.getContextPath() %>/images/prodotti/LUFFy.png" alt="luffy" class="slide">
   </div>
-  <!-- logo account -->
-  <a href="userServlet" class="account-link">
-    <img class="account-icon" src="https://cdn-icons-png.flaticon.com/512/847/847969.png" alt="Account">
-  </a>
+
+  <button id="prevBtn" class="arrow left" aria-label="immagine precedente" title="Precedente">&#10094;</button>
+  <button id="nextBtn" class="arrow right" aria-label="immagine successiva" title="Successiva">&#10095;</button>
+
+  <div class="dots" id="dots"></div>
 </div>
 
-<div class="search-container">
-  <input type="text" id="searchInput" placeholder="Cerca nella lista...">
-</div>
-
-<ul id="resultList"> <!-- lista prodotti -->
-
-  <!-- prodotto 1 -->
-  <li data-tags="maglietta starwars">
-    <a href="maglietta_starwars.jsp" class="product-link"> <!-- pagina dedicata -->
-      <img src="https://png.pngtree.com/png-vector/20241102/ourmid/pngtree-premium-black-t-shirt-mockup-png-image_14226805.png" alt="T-shirt Star Wars">
-      <div>
-        <strong>T-shirt Star Wars</strong><br>
-        <small>€19.99</small>
-      </div>
-    </a>
-  </li>
-
-  <!-- prodotto 2 -->
-  <li data-tags="maglietta starwars">
-    <a href="maglietta_starwars.jsp" class="product-link">
-      <img src="https://png.pngtree.com/png-vector/20241102/ourmid/pngtree-premium-black-t-shirt-mockup-png-image_14226805.png" alt="Maglietta">
-      <div>
-        <strong>Maglietta</strong><br>
-        <small>€19.99</small>
-      </div>
-    </a>
-  </li>
-
-</ul>
-
-<div class="tag-filter"> <!-- filtri -->
-  <button data-filter="all" class="active">Tutti</button>
-  <button data-filter="maglietta">Magliette</button>
-  <button data-filter="starwars">Star Wars</button>
-  <button data-filter="accessori">Accessori</button>
-</div>
+<jsp:include page="/WEB-INF/fragments/footer.jsp" />
 
 <script>
-  // script per filtro tag e ricerca
-  const searchInput = document.getElementById('searchInput'); // input barra di ricerca
-  const buttons = document.querySelectorAll('.tag-filter button');
-  const listItems = document.querySelectorAll('#resultList li'); // prende tutto cio che sta nel id=resultlist
-  let activeTag = 'all';
+  const slides = document.querySelectorAll(".slide");
+  const dotsContainer = document.getElementById("dots");
+  const prevBtn = document.getElementById("prevBtn");
+  const nextBtn = document.getElementById("nextBtn");
+  let currentIndex = 0;
+  let autoplayInterval;
 
-  buttons.forEach(btn => { // mette attivo il pulsante che noi usiamo
-    btn.addEventListener('click', () => {
-      buttons.forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
-      activeTag = btn.dataset.filter;
-      filterItems();
+  function showSlide(index) {
+    slides.forEach((slide, i) => {
+      slide.classList.remove("active");
+      slide.style.display = i === index ? "block" : "none";
+      dotsContainer.children[i].classList.toggle("active", i === index);
     });
+    currentIndex = index;
+  }
+
+  function nextSlide() {
+    let newIndex = (currentIndex + 1) % slides.length;
+    showSlide(newIndex);
+  }
+
+  function prevSlide() {
+    let newIndex = (currentIndex - 1 + slides.length) % slides.length;
+    showSlide(newIndex);
+  }
+
+  function startAutoplay() {
+    autoplayInterval = setInterval(nextSlide, 4000);
+  }
+
+  function stopAutoplay() {
+    clearInterval(autoplayInterval);
+  }
+
+  // Init dots
+  slides.forEach((_, i) => {
+    const dot = document.createElement("span");
+    dot.classList.add("dot");
+    if (i === 0) dot.classList.add("active");
+    dot.addEventListener("click", () => {
+      showSlide(i);
+      stopAutoplay();
+      startAutoplay();
+    });
+    dotsContainer.appendChild(dot);
   });
 
-  searchInput.addEventListener('input', filterItems);
+  prevBtn.addEventListener("click", () => {
+    prevSlide();
+    stopAutoplay();
+    startAutoplay();
+  });
 
-  function filterItems() {
-    const q = searchInput.value.toLowerCase();
-    listItems.forEach(li => {
-      const textMatch = li.textContent.toLowerCase().includes(q);
-      const tags = li.dataset.tags.split(' ');
-      const tagMatch = (activeTag === 'all' || tags.includes(activeTag));
-      li.style.display = (textMatch && tagMatch) ? '' : 'none';
-    });
-  }
+  nextBtn.addEventListener("click", () => {
+    nextSlide();
+    stopAutoplay();
+    startAutoplay();
+  });
+
+  showSlide(0);
+  startAutoplay();
 </script>
-
-<script>
-  // script telefono
-  document.getElementById('telefono').onclick = function() {
-    alert('Il nostro numero: +39 089 456 7890');
-  }
-</script>
-
 </body>
 </html>
+
