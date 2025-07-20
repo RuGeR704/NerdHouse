@@ -11,29 +11,27 @@
   <style>
     .banner-container {
       position: relative;
-      width: 500px;
-      height: 200px;
+      width: 100%;
+      height: 500px;
       overflow: hidden;
-      margin: 40px auto;
-      border-radius: 10px;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.3);
     }
 
     .banner-slider {
-      display: flex;
-      width: 300%;
-      transition: transform 0.5s ease-in-out;
-    }
-
-    .banner-slide {
-      min-width: 100%;
-      height: 100%;
-    }
-
-    .banner-slide img {
+      position: relative;
       width: 100%;
       height: 100%;
-      object-fit: cover;
+    }
+
+    .banner-slider img {
+      width: 100%;
+      height: 100%;
+      display: none;
+      object-fit: fill;
+      transition: opacity 5s ease-in-out;
+    }
+
+    .banner-slider img.active {
+      display: block;
     }
 
     .arrow {
@@ -44,18 +42,34 @@
       background: rgba(0,0,0,0.5);
       color: white;
       border: none;
-      padding: 10px;
       cursor: pointer;
-      border-radius: 50%;
+      padding: 10px;
       z-index: 10;
+      border-radius: 50%;
     }
 
-    .arrow.left {
-      left: 10px;
+    .arrow.left { left: 10px; }
+    .arrow.right { right: 10px; }
+
+    .dots {
+      position: absolute;
+      bottom: 15px;
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      gap: 10px;
     }
 
-    .arrow.right {
-      right: 10px;
+    .dot {
+      width: 12px;
+      height: 12px;
+      background: #ddd;
+      border-radius: 50%;
+      cursor: pointer;
+    }
+
+    .dot.active {
+      background: #333;
     }
   </style>
 </head>
@@ -65,32 +79,81 @@
 
 <div class="banner-container">
   <div class="banner-slider" id="slider">
-    <div class="banner-slide"><img src="<%= request.getContextPath() %>/images/prodotti/AOT.png" alt="aot"></div>
-    <div class="banner-slide"><img src="<%= request.getContextPath() %>/images/prodotti/DANDADAN.png" alt="dandadan"></div>
-    <div class="banner-slide"><img src="<%= request.getContextPath() %>/images/prodotti/LUFFY.png" alt="luffy"></div>
+    <img src="<%= request.getContextPath() %>/images/prodotti/AOT.png" alt="aot" class="slide active">
+    <img src="<%= request.getContextPath() %>/images/prodotti/DANDADAN.png" alt="dandadan" class="slide">
+    <img src="<%= request.getContextPath() %>/images/prodotti/LUFFY.png" alt="luffy" class="slide">
   </div>
 
   <button id="prevBtn" class="arrow left" aria-label="immagine precedente" title="Precedente">&#10094;</button>
   <button id="nextBtn" class="arrow right" aria-label="immagine successiva" title="Successiva">&#10095;</button>
+
+  <div class="dots" id="dots"></div>
 </div>
 
 <jsp:include page="/WEB-INF/fragments/footer.jsp" />
 
 <script>
-  const slider = document.getElementById("slider");
-  const slides = document.querySelectorAll(".banner-slide");
-  const totalSlides = slides.length;
-  let index = 0;
+  const slides = document.querySelectorAll(".slide");
+  const dotsContainer = document.getElementById("dots");
+  const prevBtn = document.getElementById("prevBtn");
+  const nextBtn = document.getElementById("nextBtn");
+  let currentIndex = 0;
+  let autoplayInterval;
 
-  document.getElementById("nextBtn").addEventListener("click", () => {
-    index = (index + 1) % totalSlides;
-    slider.style.transform = `translateX(-${index * 100}%)`;
+  function showSlide(index) {
+    slides.forEach((slide, i) => {
+      slide.classList.remove("active");
+      slide.style.display = i === index ? "block" : "none";
+      dotsContainer.children[i].classList.toggle("active", i === index);
+    });
+    currentIndex = index;
+  }
+
+  function nextSlide() {
+    let newIndex = (currentIndex + 1) % slides.length;
+    showSlide(newIndex);
+  }
+
+  function prevSlide() {
+    let newIndex = (currentIndex - 1 + slides.length) % slides.length;
+    showSlide(newIndex);
+  }
+
+  function startAutoplay() {
+    autoplayInterval = setInterval(nextSlide, 4000);
+  }
+
+  function stopAutoplay() {
+    clearInterval(autoplayInterval);
+  }
+
+  // Init dots
+  slides.forEach((_, i) => {
+    const dot = document.createElement("span");
+    dot.classList.add("dot");
+    if (i === 0) dot.classList.add("active");
+    dot.addEventListener("click", () => {
+      showSlide(i);
+      stopAutoplay();
+      startAutoplay();
+    });
+    dotsContainer.appendChild(dot);
   });
 
-  document.getElementById("prevBtn").addEventListener("click", () => {
-    index = (index - 1 + totalSlides) % totalSlides;
-    slider.style.transform = `translateX(-${index * 100}%)`;
+  prevBtn.addEventListener("click", () => {
+    prevSlide();
+    stopAutoplay();
+    startAutoplay();
   });
+
+  nextBtn.addEventListener("click", () => {
+    nextSlide();
+    stopAutoplay();
+    startAutoplay();
+  });
+
+  showSlide(0);
+  startAutoplay();
 </script>
 </body>
 </html>
