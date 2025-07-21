@@ -1,8 +1,6 @@
 package Controller;
 
-import Model.MetodoPagamento;
-import Model.MetodoPagamentoDAO;
-import Model.Utente;
+import Model.*;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -27,6 +25,22 @@ public class UserAreaServlet extends HttpServlet {
 
             Utente utente = (Utente) session.getAttribute("utente");
 
+            String sezione = request.getParameter("sezione");
+
+            if ("wishlist".equals(sezione)) {
+                // ✳️ GESTIONE WISHLIST
+                ContenutoWishlistDAO contenutoWishlistDAO = new ContenutoWishlistDAO();
+
+                try {
+                    int idWishlist = contenutoWishlistDAO.doRetrieveIdWishlistByUtente(utente.getId());
+                    List<Prodotto> prodotti = contenutoWishlistDAO.doRetrieveProdottiByIdWishList(idWishlist);
+                    request.setAttribute("prodotti", prodotti);
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                    request.setAttribute("prodotti", new ArrayList<>()); // fallback sicuro
+                }
+            }
+
             MetodoPagamentoDAO dao = new MetodoPagamentoDAO();
 
             List<MetodoPagamento> metodi = new ArrayList<>();
@@ -36,6 +50,9 @@ public class UserAreaServlet extends HttpServlet {
             } catch (SQLException e) {
                 e.printStackTrace();
             }
+
+            if (sezione == null) sezione = "dati";
+            request.setAttribute("sezione", sezione);
 
             request.setAttribute("metodi", metodi);
 

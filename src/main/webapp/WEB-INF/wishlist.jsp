@@ -18,69 +18,28 @@
 </head>
 <body>
 
-<jsp:include page="/WEB-INF/fragments/header.jsp" />
-
-<main class="content">
-  <h1>La tua Wishlist</h1>
+<main>
 
   <% if (prodotti == null || prodotti.isEmpty()) { %>
   <p>Non hai prodotti nella wishlist.</p>
   <% } else { %>
-  <table>
-    <thead>
-    <tr>
-      <th>Prodotto</th>
-      <th>Immagine</th>
-      <th>Prezzo</th>
-      <th>Aggiungi al carrello</th>
-      <th>Rimuovi</th>
-    </tr>
-    </thead>
-    <tbody>
+  <ul class="wishlist-list">
     <% for (Prodotto p : prodotti) { %>
-    <tr>
-      <td>
-        <a href="dettaglioProdotto?idProdotto=<%= p.getId_prodotto() %>">
-          <%= p.getTitolo() %>
-        </a>
-      </td>
-      <td><img id="img-<%= p.getId_prodotto() %>" style="width:100px;"></td>
-      <td>€ <%= String.format("%.2f", p.getPrezzo()) %></td>
-      <td>
-        <form action="aggiungiCarrello" method="post">
-          <input type="hidden" name="idProdotto" value="<%= p.getId_prodotto() %>">
-          <button type="submit">Aggiungi al Carrello</button>
-        </form>
-      </td>
-      <td>
-        <form action="rimuoviWishlist" method="post">
-          <input type="hidden" name="idProdotto" value="<%= p.getId_prodotto() %>">
-          <button type="submit">Rimuovi</button>
-        </form>
-      </td>
-    </tr>
+    <li>
+      <strong><%= p.getTitolo() %></strong> - €<%= p.getPrezzo() %>
+      <form action="aggiungiCarrello" method="post" style="display:inline;">
+        <input type="hidden" name="idProdotto" value="<%= p.getId_prodotto() %>">
+        <button type="submit"><i class="fas fa-cart-plus"></i></button>
+      </form>
+      <form action="rimuoviWishlist" method="post" style="display:inline;">
+        <input type="hidden" name="idProdotto" value="<%= p.getId_prodotto() %>">
+        <button type="submit"><i class="fas fa-trash"></i></button>
+      </form>
+    </li>
     <% } %>
-    </tbody>
-  </table>
+  </ul>
   <% } %>
 </main>
-
-<jsp:include page="/WEB-INF/fragments/footer.jsp" />
-
-<script>
-  const immaginiProdotti = {
-    1: "<%=baseURL%>/images/prodotto1.jpg",
-    2: "<%=baseURL%>/images/prodotto2.jpg",
-    3: "<%=baseURL%>/images/prodotto3.jpg"
-  };
-
-  <% for (Prodotto p : prodotti) { %>
-  const imgTag<%= p.getId_prodotto() %> = document.getElementById("img-<%= p.getId_prodotto() %>");
-  if (imgTag<%= p.getId_prodotto() %>) {
-    imgTag<%= p.getId_prodotto() %>.src = immaginiProdotti[<%= p.getId_prodotto() %>] || "<%=baseURL%>/images/default.jpg";
-  }
-  <% } %>
-</script>
 
 </body>
 </html>

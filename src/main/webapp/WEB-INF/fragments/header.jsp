@@ -32,7 +32,7 @@
       <div class="dropdown-content">
         <% if (utente != null) { // Utente LOGGATO %>
         <span class="non-clickable">Ciao, <%= utente.getNome() %></span>
-        <a href="userServlet" class="dropdown-item">Area Personale</a>
+        <a href="userServlet?sezione=dati" class="dropdown-item">Area Personale</a>
         <a href="logout" class="dropdown-item">Logout</a>
         <% } else { // Utente NON LOGGATO %>
         <a href="userServlet" class="dropdown-item">Accedi</a>
@@ -42,7 +42,7 @@
     </div>
 
     <div class="botton-item">
-      <a href="wishlist"><i class="fas fa-star" title="Wishlist"></i></a>
+      <a href="userServlet?sezione=wishlist"><i class="fas fa-star" title="Wishlist"></i></a>
       <span class="botton-label">Wishlist</span>
     </div>
 

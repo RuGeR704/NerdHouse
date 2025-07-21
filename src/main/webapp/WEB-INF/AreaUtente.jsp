@@ -19,6 +19,11 @@
 </head>
 <body>
 
+<%
+    String sezione = (String) request.getAttribute("sezione");
+    if (sezione == null) sezione = "dati";
+%>
+
 <jsp:include page="/WEB-INF/fragments/header.jsp" />
 
     <div class="user-area">
@@ -26,15 +31,16 @@
         <nav class="user-menu">
             <h2>Ciao, ${utente.nome}</h2>
             <ul>
-                <li><a href="#" onclick="showSection('dati')">Dati personali</a></li>
-                <li><a href="#" onclick="showSection('ordini')">I miei ordini</a></li>
-                <li><a href="#" onclick="showSection('pagamenti')">Metodi di pagamento</a></li>
+                <li><a href="?sezione=dati">Dati personali</a></li>
+                <li><a href="?sezione=ordini">I miei ordini</a></li>
+                <li><a href="?sezione=wishlist">Wishlist</a></li>
+                <li><a href="?sezione=pagamenti">Metodi di pagamento</a></li>
                 <li><a href="logout">Logout</a></li>
             </ul>
         </nav>
 
         <div class="content">
-            <section id="dati" class="dati-personali">
+            <section id="dati" class="dati-personali" style="display: <%= sezione.equals("dati") ? "block" : "none" %>;">
 
                 <h3>Dati personali</h3>
 
@@ -95,15 +101,22 @@
 
             </section>
 
+            <section id="wishlist" style="display: <%= sezione.equals("wishlist") ? "block" : "none" %>;">
+                <h3>La tua Wishlist</h3>
 
-            <section id="ordini">
+                <%if(sezione != null && sezione.equals("wishlist")) {%>
+                    <jsp:include page="wishlist.jsp" />
+                <% } %>
+            </section>
+
+            <section id="ordini" style="display: <%= sezione.equals("ordini") ? "block" : "none" %>;">
                 <h3>I tuoi ordini</h3>
 
                 <jsp:include page="ordini.jsp" />
 
             </section>
 
-            <section id="pagamenti">
+            <section id="pagamenti" style="display: <%= sezione.equals("pagamenti") ? "block" : "none" %>;">
                 <h3>I tuoi metodi di pagamento</h3>
 
                 <c:choose>
@@ -200,10 +213,6 @@
             document.getElementById(id).style.display = 'block';
         }
 
-        // Mostra la prima sezione all'avvio
-        window.onload = function () {
-            showSection('dati');
-        };
 
         function mostraForm() {
             document.getElementById("dati-statici").style.display = "none";
