@@ -27,7 +27,6 @@
       height: 100%;
       display: none;
       object-fit: fill;
-      transition: opacity 300s ease-in-out;
     }
 
     .banner-slider img.active {
@@ -71,6 +70,86 @@
     .dot.active {
       background: #333;
     }
+
+    .products-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 20px;
+      padding: 40px;
+    }
+
+    .product {
+      width: 250px;
+      border: 1px solid #ccc;
+      border-radius: 10px;
+      padding: 15px;
+      text-align: center;
+      background: #f9f9f9;
+      transition: transform 0.3s ease-in-out;
+    }
+
+    .product:hover {
+      transform: scale(1.05);
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+    }
+
+    .product img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+      margin-bottom: 10px;
+    }
+
+    .product .price {
+      font-weight: bold;
+      color: #333;
+    }
+
+    .tags {
+      margin-top: 10px;
+    }
+
+    .tag {
+      display: inline-block;
+      background-color: #eee;
+      color: #555;
+      padding: 5px 10px;
+      margin: 2px;
+      border-radius: 15px;
+      font-size: 0.8em;
+    }
+
+    .wishlist-btn {
+      background-color: transparent;
+      border: 1px solid #888;
+      padding: 8px 12px;
+      border-radius: 8px;
+      margin-top: 10px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    .wishlist-btn:hover {
+      background-color: #f0f0f0;
+    }
+
+    .product button {
+      display: block;
+      width: 100%;
+      margin-top: 10px;
+      padding: 10px;
+      font-size: 0.9em;
+      border-radius: 8px;
+      border: none;
+      cursor: pointer;
+      background-color: #cc0000;
+      color: white;
+    }
+
+    .product button:hover {
+      background-color: #a30000;
+    }
   </style>
 </head>
 
@@ -88,6 +167,71 @@
   <button id="nextBtn" class="arrow right" aria-label="immagine successiva" title="Successiva">&#10095;</button>
 
   <div class="dots" id="dots"></div>
+</div>
+
+<div class="products-container">
+  <!-- Prodotto 1: Luffy -->
+  <div class="product">
+    <a href="prodotti.jsp?nome=luffy-gear-five">
+      <img src="<%= request.getContextPath() %>/images/prodotti/luffyy.png" alt="luffy">
+      <h3>Luffy gear five</h3>
+    </a>
+    <p>Luffy gear 5 statue 30cm statua in resina</p>
+    <span class="price">&euro;600</span>
+
+    <div class="tags">
+      <span class="tag">GADGET&ACCESSORI</span>
+    </div>
+
+    <button onclick="window.location.href='<%= request.getContextPath() %>/carrello.jsp'">
+      <i class="fas fa-shopping-cart" style="margin-right: 6px;"></i> Aggiungi al carrello
+    </button>
+    <button class="wishlist-btn" onclick="window.location.href='<%= request.getContextPath() %>/wishlist.jsp'">
+      <i class="fas fa-heart" style="color: red; margin-right: 6px;"></i> Wishlist
+    </button>
+  </div>
+
+  <!-- Prodotto 2: AOT -->
+  <div class="product">
+    <a href="prodotti.jsp?nome=aoT">
+      <img src="<%= request.getContextPath() %>/images/prodotti/aoT.jpg" alt="aot">
+      <h3>Cofanetto Attack on Titan</h3>
+    </a>
+    <p>Cofanetto con 5 volumi</p>
+    <span class="price">&euro;23,50</span>
+
+    <div class="tags">
+      <span class="tag">GADGET&ACCESSORI</span>
+    </div>
+
+    <button onclick="window.location.href='<%= request.getContextPath() %>/carrello.jsp'">
+      <i class="fas fa-shopping-cart" style="margin-right: 6px;"></i> Aggiungi al carrello
+    </button>
+    <button class="wishlist-btn" onclick="window.location.href='<%= request.getContextPath() %>/wishlist.jsp'">
+      <i class="fas fa-heart" style="color: red; margin-right: 6px;"></i> Wishlist
+    </button>
+  </div>
+
+  <!-- Prodotto 3: Dandadan -->
+  <div class="product">
+    <a href="prodotti.jsp?nome=dandadan">
+      <img src="<%= request.getContextPath() %>/images/prodotti/dandadann.png" alt="dandadan">
+      <h3>Cofanetto Dandadan</h3>
+    </a>
+    <p>Cofanetto con 5 volumi della serie Dandadan</p>
+    <span class="price">&euro;21,87</span>
+
+    <div class="tags">
+      <span class="tag">GADGET&ACCESSORI</span>
+    </div>
+
+    <button onclick="window.location.href='<%= request.getContextPath() %>/carrello.jsp'">
+      <i class="fas fa-shopping-cart" style="margin-right: 6px;"></i> Aggiungi al carrello
+    </button>
+    <button class="wishlist-btn" onclick="window.location.href='<%= request.getContextPath() %>/wishlist.jsp'">
+      <i class="fas fa-heart" style="color: red; margin-right: 6px;"></i> Wishlist
+    </button>
+  </div>
 </div>
 
 <jsp:include page="/WEB-INF/fragments/footer.jsp" />
@@ -127,7 +271,6 @@
     clearInterval(autoplayInterval);
   }
 
-  // Init dots
   slides.forEach((_, i) => {
     const dot = document.createElement("span");
     dot.classList.add("dot");
@@ -157,4 +300,3 @@
 </script>
 </body>
 </html>
-
