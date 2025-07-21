@@ -36,6 +36,8 @@ public class AggiungiProdottoServlet extends HttpServlet {
 
         String titolo = request.getParameter("titolo");
         String descrizione = request.getParameter("descrizione");
+        String categoriaStr = request.getParameter("categoriaId");
+        int categoria = Integer.parseInt(categoriaStr);
         String lingua = request.getParameter("lingua");
         String autore = request.getParameter("autore");
         String dataStr = request.getParameter("dataUscita");
@@ -46,6 +48,7 @@ public class AggiungiProdottoServlet extends HttpServlet {
         Prodotto p = new Prodotto();
         p.setTitolo(titolo);
         p.setDescrizione(descrizione);
+        p.setId_categoria(categoria);
         p.setLingua(lingua);
         p.setAutore(autore);
         p.setDataUscita(data);

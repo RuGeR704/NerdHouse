@@ -46,8 +46,31 @@ public class ImmagineProdottoDAO {
         return immagini;
     }
 
+    public ImmagineProdotto doRetrieveById(int id) {
+        String sql = "SELECT * FROM immagine_prodotto WHERE ID_Immagine = ?";
+        try (Connection con = ConPool.getConnection();
+             PreparedStatement ps = con.prepareStatement(sql)) {
+            ps.setInt(1, id);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                ImmagineProdotto img = new ImmagineProdotto();
+                img.setIdImmagine(rs.getInt("ID_Immagine"));
+                img.setIdProdotto(rs.getInt("ID_Prodotto"));
+                img.setPercorsoImmagine(rs.getString("Percorso_Immagine"));
+                img.setOrdine(rs.getInt("Ordine"));
+                img.setAltText(rs.getString("Alt_Text"));
+                return img;
+            }
+            return null;
+        } catch (SQLException e) {
+            throw new RuntimeException("Errore nel recupero immagine", e);
+        }
+    }
+
+
     public boolean doDeleteById(int idImmagine) {
         String sql = "DELETE FROM immagine_prodotto WHERE ID_Immagine = ?";
+
 
         try (Connection con = ConPool.getConnection();
              PreparedStatement ps = con.prepareStatement(sql)) {

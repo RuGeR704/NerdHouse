@@ -34,7 +34,7 @@ public class LoginServlet extends HttpServlet {
         if (utente != null) {
             HttpSession session = request.getSession();
             session.setAttribute("utente", utente);
-            response.sendRedirect(request.getContextPath() + "/userServlet");
+            response.sendRedirect("index.jsp");
         } else {
             request.setAttribute("errore", "Email o password non corretti");
             request.getRequestDispatcher("/WEB-INF/login.jsp").forward(request, response);

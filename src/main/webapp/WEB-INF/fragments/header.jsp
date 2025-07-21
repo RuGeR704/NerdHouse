@@ -59,8 +59,9 @@
 
 <nav class="main-navbar">
   <ul class="nav-links">
+    <li><a href="shop.jsp">SHOP</a></li>
     <li><a href="promozioni.jsp">PROMOZIONI</a></li>
-    <li><a href="novita.jsp">NOVITÀ</a></li>
+    <li><a href="novita.jsp">NOVIT&Agrave</a></li>
     <li><a href="fumetti.jsp">FUMETTI</a></li>
     <li><a href="t-shirt.jsp">T-SHIRT</a></li>
     <li><a href="gadget.jsp">GADGET & ACCESSORI</a></li>

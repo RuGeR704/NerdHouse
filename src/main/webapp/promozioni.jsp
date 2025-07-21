@@ -19,6 +19,7 @@
 <head>
   <title>Promozioni | Nerd House</title>
   <link rel="stylesheet" href="<%= baseURL %>/css/styles.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
 <body>
 
@@ -27,7 +28,7 @@
 <main style="display: flex; margin: 40px;">
   <!-- Sidebar Filtri -->
   <aside style="width: 20%; padding: 20px; background: #f1f1f1; border-radius: 10px; margin-right: 20px;">
-    <h2>Filtra Promozioni</h2>
+    <h2>Filtro</h2>
     <form action="categoria" method="get">
       <input type="hidden" name="categoria" value="promozioni">
 
