@@ -13,32 +13,31 @@ import java.util.List;
 @WebServlet("/carrello")
 public class CarrelloServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        Utente utente = (Utente) request.getSession().getAttribute("utente");
-        if (utente == null) {
-            response.sendRedirect("login.jsp");
-            return;
-        }
-
-        int idUtente = utente.getId();
-        CarrelloDAO carrelloDAO = new CarrelloDAO();
-        ContenutoCarrelloDAO contenutoDAO = new ContenutoCarrelloDAO();
-        ProdottoDAO prodottoDAO = new ProdottoDAO();
-
-        Carrello carrello = carrelloDAO.doRetrieveByUserId(idUtente);
+        HttpSession session = request.getSession();
+        Utente utente = (Utente) session.getAttribute("utente");
         List<ContenutoCarrello> contenuti = new ArrayList<>();
-        List<Prodotto> prodotti = new ArrayList<>();
 
-        if (carrello != null) {
-            contenuti = contenutoDAO.doRetrieveByCarrelloId(carrello.getIdCarrello());
-            for (ContenutoCarrello c : contenuti) {
-                Prodotto p = prodottoDAO.doRetrieveById(c.getIdProdotto());
-                prodotti.add(p);
+        if (utente != null) {
+            int idUtente = utente.getId();
+            CarrelloDAO carrelloDAO = new CarrelloDAO();
+            ContenutoCarrelloDAO contenutoDAO = new ContenutoCarrelloDAO();
+            ProdottoDAO prodottoDAO = new ProdottoDAO();
+
+            Carrello carrello = carrelloDAO.doRetrieveByUserId(idUtente);
+            if (carrello != null) {
+                contenuti = contenutoDAO.doRetrieveByCarrelloId(carrello.getIdCarrello());
+                for (ContenutoCarrello c : contenuti) {
+                    Prodotto p = prodottoDAO.doRetrieveById(c.getIdProdotto());
+                    c.setProdotto(p);
+                }
             }
+        } else {
+            // Carrello guest dalla sessione
+            contenuti = (List<ContenutoCarrello>) session.getAttribute("carrelloGuest");
+            if (contenuti == null) contenuti = new ArrayList<>();
         }
 
-        request.setAttribute("carrello", carrello);
         request.setAttribute("contenuti", contenuti);
-        request.setAttribute("prodotti", prodotti);
-        request.getRequestDispatcher("/WEB-INF/jsp/carrello.jsp").forward(request, response);
+        request.getRequestDispatcher("/WEB-INF/carrello.jsp").forward(request, response);
     }
 }

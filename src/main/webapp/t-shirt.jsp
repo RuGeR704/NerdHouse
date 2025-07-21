@@ -7,12 +7,10 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page import="Model.Prodotto, java.util.List" %>
-<%@ page import="Model.CategoriaDAO" %>
 <%
   List<Prodotto> prodotti = (List<Prodotto>) request.getAttribute("prodotti");
-
-  CategoriaDAO categoriaDAO = new CategoriaDAO();
-
+  List<String> tipi = (List<String>) request.getAttribute("tipi");
+  List<Boolean> disponibilita = (List<Boolean>) request.getAttribute("disponibilita");
   String baseURL = request.getContextPath();
 %>
 <html>
@@ -35,7 +33,7 @@
       <select name="tipo">
         <option value="">Tutti</option>
         <% if (tipi != null) for (String tipo : tipi) { %>
-        <option value="<%= tipo %>"><%= tipo %></option>
+        <option value="<%= tipo %>"> <%= tipo.equals(request.getParameter("tipo")) ? "selected" : "" %>><%= tipo %></option>
         <% } %>
       </select><br><br>
 

@@ -34,7 +34,7 @@ public class ProdottoDettaglioServlet extends HttpServlet {
             }
 
             request.setAttribute("prodotto", prodotto);
-            request.getRequestDispatcher("dettaglioProdotto.jsp").forward(request, response);
+            request.getRequestDispatcher("/WEB-INF/dettaglioProdotto.jsp").forward(request, response);
 
         } catch (NumberFormatException e) {
             response.sendRedirect("error.jsp");

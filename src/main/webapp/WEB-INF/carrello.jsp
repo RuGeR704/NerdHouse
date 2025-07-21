@@ -9,7 +9,7 @@
 <%@ page import="Model.ContenutoCarrello, Model.Prodotto" %>
 <%@ page import="java.util.List" %>
 <%
-  List<ContenutoCarrello> carrello = (List<ContenutoCarrello>) request.getAttribute("carrello");
+  List<ContenutoCarrello> contenuti = (List<ContenutoCarrello>) request.getAttribute("contenuti");
   String baseURL = request.getContextPath();
   double totale = 0;
 %>
@@ -25,7 +25,7 @@
 <main class="content">
   <h1>Il tuo Carrello</h1>
 
-  <% if (carrello == null || carrello.isEmpty()) { %>
+  <% if (contenuti == null || contenuti.isEmpty()) { %>
   <p>Il tuo carrello è vuoto.</p>
   <% } else { %>
   <table>
@@ -40,7 +40,7 @@
     </tr>
     </thead>
     <tbody>
-    <% for (ContenutoCarrello item : carrello) {
+    <% for (ContenutoCarrello item : contenuti) {
       Prodotto prodotto = item.getProdotto();
       double prezzo = prodotto.getPrezzo();
       int quantita = item.getQuantita();
@@ -58,7 +58,7 @@
       <td><%= quantita %></td>
       <td>€ <%= String.format("%.2f", subtotale) %></td>
       <td>
-        <form action="RimuoviDalCarrelloServlet" method="post">
+        <form action="rimuoviDalCarrello" method="post">
           <input type="hidden" name="idProdotto" value="<%= prodotto.getId_prodotto() %>">
           <button type="submit">Rimuovi</button>
         </form>
@@ -84,7 +84,7 @@
     3: "<%=baseURL%>/images/prodotto3.jpg"
   };
 
-  <% for (ContenutoCarrello item : carrello) { %>
+  <% for (ContenutoCarrello item : contenuti) { %>
   const imgTag<%= item.getProdotto().getId_prodotto() %> = document.getElementById("img-<%= item.getProdotto().getId_prodotto() %>");
   if (imgTag<%= item.getProdotto().getId_prodotto() %>) {
     imgTag<%= item.getProdotto().getId_prodotto() %>.src = immaginiProdotti[<%= item.getProdotto().getId_prodotto() %>] || "<%=baseURL%>/images/default.jpg";
