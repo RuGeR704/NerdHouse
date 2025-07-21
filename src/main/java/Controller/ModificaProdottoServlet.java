@@ -84,8 +84,6 @@ public class ModificaProdottoServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        System.out.println("in POST");
-
         try {
             int id = Integer.parseInt(request.getParameter("idProdotto"));
             String titolo = request.getParameter("titolo");
@@ -104,24 +102,19 @@ public class ModificaProdottoServlet extends HttpServlet {
             ImmagineProdottoDAO immagineDAO = new ImmagineProdottoDAO();
 
             String immaginiDaRimuovereStr = request.getParameter("immaginiDaRimuovere");
-            System.out.println("Immagini recuperate");
             if (immaginiDaRimuovereStr != null && !immaginiDaRimuovereStr.isEmpty()) {
                 String[] idsDaRimuovere = immaginiDaRimuovereStr.split(",");
                 for (String idStr : idsDaRimuovere) {
-                    System.out.println("nel for");
                     int idImmagine = Integer.parseInt(idStr);
 
                     ImmagineProdotto img = immagineDAO.doRetrieveById(idImmagine);
                     if (img != null) {
-                        System.out.println("If superato");
                         String pathAssoluto = getServletContext().getRealPath(img.getPercorsoImmagine());
                         File file = new File(pathAssoluto);
                         if (file.exists()) {
                             file.delete();
                         }
-                        System.out.println("Immagine eliminata in locale");
                         immagineDAO.doDeleteById(idImmagine);
-                        System.out.println("Immagine eliminata in db");
                     }
                 }
             }

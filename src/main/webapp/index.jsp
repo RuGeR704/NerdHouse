@@ -143,7 +143,7 @@
       border-radius: 8px;
       border: none;
       cursor: pointer;
-      background-color: #cc0000;
+      background-color: darkred;
       color: white;
     }
 

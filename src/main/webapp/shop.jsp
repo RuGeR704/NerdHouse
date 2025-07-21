@@ -15,6 +15,9 @@
 
   Utente utente = (Utente) session.getAttribute("utente");
 
+  List<String> editori = (List<String>) request.getAttribute("editori");
+  List<String> autori = (List<String>) request.getAttribute("autori");
+
   CategoriaDAO categoriaDAO = new CategoriaDAO();
   List<Categoria> categorie = categoriaDAO.doRetrieveAll();
   request.setAttribute("categorie", categorie);
@@ -37,19 +40,40 @@
   <main style="display: flex; margin: 40px;">
     <!-- Sidebar Filtri -->
     <aside style="width: 20%; padding: 20px; background: #f1f1f1; border-radius: 10px; margin-right: 20px;">
-      <h2 style="color: darkred;">Filtra</h2>
-      <form action="catalogoCategoria" method="get">
-        <label>Lingua:</label>
-        <select name="lingua">
-          <option value="">Tutte</option>
-          <option value="Italiano">Italiano</option>
-          <option value="Inglese">Inglese</option>
-        </select>
-        <br><br>
+      <h2>Filtro</h2>
+      <form action="categoria" method="get">
+        <input type="hidden" name="categoria" value="gadget">
+
+        <label>Prezzo (min):</label>
+        <input type="number" name="prezzoMin" step="0.01"><br><br>
+
+        <label>Prezzo (max):</label>
+        <input type="number" name="prezzoMax" step="0.01"><br><br>
+
         <label>Editore:</label>
-        <input type="text" name="editore" id="filter" placeholder="Inserisci editore">
-        <br><br>
-        <button type="submit">Applica Filtri</button>
+        <select name="editore">
+          <option value="">Tutti</option>
+          <% if (editori != null) for (String editore : editori) { %>
+          <option value="<%= editore %>"><%= editore %></option>
+          <% } %>
+        </select><br><br>
+
+        <label>Autore:</label>
+        <select name="autore">
+          <option value="">Tutti</option>
+          <% if (autori != null) for (String autore : autori) { %>
+          <option value="<%= autore %>"><%= autore %></option>
+          <% } %>
+        </select><br><br>
+
+        <label>Disponibilità:</label>
+        <select name="disponibilita">
+          <option value="">Tutte</option>
+          <option value="true">Disponibile</option>
+          <option value="false">Non disponibile</option>
+        </select><br><br>
+
+        <button type="submit">Filtra</button>
       </form>
     </aside>
 
@@ -93,22 +117,26 @@
 
         <form action="aggiungiCarrello" method="post">
           <input type="hidden" name="idProdotto" value="<%= p.getId_prodotto() %>">
-          <button type="submit">Aggiungi al Carrello</button>
+          <button>
+            <i class="fas fa-shopping-cart" style="margin-right: 6px;"></i> Aggiungi al carrello
+          </button>
         </form>
 
         <form action="aggiungiWishlist" method="post">
           <input type="hidden" name="idProdotto" value="<%= p.getId_prodotto() %>">
-          <button type="submit">Aggiungi a Wishlist</button>
+          <button class="wishlist-btn">
+            <i class="fas fa-heart" style="color: red; margin-right: 6px;"></i> Wishlist
+          </button>
         </form>
 
         <a href="dettaglioProdotto?idProdotto=<%= p.getId_prodotto() %>">Dettagli</a>
 
         <% if (utente != null && utente.isAdmin()) { %>
         <div class="admin-product-actions" style="margin-top: 10px; border-top: 1px solid #eee; padding-top: 10px;">
-          <a href="#" onclick="apriOverlayModifica(<%= p.getId_prodotto() %>)" style="color: blue;">Modifica</a>
+          <button onclick="apriOverlayModifica(<%= p.getId_prodotto() %>)" style="color: black; background-color: gold;">Modifica</button>
           <form action="rimuoviProdotto" method="post" style="display: inline;" onsubmit="return confirm('Sei sicuro di voler rimuovere questo prodotto?');">
             <input type="hidden" name="idProdotto" value="<%= p.getId_prodotto() %>">
-            <button type="submit" style="background: none; border: none; color: red; cursor: pointer; padding: 0;">Rimuovi</button>
+            <button type="submit" style="background-color: #aa0000; border: none; color: white; cursor: pointer; padding: 0;">Rimuovi</button>
           </form>
         </div>
 

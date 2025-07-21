@@ -1,5 +1,7 @@
 package Controller;
 
+import Model.Categoria;
+import Model.CategoriaDAO;
 import Model.Prodotto;
 import Model.ProdottoDAO;
 import jakarta.servlet.ServletException;
@@ -18,6 +20,11 @@ public class InitServlet extends HttpServlet {
             List<Prodotto> prodotti = new ProdottoDAO().doRetrieveAll();
             getServletContext().setAttribute("prodotti", prodotti);
             System.out.println("prodotti caricati");
+
+            CategoriaDAO categoriaDAO = new CategoriaDAO();
+            List<Categoria> categorie = categoriaDAO.doRetrieveAll();
+            getServletContext().setAttribute("categorie", categorie);
+            System.out.println("CATEGORIE caricate");
         } catch (Exception e) {
             throw new ServletException("Errore durante l'inizializzazione dei prodotti", e);
         }

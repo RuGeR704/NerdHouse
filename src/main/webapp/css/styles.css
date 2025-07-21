@@ -847,6 +847,36 @@ tbody tr:hover {
     object-fit: cover;
 }
 
+.wishlist-btn {
+    background-color: transparent;
+    border: 1px solid #888;
+    padding: 8px 12px;
+    border-radius: 8px;
+    margin-top: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.wishlist-btn:hover {
+    background-color: #f0f0f0;
+}
+
+.product-card button {
+    display: block;
+    width: 100%;
+    margin-top: 10px;
+    padding: 10px;
+    font-size: 0.9em;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    background-color: darkred;
+    color: white;
+}
+
+.product-card button:hover {
+    background-color: #a30000;
+}
 /* Responsive */
 @media (max-width: 900px) {
     .prodotto-container {
