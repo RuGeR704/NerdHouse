@@ -35,7 +35,16 @@
 
 <jsp:include page="/WEB-INF/fragments/header.jsp"/>
 
+
+
 <div class="content-shop">
+
+  <br>
+  <% if (utente != null && utente.isAdmin()) { %>
+  <div class="admin-controls" style="margin-bottom: 20px; text-align: right;">
+    <button id="aggiungiProdotto" onclick="apriOverlayAggiungi()">Aggiungi prodotto</button>
+  </div>
+  <% } %>
 
   <main style="display: flex; margin: 40px;">
     <!-- Sidebar Filtri -->
@@ -77,11 +86,7 @@
       </form>
     </aside>
 
-    <% if (utente != null && utente.isAdmin()) { %>
-    <div class="admin-controls" style="margin-bottom: 20px; text-align: right;">
-      <button id="aggiungiProdotto" onclick="apriOverlayAggiungi()">Aggiungi prodotto</button>
-    </div>
-    <% } %>
+
 
 
     <!-- Prodotti -->
@@ -99,12 +104,14 @@
             if (immagini != null && !immagini.isEmpty()) {
               for (ImmagineProdotto img : immagini) {
           %>
-          <div><img class="img-prodotto" src="<%= request.getContextPath() + img.getPercorsoImmagine() %>" style="width: 100%;" /></div>
+          <a href="dettaglioProdotto?idProdotto=<%= p.getId_prodotto() %>" style="text-decoration: none">
+          <div><img class="img-prodotto" src="<%= request.getContextPath() + img.getPercorsoImmagine() %>" style="width: 100%;" /></div>  </a>
           <%
             }
           } else {
           %>
-          <div><img src="<%= baseURL %>/images/default.jpg" style="width: 100%;" /></div>
+          <a href="dettaglioProdotto?idProdotto=<%= p.getId_prodotto() %>" style="text-decoration: none">
+          <div><img src="<%= baseURL %>/images/default.jpg" style="width: 100%;" /></div> </a>
           <% } %>
         </div>
         </div>
@@ -129,8 +136,6 @@
           </button>
         </form>
 
-        <a href="dettaglioProdotto?idProdotto=<%= p.getId_prodotto() %>">Dettagli</a>
-
         <% if (utente != null && utente.isAdmin()) { %>
         <div class="admin-product-actions" style="margin-top: 10px; border-top: 1px solid #eee; padding-top: 10px;">
           <button onclick="apriOverlayModifica(<%= p.getId_prodotto() %>)" style="color: black; background-color: gold;">Modifica</button>
@@ -143,6 +148,7 @@
         <% } %>
 
       </div>
+
       <% }} else { %>
       <p>Nessun prodotto trovato.</p>
       <% } %>

@@ -6,6 +6,24 @@ import java.util.List;
 
 public class ContenutoWishlistDAO {
 
+
+    public Integer doRetrieveIdWishlistByUtente(int idUtente) throws SQLException {
+        String sql = "SELECT ID_Wishlist FROM Wishlist WHERE ID_Utente = ?";
+
+        try (Connection conn = ConPool.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            stmt.setInt(1, idUtente);
+            try (ResultSet rs = stmt.executeQuery()) {
+                if (rs.next()) {
+                    return rs.getInt("ID_Wishlist");
+                }
+            }
+        }
+
+        return null; // oppure -1 o lancia un'eccezione se non esiste
+    }
+
     public List<Prodotto> doRetrieveProdottiByIdWishList(int idWishlist) {
         List<Prodotto> prodotti = new ArrayList<>();
 
