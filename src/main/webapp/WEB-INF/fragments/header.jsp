@@ -59,6 +59,7 @@
 
 <nav class="main-navbar">
   <ul class="nav-links">
+    <li><a href="shop.jsp">SHOP</a></li>
     <li><a href="promozioni.jsp">PROMOZIONI</a></li>
     <li><a href="novita.jsp">NOVITÀ</a></li>
     <li><a href="fumetti.jsp">FUMETTI</a></li>
