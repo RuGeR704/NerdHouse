@@ -122,12 +122,9 @@
 
         <p style="font-weight: bold; color: red;">Prezzo: € <%= String.format("%.2f", p.getPrezzo()) %></p>
 
-        <form action="aggiungiCarrello" method="post">
-          <input type="hidden" name="idProdotto" value="<%= p.getId_prodotto() %>">
-          <button>
-            <i class="fas fa-shopping-cart" style="margin-right: 6px;"></i> Aggiungi al carrello
-          </button>
-        </form>
+        <button onclick="aggiungiCarrelloAjax(<%= p.getId_prodotto() %>)">
+          <i class="fas fa-shopping-cart" style="margin-right: 6px;"></i> Aggiungi al carrello
+        </button>
 
         <form action="aggiungiWishlist" method="post">
           <input type="hidden" name="idProdotto" value="<%= p.getId_prodotto() %>">
@@ -458,6 +455,35 @@
       });
     });
   });
+
+  function aggiungiCarrelloAjax(idProdotto) {
+    fetch(baseURL + "/aggiungiCarrello", {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      body: 'idProdotto=' + encodeURIComponent(idProdotto)
+    })
+            .then(response => response.json())
+            .then(data => {
+              if (data.success) {
+                updateCartCount(); // <-- QUI CHIAMALA
+              } else {
+                alert('Errore durante l\'aggiunta al carrello');
+              }
+            })
+            .catch(() => alert('Errore di rete nell\'aggiungere al carrello'));
+  }
+
+  function updateCartCount() {
+    fetch(baseURL + "/quantitaCarrello")
+            .then(response => response.json())
+            .then(data => {
+              const cartCountElem = document.getElementById("cart-count");
+              if (cartCountElem) {
+                cartCountElem.textContent = data.count;
+              }
+            })
+            .catch(() => console.error("Errore nel recupero della quantità del carrello"));
+  }
 
 </script>
 

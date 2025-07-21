@@ -71,12 +71,12 @@
 <script>
   //Script aggiornamento counter carrello
   function updateCartCount() {
-    fetch('<%= request.getContextPath() %>/cart/count')
+    fetch('<%= request.getContextPath() %>/quantitaCarrello')
             .then(response => response.json())
             .then(data => {
               const countElement = document.getElementById('cart-count');
               if (countElement) {
-                countElement.textContent = data.count;
+                countElement.textContent = data.count; // Solo il numero, niente altro testo
               }
             })
             .catch(error => {
