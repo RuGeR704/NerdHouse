@@ -68,6 +68,7 @@
 
       <div class="product-card" data-id="<%= p.getId_prodotto() %>" style="flex: 1 1 200px; border: 2px solid #ddd; border-radius: 10px; padding: 15px; max-width: 250px; background: #fff;">
 
+        <div class="slider-container">
         <div class="product-images my-slider" id="slider-<%= p.getId_prodotto() %>">
           <%
             List<ImmagineProdotto> immagini = new Model.ImmagineProdottoDAO().doRetrieveByProdotto(p.getId_prodotto());
@@ -81,6 +82,7 @@
           %>
           <div><img src="<%= baseURL %>/images/default.jpg" style="width: 100%;" /></div>
           <% } %>
+        </div>
         </div>
 
         <h3 style="color: black;"><%= p.getTitolo() %></h3>
@@ -260,7 +262,6 @@
   const baseURL = "<%= request.getContextPath() %>";
 
   function apriOverlayModifica(idProdotto) {
-    console.log("apriOverlayModifica chiamata con ID:", idProdotto);
     const form = document.getElementById("modificaForm");
     form.style.display = "block";
 
@@ -277,6 +278,14 @@
             .then(data => {
               const prodotto = data.prodotto;
               const immagini = data.immagini || [];
+
+              if (immagini.length === 0) {
+                const noImgMsg = document.createElement("p");
+                noImgMsg.innerHTML = "Non ci sono immagini";
+                noImgMsg.style.fontStyle = "italic";
+                noImgMsg.style.color = "#666";
+                immaginiContainer.appendChild(noImgMsg);
+              }
 
               const formEl = form.querySelector("form");
 
@@ -302,14 +311,12 @@
               formEl.querySelector("input[name='editore']").value = prodotto.editore || "";
 
               immagini.forEach(img => {
-                console.log("Processing image:", img);
                 const wrapper = document.createElement("div");
                 wrapper.style.position = "relative";
                 wrapper.style.display = "inline-block";
                 wrapper.style.marginRight = "10px";
 
 
-                console.log("Contenuto di img:", img);
 
                 // Assicurati che percorsoImmagine sia URL completo o relativa corretta
                 const imageEl = document.createElement("img");
@@ -366,13 +373,11 @@
 
                   let currentValue = immaginiDaRimuovereInput.value;
                   const idDaRimuovere = imageEl.dataset.id;
-                  console.log(idDaRimuovere);
                   // Evita duplicati
                   const ids = currentValue ? currentValue.split(",") : [];
                   if (!ids.includes(String(idDaRimuovere))) {
                     ids.push(idDaRimuovere);
                     immaginiDaRimuovereInput.value = ids.join(",");
-                    console.log("ID da rimuovere aggiornati:", immaginiDaRimuovereInput.value);
                   }
                 });
 
@@ -414,7 +419,8 @@
         autoplay: true,
         controls: true,
         nav: false,
-        autoplayButtonOutput: false
+        autoplayButtonOutput: false,
+        controlsText: ['&#10094;', '&#10095;']
       });
     });
   });
