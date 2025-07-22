@@ -59,38 +59,5 @@
   <% } %>
 </main>
 
-<script>
-  var baseURL = '<%= request.getContextPath() %>';
-
-  function aggiungiCarrelloAjax(idProdotto) {
-    fetch(baseURL + "/aggiungiCarrello", {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-      body: 'idProdotto=' + encodeURIComponent(idProdotto)
-    })
-            .then(response => response.json())
-            .then(data => {
-              if (data.success) {
-                updateCartCount(); // <-- QUI CHIAMALA
-              } else {
-                alert('Errore durante l\'aggiunta al carrello');
-              }
-            })
-            .catch(() => alert('Errore di rete nell\'aggiungere al carrello'));
-  }
-
-  function updateCartCount() {
-    fetch(baseURL + "/quantitaCarrello")
-            .then(response => response.json())
-            .then(data => {
-              const cartCountElem = document.getElementById("cart-count");
-              if (cartCountElem) {
-                cartCountElem.textContent = data.count;
-              }
-            })
-            .catch(() => console.error("Errore nel recupero della quantità del carrello"));
-  }
-</script>
-
 </body>
 </html>
