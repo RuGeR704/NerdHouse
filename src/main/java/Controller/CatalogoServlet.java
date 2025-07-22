@@ -24,6 +24,6 @@ public class CatalogoServlet extends HttpServlet {
         request.setAttribute("categorie", categorie);
 
         RequestDispatcher dispatcher = request.getRequestDispatcher("/shop.jsp");
-        dispatcher.forward(request, response);
+        dispatcher.forward(request, response);//
     }
 }

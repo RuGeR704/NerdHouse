@@ -57,7 +57,7 @@
 
   </div>
 </header>
-
+//
 <nav class="main-navbar">
   <ul class="nav-links">
     <li><a href="categoria">SHOP</a></li>

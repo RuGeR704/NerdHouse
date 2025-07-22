@@ -480,7 +480,7 @@ public List<Boolean> doRetrieveAllDisponibilita(int idCategoria) {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-        return disponibilita;
+        return disponibilita;//
     }
 
 }

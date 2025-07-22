@@ -104,7 +104,7 @@
               }
             }
           %>
-        </select><br><br>
+        </select><br><br>//
 
 
         <label>Disponibilità:</label>
