@@ -4,7 +4,6 @@
 <%
   String nomeProdotto = request.getParameter("nome");
 
-  // Simulazione database (puoi sostituirla con DAO)
   Map<String, Map<String, String>> prodotti = new HashMap<>();
 
   Map<String, String> luffy = new HashMap<>();
@@ -28,6 +27,42 @@
   dandadan.put("immagine", "dandadann.png");
   prodotti.put("dandadan", dandadan);
 
+  Map<String, String> callNight = new HashMap<>();
+  callNight.put("titolo", "Call of the Night");
+  callNight.put("descrizione", "Action figure resina Nazuna 15cm");
+  callNight.put("prezzo", "60.00");
+  callNight.put("immagine", "call_of_night.png");
+  prodotti.put("call_of_the_night", callNight);
+
+  Map<String, String> cofanettoNagatoro = new HashMap<>();
+  cofanettoNagatoro.put("titolo", "Cofanetto Nagatoro");
+  cofanettoNagatoro.put("descrizione", "Cofanetto con 5 volumi della serie Nagatoro");
+  cofanettoNagatoro.put("prezzo", "29.99");
+  cofanettoNagatoro.put("immagine", "cofanettonagatoro.png");
+  prodotti.put("dnagatoricofanetto", cofanettoNagatoro);
+
+  Map<String, String> actionNagatoro = new HashMap<>();
+  actionNagatoro.put("titolo", "Action Figure Nagatoro");
+  actionNagatoro.put("descrizione", "Action figure Nagatoro");
+  actionNagatoro.put("prezzo", "58.87");
+  actionNagatoro.put("immagine", "nagatoro_action.png");
+  prodotti.put("nagatoro", actionNagatoro);
+
+
+  Map<String, String> tshirtNaruto = new HashMap<>();
+  tshirtNaruto.put("titolo", "Naruto T-Shirt");
+  tshirtNaruto.put("descrizione", "T-Shirt Naruto");
+  tshirtNaruto.put("prezzo", "20.00");
+  tshirtNaruto.put("immagine", "naruto.png");
+  prodotti.put("naruto-shirt", tshirtNaruto);
+
+  Map<String, String> posterNaruto = new HashMap<>();
+  posterNaruto.put("titolo", "Poster Naruto");
+  posterNaruto.put("descrizione", "Poster Naruto 15x24cm");
+  posterNaruto.put("prezzo", "15.00");
+  posterNaruto.put("immagine", "posternaruto.png");
+  prodotti.put("naruto-poster", posterNaruto);
+
   Map<String, String> prodotto = prodotti.get(nomeProdotto);
   if (prodotto == null) {
     response.sendRedirect("index.jsp");
@@ -38,31 +73,32 @@
 <!DOCTYPE html>
 <html lang="it">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
   <title><%= prodotto.get("titolo") %> - NerdHouse</title>
-  <link rel="stylesheet" href="./css/styles.css" type="text/css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="./css/styles.css" type="text/css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
   <style>
     .product-detail-container {
       display: flex;
-      flex-direction: column;
+      justify-content: center;
       align-items: center;
-      padding: 50px 20px;
+      padding: 40px;
     }
 
     .product-detail {
-      max-width: 800px;
-      background: #f5f5f5;
-      border-radius: 12px;
-      padding: 30px;
+      max-width: 600px;
+      padding: 20px;
+      border: 1px solid #ccc;
+      border-radius: 10px;
+      background: #fff;
       text-align: center;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
     }
 
     .product-detail img {
-      max-width: 100%;
-      height: auto;
-      border-radius: 12px;
+      width: 100%;
+      max-height: 400px;
+      object-fit: contain;
       margin-bottom: 20px;
     }
 
@@ -70,56 +106,53 @@
       margin-bottom: 10px;
     }
 
-    .product-detail .price {
-      font-size: 1.4em;
-      font-weight: bold;
-      color: #cc0000;
-      margin-bottom: 20px;
-    }
-
     .product-detail p {
-      margin-bottom: 20px;
+      font-size: 1.1em;
+      margin-bottom: 15px;
     }
 
-    .product-buttons {
-      display: flex;
-      flex-direction: column;
-      gap: 15px;
+    .price {
+      font-weight: bold;
+      color: darkred;
+      font-size: 1.5em;
+      margin-bottom: 20px;
     }
 
     .product-buttons button {
-      padding: 12px 20px;
-      font-size: 1em;
+      padding: 10px 20px;
+      margin: 10px 5px;
       border: none;
       border-radius: 8px;
       cursor: pointer;
-      transition: background-color 0.3s;
+      font-size: 1em;
+    }
+
+    .btn-shop {
+      background-color: darkred;
+      color: white;
+    }
+
+    .btn-wishlist {
+      background-color: white;
+      border: 1px solid darkred;
+      color: darkred;
     }
 
     .btn-return {
       background-color: #ddd;
-    }
-
-    .btn-return:hover {
-      background-color: #bbb;
-    }
-
-    .btn-wishlist {
-      background-color: #f9f9f9;
-      border: 1px solid #aaa;
-    }
-
-    .btn-wishlist:hover {
-      background-color: #eee;
-    }
-
-    .btn-shop {
-      background-color: #cc0000;
-      color: white;
+      color: #333;
     }
 
     .btn-shop:hover {
       background-color: #a30000;
+    }
+
+    .btn-wishlist:hover {
+      background-color: #f8d7da;
+    }
+
+    .btn-return:hover {
+      background-color: #ccc;
     }
   </style>
 </head>
@@ -128,22 +161,21 @@
 
 <div class="product-detail-container">
   <div class="product-detail">
-    <img src="<%= request.getContextPath() %>/images/prodotti/<%= prodotto.get("immagine") %>" alt="<%= prodotto.get("titolo") %>">
+    <img src="<%= request.getContextPath() %>/images/prodotti/<%= prodotto.get("immagine") %>"
+         alt="<%= prodotto.get("titolo") %>"/>
     <h2><%= prodotto.get("titolo") %></h2>
     <p><%= prodotto.get("descrizione") %></p>
-    <div class="price">&euro;<%= prodotto.get("prezzo") %></div>
+    <div class="price">&euro; <%= prodotto.get("prezzo") %></div>
 
     <div class="product-buttons">
-      <button class="btn-return" onclick="window.location.href='index.jsp'">
-        ⬅ Torna alla home
-      </button>
-
-      <button class="btn-wishlist" onclick="window.location.href='wishlist.jsp'">
-        ❤️ Aggiungi alla Wishlist
-      </button>
-
       <button class="btn-shop" onclick="window.location.href='carrello.jsp'">
-        🛒 Vai al negozio
+        <i class="fas fa-shopping-cart" style="margin-right: 6px;"></i> Aggiungi al carrello
+      </button>
+      <button class="btn-wishlist" onclick="window.location.href='wishlist.jsp'">
+        <i class="fas fa-heart" style="color: red; margin-right: 6px;"></i> Aggiungi alla Wishlist
+      </button>
+      <button class="btn-return" onclick="window.location.href='index.jsp'">
+        <i class="fas fa-arrow-left" style="margin-right: 6px;"></i> Torna indietro
       </button>
     </div>
   </div>

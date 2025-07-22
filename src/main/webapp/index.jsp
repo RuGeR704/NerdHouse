@@ -201,7 +201,7 @@
     <span class="price">&euro;23,50</span>
 
     <div class="tags">
-      <span class="tag">GADGET&ACCESSORI</span>
+      <span class="tag">FUMETTI</span>
     </div>
 
     <button onclick="window.location.href='<%= request.getContextPath() %>/carrello.jsp'">
@@ -220,6 +220,115 @@
     </a>
     <p>Cofanetto con 5 volumi della serie Dandadan</p>
     <span class="price">&euro;21,87</span>
+
+    <div class="tags">
+      <span class="tag">FUMETTI</span>
+    </div>
+
+    <button onclick="window.location.href='<%= request.getContextPath() %>/carrello.jsp'">
+      <i class="fas fa-shopping-cart" style="margin-right: 6px;"></i> Aggiungi al carrello
+    </button>
+    <button class="wishlist-btn" onclick="window.location.href='<%= request.getContextPath() %>/wishlist.jsp'">
+      <i class="fas fa-heart" style="color: red; margin-right: 6px;"></i> Wishlist
+    </button>
+  </div>
+
+  <!-- Prodotto 4 -->
+  <div class="product">
+    <a href="prodotti.jsp?nome=call_of_the_night">
+      <img src="<%= request.getContextPath() %>/images/prodotti/call_of_night.png" alt="call">
+      <h3>Call of the night</h3>
+    </a>
+    <p>Action figure resina Nazuna 15cm</p>
+    <span class="price">&euro;60,00</span>
+
+    <div class="tags">
+      <span class="tag">GADGET&ACCESSORI</span>
+      <span class="tag">NOVITA'</span>
+    </div>
+
+    <button onclick="window.location.href='<%= request.getContextPath() %>/carrello.jsp'">
+      <i class="fas fa-shopping-cart" style="margin-right: 6px;"></i> Aggiungi al carrello
+    </button>
+    <button class="wishlist-btn" onclick="window.location.href='<%= request.getContextPath() %>/wishlist.jsp'">
+      <i class="fas fa-heart" style="color: red; margin-right: 6px;"></i> Wishlist
+    </button>
+  </div>
+
+  <!-- Prodotto 5 -->
+  <div class="product">
+    <a href="prodotti.jsp?nome=dnagatoricofanetto">
+      <img src="<%= request.getContextPath() %>/images/prodotti/cofanettonagatoro.png" alt="nagatoro">
+      <h3>Cofanetto Nagatoro</h3>
+    </a>
+    <p>Cofanetto con 5 volumi della serie Nagatoro</p>
+    <span class="price">&euro;29,99</span>
+
+    <div class="tags">
+      <span class="tag">FUMETTI</span>
+    </div>
+
+    <button onclick="window.location.href='<%= request.getContextPath() %>/carrello.jsp'">
+      <i class="fas fa-shopping-cart" style="margin-right: 6px;"></i> Aggiungi al carrello
+    </button>
+    <button class="wishlist-btn" onclick="window.location.href='<%= request.getContextPath() %>/wishlist.jsp'">
+      <i class="fas fa-heart" style="color: red; margin-right: 6px;"></i> Wishlist
+    </button>
+  </div>
+
+  <!-- Prodotto 6 -->
+  <div class="product">
+    <a href="prodotti.jsp?nome=nagatoro">
+      <img src="<%= request.getContextPath() %>/images/prodotti/nagatoro_action.png" alt="nagatoro">
+      <h3>Action figure Nagatoro</h3>
+    </a>
+    <p>Action figure Nagatoro</p>
+    <span class="price">&euro;58,87</span>
+
+    <div class="tags">
+      <span class="tag">GADGET&ACCESSORI</span>
+      <span class="tag">NOVITA'</span>
+    </div>
+
+    <button onclick="window.location.href='<%= request.getContextPath() %>/carrello.jsp'">
+      <i class="fas fa-shopping-cart" style="margin-right: 6px;"></i> Aggiungi al carrello
+    </button>
+    <button class="wishlist-btn" onclick="window.location.href='<%= request.getContextPath() %>/wishlist.jsp'">
+      <i class="fas fa-heart" style="color: red; margin-right: 6px;"></i> Wishlist
+    </button>
+  </div>
+
+  <!-- Prodotto 7 -->
+  <div class="product">
+    <a href="prodotti.jsp?nome=naruto-shirt">
+      <img src="<%= request.getContextPath() %>/images/prodotti/naruto.png" alt="naruto">
+      <h3>Naruto T-Shirt</h3>
+    </a>
+
+    <p>T-Shirt Naruto</p>
+    <span class="price">&euro;20,00</span>
+
+    <div class="tags">
+      <span class="tag">T-SHIRT</span>
+    </div>
+
+    <button onclick="window.location.href='<%= request.getContextPath() %>/carrello.jsp'">
+      <i class="fas fa-shopping-cart" style="margin-right: 6px;"></i> Aggiungi al carrello
+    </button>
+    <button class="wishlist-btn" onclick="window.location.href='<%= request.getContextPath() %>/wishlist.jsp'">
+      <i class="fas fa-heart" style="color: red; margin-right: 6px;"></i> Wishlist
+    </button>
+  </div>
+
+  <!-- Prodotto 8 -->
+  <div class="product">
+    <a href="prodotti.jsp?nome=naruto-poster">
+      <img src="<%= request.getContextPath() %>/images/prodotti/posternaruto.png" alt="Naruto">
+      <h3>Naruto poster</h3>
+    </a>
+
+    <p>Poster Naruto 15x24cm</p>
+    <span class="price">&euro;15,00</span>
 
     <div class="tags">
       <span class="tag">GADGET&ACCESSORI</span>
