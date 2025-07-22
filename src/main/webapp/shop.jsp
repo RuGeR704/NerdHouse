@@ -10,15 +10,21 @@
 <%@ page import="Model.*" %>
 
 <%
-  List<Prodotto> prodotti = (List<Prodotto>) application.getAttribute("prodotti");
-  String baseURL = request.getContextPath();
+  List<Prodotto> prodotti = (List<Prodotto>) request.getAttribute("prodotti");
+  if (prodotti == null) {
+    prodotti = (List<Prodotto>) application.getAttribute("prodotti");
+  }
 
-  Utente utente = (Utente) session.getAttribute("utente");
+  List<Categoria> categorie = (List<Categoria>) request.getAttribute("categorie");
+  if (categorie == null) {
+    categorie = (List<Categoria>) application.getAttribute("categorie");
+  }
 
   List<String> editori = (List<String>) request.getAttribute("editori");
   List<String> autori = (List<String>) request.getAttribute("autori");
 
-  List<Categoria> categorie = (List<Categoria>) application.getAttribute("categorie");
+  String baseURL = request.getContextPath();
+  Utente utente = (Utente) session.getAttribute("utente");
 %>
 
 <html>
@@ -45,11 +51,22 @@
   <% } %>
 
   <main style="display: flex; margin: 40px;">
+
     <!-- Sidebar Filtri -->
     <aside style="width: 20%; padding: 20px; background: #f1f1f1; border-radius: 10px; margin-right: 20px;">
       <h2>Filtro</h2>
+      <p>DEBUG AUTORI: <%= autori != null ? autori.toString() : "null" %></p>
+      <p>DEBUG EDITORI: <%= editori != null ? editori.toString() : "null" %></p>
       <form action="categoria" method="get">
-        <input type="hidden" name="categoria" value="gadget">
+        <label for="categoria">Categoria:</label>
+        <select name="categoria" id="categoria">
+          <option value="">Tutte</option>
+          <% if (categorie != null) {
+            for (Categoria c : categorie) { %>
+          <option value="<%= c.getIdCategoria() %>"><%= c.getNome() + " - " + c.getTipo() %></option>
+          <% }
+          } %>
+        </select><br><br>
 
         <label>Prezzo (min):</label>
         <input type="number" name="prezzoMin" step="0.01"><br><br>
@@ -60,18 +77,35 @@
         <label>Editore:</label>
         <select name="editore">
           <option value="">Tutti</option>
-          <% if (editori != null) for (String editore : editori) { %>
-          <option value="<%= editore %>"><%= editore %></option>
-          <% } %>
+          <%
+            String filtroEditore = request.getParameter("editore");
+            if (editori != null && !editori.isEmpty()) {
+              for (String editore : editori) {
+                boolean selected = editore.equals(filtroEditore);
+          %>
+          <option value="<%= editore %>" <%= selected ? "selected" : "" %>><%= editore %></option>
+          <%
+              }
+            }
+          %>
         </select><br><br>
 
         <label>Autore:</label>
         <select name="autore">
           <option value="">Tutti</option>
-          <% if (autori != null) for (String autore : autori) { %>
-          <option value="<%= autore %>"><%= autore %></option>
-          <% } %>
+          <%
+            String filtroAutore = request.getParameter("autore");
+            if (autori != null && !autori.isEmpty()) {
+              for (String autore : autori) {
+                boolean selected = autore.equals(filtroAutore);
+          %>
+          <option value="<%= autore %>" <%= selected ? "selected" : "" %>><%= autore %></option>
+          <%
+              }
+            }
+          %>
         </select><br><br>
+
 
         <label>Disponibilità:</label>
         <select name="disponibilita">
@@ -144,7 +178,7 @@
       </div>
 
       <% }} else { %>
-      <p>Nessun prodotto trovato.</p>
+      <p style="color:red; font-weight:bold;">Nessun prodotto trovato con questi filtri.</p>
       <% } %>
     </section>
   </main>

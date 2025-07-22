@@ -15,23 +15,29 @@ public class CategoriaServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        String categoriaParam = request.getParameter("categoria");
-        if (categoriaParam == null || categoriaParam.isEmpty()) {
-            response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Categoria mancante");
-            return;
-        }
-
         CategoriaDAO categoriaDAO = new CategoriaDAO();
-        Categoria categoria = categoriaDAO.doRetrieveByNome(categoriaParam);
-        if (categoria == null) {
-            response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Categoria non valida");
-            return;
+        ProdottoDAO prodottoDAO = new ProdottoDAO();
+
+        String idCategoriaParam = request.getParameter("categoria");
+        Integer idCategoria = null;
+        Categoria categoria = null;
+
+
+        if (idCategoriaParam != null && !idCategoriaParam.isEmpty()) {
+            try {
+                idCategoria = Integer.parseInt(idCategoriaParam);
+                categoria = categoriaDAO.doRetrieveByID(idCategoria);
+                if (categoria == null) {
+                    response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Categoria non valida");
+                    return;
+                }
+            } catch (NumberFormatException e) {
+                response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Categoria non valida");
+                return;
+            }
         }
 
-        int idCategoria = categoria.getIdCategoria();
-        request.setAttribute("categoria", categoria);
-
-        // Filtri
+        // Recupera filtri facoltativi
         String tipo = request.getParameter("tipo");
         String lingua = request.getParameter("lingua");
         String editore = request.getParameter("editore");
@@ -43,19 +49,30 @@ public class CategoriaServlet extends HttpServlet {
         Double prezzoMin = (prezzoMinStr != null && !prezzoMinStr.isEmpty()) ? Double.parseDouble(prezzoMinStr) : null;
         Double prezzoMax = (prezzoMaxStr != null && !prezzoMaxStr.isEmpty()) ? Double.parseDouble(prezzoMaxStr) : null;
 
-        ProdottoDAO prodottoDAO = new ProdottoDAO();
-
-        List<String> tipi = categoriaDAO.doRetrieveAllTipi();
-        List<String> autori = prodottoDAO.doRetrieveAllAutori(idCategoria);
-        List<String> editori = prodottoDAO.doRetrieveAllEditori(idCategoria);
-
         List<Prodotto> prodotti = prodottoDAO.doRetrieveFiltrati(idCategoria, tipo, lingua, editore, autore, disponibilita, prezzoMin, prezzoMax);
+        List<Categoria> categorie = categoriaDAO.doRetrieveAll();
+        List<String> tipi = categoriaDAO.doRetrieveAllTipi();
 
+        List<String> autori;
+        List<String> editori;
+
+        if (prodotti.isEmpty()) {
+            // Nessun prodotto trovato per la categoria: mostra autori/editori globali senza filtro categoria
+            autori = prodottoDAO.doRetrieveAllAutori(null);
+            editori = prodottoDAO.doRetrieveAllEditori(null);
+        } else {
+            // Prodotti trovati: filtra autori/editori per categoria
+            autori = prodottoDAO.doRetrieveAllAutori(idCategoria);
+            editori = prodottoDAO.doRetrieveAllEditori(idCategoria);
+        }
+
+        request.setAttribute("prodotti", prodotti);
+        request.setAttribute("categorie", categorie);
         request.setAttribute("tipi", tipi);
         request.setAttribute("autori", autori);
         request.setAttribute("editori", editori);
-        request.setAttribute("prodotti", prodotti);
+        request.setAttribute("categoria", categoria);
 
-        request.getRequestDispatcher("/WEB-INF/jsp/catalogoCategoria.jsp").forward(request, response);
+        request.getRequestDispatcher("/shop.jsp").forward(request, response);
     }
 }

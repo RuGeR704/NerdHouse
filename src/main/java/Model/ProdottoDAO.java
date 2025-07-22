@@ -3,6 +3,7 @@ package Model;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class ProdottoDAO {
 
@@ -123,6 +124,32 @@ public class ProdottoDAO {
         return prodotti;
     }
 
+    public List<Prodotto> doRetrieveByCategoria(int idCategoria) {
+        List<Prodotto> prodotti = new ArrayList<>();
+        try (Connection con = ConPool.getConnection()) {
+            PreparedStatement ps = con.prepareStatement("SELECT * FROM Prodotto WHERE ID_Categoria = ?");
+            ps.setInt(1, idCategoria);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                Prodotto p = new Prodotto();
+                p.setId_prodotto(rs.getInt("ID_Prodotto"));
+                p.setTitolo(rs.getString("Titolo"));
+                p.setDescrizione(rs.getString("Descrizione"));
+                p.setPrezzo(rs.getFloat("Prezzo"));
+                p.setAutore(rs.getString("Autore"));
+                p.setEditore(rs.getString("Editore"));
+                p.setDataUscita(rs.getDate("Data_Uscita"));
+                p.setLingua(rs.getString("Lingua"));
+                p.setDisponibilita(rs.getBoolean("Disponibilita"));
+                p.setId_categoria(rs.getInt("ID_Categoria"));
+                prodotti.add(p);
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return prodotti;
+    }
+
     public List<Prodotto> doRetrieveAll() {
         List<Prodotto> prodotti = new ArrayList<>();
         try (Connection con = ConPool.getConnection()) {
@@ -174,63 +201,68 @@ public class ProdottoDAO {
     }
 
     // Recupera prodotti filtrati, includendo join categoria per filtro tipo
-    public List<Prodotto> doRetrieveFiltrati(int idCategoria, String tipo, String lingua, String editore, String autore, String disponibilita, Double prezzoMin, Double prezzoMax) {
+    public List<Prodotto> doRetrieveFiltrati(Integer idCategoria, String tipo, String lingua, String editore, String autore, String disponibilita, Double prezzoMin, Double prezzoMax) {
         List<Prodotto> prodotti = new ArrayList<>();
-        try (Connection con = ConPool.getConnection()) {
-            StringBuilder query = new StringBuilder(
-                    "SELECT p.* FROM prodotto p JOIN categoria c ON p.ID_Categoria = c.ID_Categoria WHERE p.ID_Categoria = ?"
-            );
-            List<Object> parameters = new ArrayList<>();
-            parameters.add(idCategoria);
+        StringBuilder sql = new StringBuilder(
+                "SELECT p.* FROM Prodotto p JOIN Categoria c ON p.ID_Categoria = c.ID_Categoria WHERE 1=1 "
+        );
+        List<Object> params = new ArrayList<>();
 
-            if (tipo != null && !tipo.isEmpty()) {
-                query.append(" AND c.Tipo = ?");
-                parameters.add(tipo);
-            }
-            if (lingua != null && !lingua.isEmpty()) {
-                query.append(" AND p.Lingua = ?");
-                parameters.add(lingua);
-            }
-            if (editore != null && !editore.isEmpty()) {
-                query.append(" AND p.Editore = ?");
-                parameters.add(editore);
-            }
-            if (autore != null && !autore.isEmpty()) {
-                query.append(" AND p.Autore = ?");
-                parameters.add(autore);
-            }
-            if (disponibilita != null && !disponibilita.isEmpty()) {
-                query.append(" AND p.Disponibilita = ?");
-                parameters.add(Boolean.parseBoolean(disponibilita));
-            }
-            if (prezzoMin != null) {
-                query.append(" AND p.Prezzo >= ?");
-                parameters.add(prezzoMin);
-            }
-            if (prezzoMax != null) {
-                query.append(" AND p.Prezzo <= ?");
-                parameters.add(prezzoMax);
-            }
+        if (idCategoria != null) {
+            sql.append("AND p.ID_Categoria = ? ");
+            params.add(idCategoria);
+        }
+        if (tipo != null && !tipo.isEmpty()) {
+            sql.append("AND c.Tipo = ? ");
+            params.add(tipo);
+        }
+        if (lingua != null && !lingua.isEmpty()) {
+            sql.append("AND p.Lingua = ? ");
+            params.add(lingua);
+        }
+        if (editore != null && !editore.isEmpty()) {
+            sql.append("AND p.Editore = ? ");
+            params.add(editore);
+        }
+        if (autore != null && !autore.isEmpty()) {
+            sql.append("AND p.Autore = ? ");
+            params.add(autore);
+        }
+        if (disponibilita != null && !disponibilita.isEmpty()) {
+            sql.append("AND p.Disponibilita = ? ");
+            params.add(Boolean.parseBoolean(disponibilita));
+        }
+        if (prezzoMin != null) {
+            sql.append("AND p.Prezzo >= ? ");
+            params.add(prezzoMin);
+        }
+        if (prezzoMax != null) {
+            sql.append("AND p.Prezzo <= ? ");
+            params.add(prezzoMax);
+        }
 
-            PreparedStatement ps = con.prepareStatement(query.toString());
-            for (int i = 0; i < parameters.size(); i++) {
-                ps.setObject(i + 1, parameters.get(i));
+        try (Connection con = ConPool.getConnection();
+             PreparedStatement ps = con.prepareStatement(sql.toString())) {
+
+            for (int i = 0; i < params.size(); i++) {
+                ps.setObject(i + 1, params.get(i));
             }
 
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
-                Prodotto prodotto = new Prodotto();
-                prodotto.setId_prodotto(rs.getInt("ID_Prodotto"));
-                prodotto.setTitolo(rs.getString("Titolo"));
-                prodotto.setDescrizione(rs.getString("Descrizione"));
-                prodotto.setPrezzo(rs.getDouble("Prezzo"));
-                prodotto.setAutore(rs.getString("Autore"));
-                prodotto.setDataUscita(rs.getDate("Data_Uscita"));
-                prodotto.setLingua(rs.getString("Lingua"));
-                prodotto.setEditore(rs.getString("Editore"));
-                prodotto.setDisponibilita(rs.getBoolean("Disponibilita"));
-                prodotto.setId_categoria(rs.getInt("ID_Categoria"));
-                prodotti.add(prodotto);
+                Prodotto p = new Prodotto();
+                p.setId_prodotto(rs.getInt("ID_Prodotto"));
+                p.setTitolo(rs.getString("Titolo"));
+                p.setPrezzo(rs.getDouble("Prezzo"));
+                p.setLingua(rs.getString("Lingua"));
+                p.setAutore(rs.getString("Autore"));
+                p.setDataUscita(rs.getDate("Data_Uscita"));
+                p.setDescrizione(rs.getString("Descrizione"));
+                p.setEditore(rs.getString("Editore"));
+                p.setDisponibilita(rs.getBoolean("Disponibilita"));
+                p.setId_categoria(rs.getInt("ID_Categoria"));
+
+                prodotti.add(p);
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -256,15 +288,186 @@ public class ProdottoDAO {
         return valori;
     }
 
-    public List<String> doRetrieveAllAutori(int idCategoria) {
-        return doRetrieveDistinctString("Autore", idCategoria);
+    // Metodo per recuperare tutti gli autori, eventualmente filtrati per categoria (se idCategoria != null
+
+    public List<String> doRetrieveAllAutori(Integer idCategoria) {
+        List<String> autori = new ArrayList<>();
+        String sql = (idCategoria == null)
+                ? "SELECT DISTINCT Autore FROM Prodotto WHERE Autore IS NOT NULL AND Autore <> '' ORDER BY Autore ASC"
+                : "SELECT DISTINCT Autore FROM Prodotto WHERE ID_Categoria = ? AND Autore IS NOT NULL AND Autore <> '' ORDER BY Autore ASC";
+        try (Connection con = ConPool.getConnection();
+             PreparedStatement ps = con.prepareStatement(sql)) {
+            if (idCategoria != null) {
+                ps.setInt(1, idCategoria);
+            }
+            try (ResultSet rs = ps.executeQuery()) {
+                while (rs.next()) {
+                    String autore = rs.getString("Autore");
+                    if (autore != null && !autore.isEmpty()) {
+                        autori.add(autore);
+                    }
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw new RuntimeException("Errore nel recupero autori", e);
+        }
+        System.out.println("[DEBUG DAO] Autori trovati: " + autori);
+        return autori;
     }
 
-    public List<String> doRetrieveAllEditori(int idCategoria) {
-        return doRetrieveDistinctString("Editore", idCategoria);
+    // ✅ Recupero editori sempre non null e con controllo stringa
+    public List<String> doRetrieveAllEditori(Integer idCategoria) {
+        List<String> editori = new ArrayList<>();
+        String sql = (idCategoria == null)
+                ? "SELECT DISTINCT Editore FROM Prodotto WHERE Editore IS NOT NULL AND Editore <> '' ORDER BY Editore ASC"
+                : "SELECT DISTINCT Editore FROM Prodotto WHERE ID_Categoria = ? AND Editore IS NOT NULL AND Editore <> '' ORDER BY Editore ASC";
+        try (Connection con = ConPool.getConnection();
+             PreparedStatement ps = con.prepareStatement(sql)) {
+            if (idCategoria != null) {
+                ps.setInt(1, idCategoria);
+            }
+            try (ResultSet rs = ps.executeQuery()) {
+                while (rs.next()) {
+                    String editore = rs.getString("Editore");
+                    if (editore != null && !editore.isEmpty()) {
+                        editori.add(editore);
+                    }
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw new RuntimeException("Errore nel recupero editori", e);
+        }
+        System.out.println("[DEBUG DAO] Editori trovati: " + editori);
+        return editori;
     }
 
-    public List<Boolean> doRetrieveAllDisponibilita(int idCategoria) {
+    public List<String> doRetrieveAutoriFiltrati(Integer idCategoria, String tipo, String lingua, String editore, String autore, String disponibilita, Double prezzoMin, Double prezzoMax) {
+        List<String> autori = new ArrayList<>();
+        StringBuilder sql = new StringBuilder(
+                "SELECT DISTINCT p.Autore FROM Prodotto p JOIN Categoria c ON p.ID_Categoria = c.ID_Categoria WHERE 1=1 "
+        );
+        List<Object> params = new ArrayList<>();
+
+        if (idCategoria != null) {
+            sql.append("AND p.ID_Categoria = ? ");
+            params.add(idCategoria);
+        }
+        if (tipo != null && !tipo.isEmpty()) {
+            sql.append("AND c.Tipo = ? ");
+            params.add(tipo);
+        }
+        if (lingua != null && !lingua.isEmpty()) {
+            sql.append("AND p.Lingua = ? ");
+            params.add(lingua);
+        }
+        if (editore != null && !editore.isEmpty()) {
+            sql.append("AND p.Editore = ? ");
+            params.add(editore);
+        }
+        if (autore != null && !autore.isEmpty()) {
+            sql.append("AND p.Autore = ? ");
+            params.add(autore);
+        }
+        if (disponibilita != null && !disponibilita.isEmpty()) {
+            sql.append("AND p.Disponibilita = ? ");
+            params.add(Boolean.parseBoolean(disponibilita));
+        }
+        if (prezzoMin != null) {
+            sql.append("AND p.Prezzo >= ? ");
+            params.add(prezzoMin);
+        }
+        if (prezzoMax != null) {
+            sql.append("AND p.Prezzo <= ? ");
+            params.add(prezzoMax);
+        }
+
+        sql.append("ORDER BY p.Autore ASC");
+
+        try (Connection con = ConPool.getConnection();
+             PreparedStatement ps = con.prepareStatement(sql.toString())) {
+
+            for (int i = 0; i < params.size(); i++) {
+                ps.setObject(i + 1, params.get(i));
+            }
+
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                String a = rs.getString("Autore");
+                if (a != null && !a.isEmpty()) {
+                    autori.add(a);
+                }
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return autori;
+    }
+
+    public List<String> doRetrieveEditoriFiltrati(Integer idCategoria, String tipo, String lingua, String editore, String autore, String disponibilita, Double prezzoMin, Double prezzoMax) {
+        List<String> editori = new ArrayList<>();
+        StringBuilder sql = new StringBuilder(
+                "SELECT DISTINCT p.Editore FROM Prodotto p JOIN Categoria c ON p.ID_Categoria = c.ID_Categoria WHERE 1=1 "
+        );
+        List<Object> params = new ArrayList<>();
+
+        if (idCategoria != null) {
+            sql.append("AND p.ID_Categoria = ? ");
+            params.add(idCategoria);
+        }
+        if (tipo != null && !tipo.isEmpty()) {
+            sql.append("AND c.Tipo = ? ");
+            params.add(tipo);
+        }
+        if (lingua != null && !lingua.isEmpty()) {
+            sql.append("AND p.Lingua = ? ");
+            params.add(lingua);
+        }
+        if (editore != null && !editore.isEmpty()) {
+            sql.append("AND p.Editore = ? ");
+            params.add(editore);
+        }
+        if (autore != null && !autore.isEmpty()) {
+            sql.append("AND p.Autore = ? ");
+            params.add(autore);
+        }
+        if (disponibilita != null && !disponibilita.isEmpty()) {
+            sql.append("AND p.Disponibilita = ? ");
+            params.add(Boolean.parseBoolean(disponibilita));
+        }
+        if (prezzoMin != null) {
+            sql.append("AND p.Prezzo >= ? ");
+            params.add(prezzoMin);
+        }
+        if (prezzoMax != null) {
+            sql.append("AND p.Prezzo <= ? ");
+            params.add(prezzoMax);
+        }
+
+        sql.append("ORDER BY p.Editore ASC");
+
+        try (Connection con = ConPool.getConnection();
+             PreparedStatement ps = con.prepareStatement(sql.toString())) {
+
+            for (int i = 0; i < params.size(); i++) {
+                ps.setObject(i + 1, params.get(i));
+            }
+
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                String e = rs.getString("Editore");
+                if (e != null && !e.isEmpty()) {
+                    editori.add(e);
+                }
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return editori;
+    }
+
+public List<Boolean> doRetrieveAllDisponibilita(int idCategoria) {
         List<Boolean> disponibilita = new ArrayList<>();
         try (Connection con = ConPool.getConnection()) {
             String sql = "SELECT DISTINCT Disponibilita FROM prodotto WHERE ID_Categoria = ?";
