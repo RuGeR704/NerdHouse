@@ -102,8 +102,7 @@
               }
             }
           %>
-        </select><br><br>//
-
+        </select><br><br>
 
         <label>Disponibilità:</label>
         <select name="disponibilita">
@@ -115,8 +114,6 @@
         <button type="submit">Filtra</button>
       </form>
     </aside>
-
-
 
 
     <!-- Prodotti -->
