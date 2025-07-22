@@ -98,7 +98,7 @@ public class ProdottoDAO {
     public List<Prodotto> doRetrieveByTitolo(String titolo) {
         List<Prodotto> prodotti = new ArrayList<>();
         try (Connection con = ConPool.getConnection()) {
-            String query = "SELECT * FROM prodotto WHERE titolo LIKE ?";
+            String query = "SELECT * FROM prodotto WHERE titolo LIKE ? LIMIT 10";
             PreparedStatement ps = con.prepareStatement(query);
             ps.setString(1, "%" + titolo + "%");
             ResultSet rs = ps.executeQuery();
