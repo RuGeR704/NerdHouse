@@ -55,8 +55,6 @@
     <!-- Sidebar Filtri -->
     <aside style="width: 20%; padding: 20px; background: #f1f1f1; border-radius: 10px; margin-right: 20px;">
       <h2>Filtro</h2>
-      <p>DEBUG AUTORI: <%= autori != null ? autori.toString() : "null" %></p>
-      <p>DEBUG EDITORI: <%= editori != null ? editori.toString() : "null" %></p>
       <form action="categoria" method="get">
         <label for="categoria">Categoria:</label>
         <select name="categoria" id="categoria">

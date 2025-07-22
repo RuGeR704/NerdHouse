@@ -74,6 +74,6 @@ public class CategoriaDAO {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-        return tipi;//
+        return tipi;
     }
 }

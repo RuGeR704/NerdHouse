@@ -73,6 +73,6 @@ public class CategoriaServlet extends HttpServlet {
         request.setAttribute("editori", editori);
         request.setAttribute("categoria", categoria);
 
-        request.getRequestDispatcher("/shop.jsp").forward(request, response);//
+        request.getRequestDispatcher("/shop.jsp").forward(request, response);
     }
 }
