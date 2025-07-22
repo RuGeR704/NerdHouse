@@ -10,6 +10,10 @@
 
   <style>
 
+    body {
+      background-color: #121212;
+    }
+
     .novita-box {
       position: relative;
       z-index: 1;
@@ -37,8 +41,6 @@
       text-decoration: none;
     }
 
-    a:visited {
-      color: inherit;
 
       h1{
         font-size: 2.2em;
@@ -51,29 +53,34 @@
         letter-spacing: 1px;
         text-align: center;
       }
-    }
 
 
-
-
-
-    h2 {
+    .novita-box h2 {
       border: 2px solid #ff8300;
       display: inline-block;
       padding: 10px 15px;
       border-radius: 8px;
       background-color: black;
       box-shadow: 0 0 10px rgba(255, 131, 0, 0.5);
-      display: inline-block;
-
       font-size: 2.5em;
       font-weight: bold;
-      color: white;
+      color: goldenrod;
       text-decoration-line: underline;
       text-decoration-thickness: 5px;
-      text-decoration-color:red;
+      text-decoration-color: darkred;
       margin: 20px auto; /* ← centrato orizzontalmente */
-      letter-spacing: 2px;
+      text-align: center;
+    }
+
+    .evidenza h2 {
+      font-size: 2.2em;
+      font-weight: 700;
+      color: gold;
+      text-decoration-line: underline;
+      text-decoration-thickness: 5px;
+      text-decoration-color: darkred;
+      margin-bottom: 20px;
+      letter-spacing: 1px;
       text-align: center;
     }
 
@@ -326,9 +333,11 @@
   </div>
 </div>
 
+<div class="evidenza">
+<h2>Prodotti in evidenza</h2>
+</div>
 
 <div class="products-container">
-
 
   <!-- Prodotto 4 -->
   <div class="product">
@@ -418,6 +427,7 @@
   </div>
 </div>
 
+<a href="WEB-INF/confermaordine.jsp">Clicca qui per vedere un capolavoro</a>
 <jsp:include page="/WEB-INF/fragments/footer.jsp" />
 
 <script>

@@ -89,6 +89,7 @@ public class ContenutoCarrelloDAO {
         return contenuto;
     }
 
+
     public void doDeleteAllByCarrelloId(int idCarrello) {
         String sql = "DELETE FROM Contenuto_Carrello WHERE ID_Carrello = ?";
         try (Connection con = ConPool.getConnection();

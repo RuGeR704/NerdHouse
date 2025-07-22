@@ -41,6 +41,10 @@ public class UserAreaServlet extends HttpServlet {
                 }
             }
 
+            OrdineDAO ordineDAO = new OrdineDAO();
+
+            List<OrdineDettaglio> ordini = ordineDAO.doRetrieveByUtenteId(utente.getId());
+
             MetodoPagamentoDAO dao = new MetodoPagamentoDAO();
 
             List<MetodoPagamento> metodi = new ArrayList<>();
@@ -55,7 +59,7 @@ public class UserAreaServlet extends HttpServlet {
             request.setAttribute("sezione", sezione);
 
             request.setAttribute("metodi", metodi);
-
+            request.setAttribute("ordini", ordini);
             request.setAttribute("utente", utente);
 
             request.getRequestDispatcher("/WEB-INF/AreaUtente.jsp").forward(request, response);

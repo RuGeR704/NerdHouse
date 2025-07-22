@@ -4,6 +4,7 @@ import java.sql.Timestamp;
 
 public class Ordine {
     private int idOrdine;
+    private int idProdotto;
     private int idUtente;
     private String pagamento;
     private String indirizzoOrdine;
@@ -24,6 +25,14 @@ public class Ordine {
 
     public void setIdUtente(int idUtente) {
         this.idUtente = idUtente;
+    }
+
+    public int getIdProdotto() {
+        return idProdotto;
+    }
+
+    public void setIdProdotto(int idProdotto) {
+        this.idProdotto = idProdotto;
     }
 
     public String getPagamento() {

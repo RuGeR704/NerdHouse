@@ -484,7 +484,7 @@ footer {
 
 
 .content input {
-    width: 25%;
+    width: 100%;
     padding: 10px;
     margin: 8px 0;
     border: 4px solid #ccc;
@@ -506,17 +506,15 @@ footer {
     display: none;
 }
 
-.dati-statici p{
-    display: inline-block;
-    margin-right: 20px;
+#dati-statici p{
+    display: block;
+    margin-top: 2px;
+    margin-bottom: 2px;
     padding: 10px;
 }
-.form-box {
-    background: white;
-    padding: 15px;
-    border: 1px solid #ccc;
-    margin-bottom: 15px;
-    border-radius: 5px;
+
+#dati-statici strong{
+    font-size: 18px;
 }
 
 .form-box label {
@@ -683,7 +681,7 @@ tbody tr:hover {
 .product-card img {
     width: 100%;
     height: 200px; /* o altezza desiderata */
-    object-fit: cover; /* adatta l’immagine centrata, ritagliandola se necessario */
+    object-fit: contain; /* adatta l’immagine centrata, ritagliandola se necessario */
 }
 
 .img-prodotto {
@@ -879,7 +877,7 @@ tbody tr:hover {
 }
 
 .image-preview img {
-    object-fit: cover;
+    object-fit: contain;
 }
 
 /* Stile per la lista della wishlist */
@@ -974,6 +972,141 @@ tbody tr:hover {
 .product-card button:hover {
     background-color: #a30000;
 }
+
+/* Checkout */
+
+/* Contenitore principale per il checkout */
+.checkout {
+    margin: 30px;
+}
+
+/* Sezione con il riepilogo del carrello e il form di spedizione */
+.content {
+    display: flex;
+    gap: 40px;
+    justify-content: space-between;
+    flex-wrap: wrap; /* Permette alle colonne di adattarsi su schermi piccoli */
+}
+
+/* Riepilogo Carrello */
+.carrello-list {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+.carrello-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 0;
+    border-bottom: 1px solid #ddd;
+}
+
+.prodotto-info {
+    display: flex;
+    gap: 15px;
+    align-items: center;
+}
+
+.prodotto-dettagli {
+    flex: 1;
+}
+
+.prodotto-dettagli strong {
+    font-size: 1.2rem;
+    margin-bottom: 5px;
+    display: block;
+}
+
+.prodotto-dettagli p {
+    color: darkred;
+    font-weight: bold;
+    text-align: right;
+    font-size: 16px;
+}
+
+.img-prodotto {
+    max-height: 420px;
+    width: auto;
+    border-radius: 8px;
+}
+
+/* Form di spedizione e pagamento */
+.checkout form {
+    flex: 1;
+    background-color: #f9f9f9;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.checkout form label {
+    font-size: 1rem;
+    margin-bottom: 8px;
+    display: inline-block;
+}
+
+.checkout form input,
+.checkout form select {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+.checkout form button {
+    padding: 12px 25px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background-color 0.3s;
+}
+
+.checkout form button:hover {
+    background-color: #45a049;
+}
+
+/* Titolo e subtitoli */
+.checkout h1, h2 {
+    font-size: 2rem;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+/* Totale dell'ordine */
+strong {
+    font-size: 1.5rem;
+    color: #333;
+}
+
+/* Media query per schermi piccoli */
+@media (max-width: 768px) {
+    .content {
+        flex-direction: column; /* In versione mobile, le sezioni sono disposte una sopra l'altra */
+    }
+
+    .carrello-item {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 20px 0;
+    }
+
+    .prodotto-info {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    form {
+        width: 100%;
+    }
+}
+
+
 /* Responsive */
 @media (max-width: 900px) {
     .prodotto-container {
