@@ -7,7 +7,9 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.*;
 
 import java.io.IOException;
+import java.sql.SQLException;
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -17,10 +19,10 @@ public class CheckoutServlet extends HttpServlet {
             throws ServletException, IOException {
 
         HttpSession session = request.getSession(false);
-        Utente utente = (Utente) session.getAttribute("user");
+        Utente utente = (Utente) session.getAttribute("utente");
 
         if (utente == null) {
-            response.sendRedirect("login.jsp");
+            response.sendRedirect("userServlet");
             return;
         }
 
@@ -40,7 +42,7 @@ public class CheckoutServlet extends HttpServlet {
 
         if (prodottiCarrello == null || prodottiCarrello.isEmpty()) {
             request.setAttribute("errore", "Carrello vuoto");
-            request.getRequestDispatcher("/WEB-INF/jsp/checkout.jsp").forward(request, response);
+            request.getRequestDispatcher("/WEB-INF/checkout.jsp").forward(request, response);
             return;
         }
 
@@ -69,11 +71,51 @@ public class CheckoutServlet extends HttpServlet {
         carrelloDAO.doUpdate(carrello);
 
         request.setAttribute("messaggio", "Ordine effettuato con successo!");
-        request.getRequestDispatcher("/WEB-INF/jsp/ordineConfermato.jsp").forward(request, response);
+        request.getRequestDispatcher("/WEB-INF/confermaordine.jsp").forward(request, response);
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws IOException {
-        response.sendRedirect("checkout.jsp");
+            throws IOException, ServletException {
+        String totaleStr = request.getParameter("totale");
+
+        totaleStr = totaleStr.replace(',', '.');
+        float totale =  Float.parseFloat(totaleStr);
+
+        HttpSession session = request.getSession(false);
+        if (session == null || session.getAttribute("utente") == null) {
+            request.setAttribute("errore", "Devi essere loggato per poter acquistare");
+            response.sendRedirect("userServlet");
+            return;
+        }
+
+        Utente utente = (Utente) session.getAttribute("utente");
+
+        MetodoPagamentoDAO metodoPagamentoDAO = new MetodoPagamentoDAO();
+        List<MetodoPagamento> metodiPagamento = new ArrayList<>();
+
+        try {
+            metodiPagamento = metodoPagamentoDAO.doRetrievebyUtente(utente);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        CarrelloDAO carrelloDAO = new CarrelloDAO();
+        ContenutoCarrelloDAO contenutoCarrelloDAO = new ContenutoCarrelloDAO();
+        ProdottoDAO prodottoDAO = new ProdottoDAO();
+
+        Carrello carrello = carrelloDAO.doRetrieveByUserId(utente.getId());
+        List<ContenutoCarrello> contenutiCarrello = contenutoCarrelloDAO.doRetrieveByCarrelloId(carrello.getIdCarrello());
+
+        List<Prodotto> prodottiCarrello = new ArrayList<>();
+        for (ContenutoCarrello item : contenutiCarrello) {
+            Prodotto prodotto = prodottoDAO.doRetrieveById(item.getIdProdotto());
+            prodottiCarrello.add(prodotto);
+        }
+
+        request.setAttribute("metodi", metodiPagamento);
+        request.setAttribute("prodottiCarrello", prodottiCarrello);
+        request.setAttribute("totale", totale);
+
+        request.getRequestDispatcher("/WEB-INF/checkout.jsp").forward(request, response);
     }
 }
