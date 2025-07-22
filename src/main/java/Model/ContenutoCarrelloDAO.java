@@ -65,6 +65,30 @@ public class ContenutoCarrelloDAO {
         return contenuti;
     }
 
+    public ContenutoCarrello doRetrieveByCarrelloAndProdotto(int idCarrello, int idProdotto) {
+        ContenutoCarrello contenuto = null;
+        String sql = "SELECT * FROM contenuto_carrello WHERE id_carrello = ? AND id_prodotto = ?";
+
+        try (Connection con = ConPool.getConnection();
+             PreparedStatement ps = con.prepareStatement(sql)) {
+
+            ps.setInt(1, idCarrello);
+            ps.setInt(2, idProdotto);
+
+            try (ResultSet rs = ps.executeQuery()) {
+                if (rs.next()) {
+                    contenuto = new ContenutoCarrello();
+                    contenuto.setIdCarrello(rs.getInt("id_carrello"));
+                    contenuto.setIdProdotto(rs.getInt("id_prodotto"));
+                    contenuto.setQuantita(rs.getInt("quantita"));
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return contenuto;
+    }
+
     public void doDeleteAllByCarrelloId(int idCarrello) {
         String sql = "DELETE FROM Contenuto_Carrello WHERE ID_Carrello = ?";
         try (Connection con = ConPool.getConnection();

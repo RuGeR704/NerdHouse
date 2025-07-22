@@ -18,9 +18,7 @@
   List<String> editori = (List<String>) request.getAttribute("editori");
   List<String> autori = (List<String>) request.getAttribute("autori");
 
-  CategoriaDAO categoriaDAO = new CategoriaDAO();
-  List<Categoria> categorie = categoriaDAO.doRetrieveAll();
-  request.setAttribute("categorie", categorie);
+  List<Categoria> categorie = (List<Categoria>) application.getAttribute("categorie");
 %>
 
 <html>
@@ -118,9 +116,8 @@
 
         <h3 style="color: black;"><%= p.getTitolo() %></h3>
 
-        <p><%= p.getDescrizione() %></p>
 
-        <p style="font-weight: bold; color: red;">Prezzo: € <%= String.format("%.2f", p.getPrezzo()) %></p>
+        <p style="font-weight: bold; color: red; font-size: 26px">€ <%= String.format("%.2f", p.getPrezzo()) %></p>
 
         <button onclick="aggiungiCarrelloAjax(<%= p.getId_prodotto() %>)">
           <i class="fas fa-shopping-cart" style="margin-right: 6px;"></i> Aggiungi al carrello
@@ -168,7 +165,6 @@
         <select name="categoriaId" required>
           <option value=""> Seleziona categoria</option>
           <%
-            request.getAttribute("categorie");
             if (categorie != null) {
               for (Categoria c : categorie) {
           %>
@@ -217,7 +213,6 @@
         <select name="categoriaId" required>
           <option value=""> Seleziona categoria</option>
           <%
-            request.getAttribute("categorie");
             if (categorie != null) {
               for (Categoria c : categorie) {
           %>
@@ -238,6 +233,13 @@
       </select> <br><br>
 
         <strong>Editore:</strong> <input type="text" name="editore"><br><br>
+        <strong>Disponibilità:</strong>
+        <label>
+          <input type="radio" name="disponibilita" value="true"> Disponibile
+        </label><br>
+        <label>
+          <input type="radio" name="disponibilita" value="false"> <br> Non Disponibile
+        </label> <br><br>
         <button type="submit">Modifica</button>
       </form>
     </div>
@@ -340,6 +342,12 @@
 
               formEl.querySelector("select[name='lingua']").value = prodotto.lingua || "";
               formEl.querySelector("input[name='editore']").value = prodotto.editore || "";
+
+              if (prodotto.disponibilita === true) {
+                formEl.querySelector("input[name='disponibilita'][value='true']").checked = true;
+              } else {
+                formEl.querySelector("input[name='disponibilita'][value='false']").checked = true;
+              }
 
               immagini.forEach(img => {
                 const wrapper = document.createElement("div");

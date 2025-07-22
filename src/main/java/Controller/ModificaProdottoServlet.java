@@ -96,7 +96,9 @@ public class ModificaProdottoServlet extends HttpServlet {
                     : null;
             String lingua = request.getParameter("lingua");
             String editore = request.getParameter("editore");
-            int idCategoria = Integer.parseInt(request.getParameter("categoriaId"));  // <-- aggiunto
+            int idCategoria = Integer.parseInt(request.getParameter("categoriaId"));
+            String disponibilitaStr = request.getParameter("disponibilita");
+            boolean disponibilita = "true".equals(disponibilitaStr);
 
             ProdottoDAO dao = new ProdottoDAO();
             ImmagineProdottoDAO immagineDAO = new ImmagineProdottoDAO();
@@ -151,7 +153,8 @@ public class ModificaProdottoServlet extends HttpServlet {
             p.setDataUscita(dataUscita);
             p.setLingua(lingua);
             p.setEditore(editore);
-            p.setId_categoria(idCategoria);  // <-- aggiunto
+            p.setId_categoria(idCategoria);
+            p.setDisponibilita(disponibilita);
 
             dao.doUpdate(p);
 

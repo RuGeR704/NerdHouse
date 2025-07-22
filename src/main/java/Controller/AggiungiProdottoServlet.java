@@ -17,6 +17,7 @@ import java.io.IOException;
 import java.nio.file.Paths;
 import java.sql.Date;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
@@ -54,6 +55,7 @@ public class AggiungiProdottoServlet extends HttpServlet {
         p.setDataUscita(data);
         p.setEditore(editore);
         p.setPrezzo(prezzo);
+        p.setDisponibilita(true);
 
         ProdottoDAO prodottoDAO = new ProdottoDAO();
         int idProdotto = prodottoDAO.doSave(p);
@@ -68,6 +70,8 @@ public class AggiungiProdottoServlet extends HttpServlet {
         // Gestione upload immagini multiple
         Collection<Part> parts = request.getParts();
         int ordine = 1;
+
+        List<ImmagineProdotto> immaginiProdotto = new ArrayList<>();
 
         for (Part part : parts) {
             if ("immagini[]".equals(part.getName()) && part.getSize() > 0) {
@@ -88,9 +92,18 @@ public class AggiungiProdottoServlet extends HttpServlet {
                     e.printStackTrace();
                 }
 
+                ImmagineProdotto img = new ImmagineProdotto();
+                img.setIdProdotto(idProdotto);
+                img.setOrdine(ordine);
+                img.setPercorsoImmagine(percorsoRelativo);
+                img.setAltText("Immagine prodotto " + ordine);
+                immaginiProdotto.add(img);
+
                 ordine++;
             }
         }
+
+        p.setImmagini(immaginiProdotto);
 
         List<Prodotto> prodottiAggiornati = prodottoDAO.doRetrieveAll();
 

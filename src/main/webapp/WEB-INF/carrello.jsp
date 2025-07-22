@@ -8,6 +8,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page import="Model.ContenutoCarrello, Model.Prodotto" %>
 <%@ page import="java.util.List" %>
+<%@ page import="Model.ImmagineProdotto" %>
 <%
   List<ContenutoCarrello> contenuti = (List<ContenutoCarrello>) request.getAttribute("contenuti");
   String baseURL = request.getContextPath();
@@ -17,6 +18,7 @@
 <head>
   <title>Carrello | Nerd House</title>
   <link rel="stylesheet" href="<%=baseURL%>/css/styles.css" type="text/css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
 <body>
 
@@ -53,7 +55,19 @@
           <%= prodotto.getTitolo() %>
         </a>
       </td>
-      <td><img id="img-<%= prodotto.getId_prodotto() %>" style="width:100px;"></td>
+      <td>
+        <%
+          List<ImmagineProdotto> immagini = new Model.ImmagineProdottoDAO().doRetrieveByProdotto(prodotto.getId_prodotto());
+          if (immagini != null && !immagini.isEmpty()) {
+            ImmagineProdotto img = immagini.getFirst();
+        %>
+        <div><img class="img-prodotto" src="<%= request.getContextPath() + img.getPercorsoImmagine() %>" style="height: 120px; width: auto;" /></div>
+        <%
+            } else {
+        %>
+        <div><img src="<%= baseURL %>/images/default.jpg" style="height: 120px; width: auto;"/></div>
+        <% } %>
+      </td>
       <td>€ <%= String.format("%.2f", prezzo) %></td>
       <td><%= quantita %></td>
       <td>€ <%= String.format("%.2f", subtotale) %></td>
@@ -78,18 +92,22 @@
 <jsp:include page="/WEB-INF/fragments/footer.jsp" />
 
 <script>
-  const immaginiProdotti = {
-    1: "<%=baseURL%>/images/prodotto1.jpg",
-    2: "<%=baseURL%>/images/prodotto2.jpg",
-    3: "<%=baseURL%>/images/prodotto3.jpg"
-  };
 
-  <% for (ContenutoCarrello item : contenuti) { %>
-  const imgTag<%= item.getProdotto().getId_prodotto() %> = document.getElementById("img-<%= item.getProdotto().getId_prodotto() %>");
-  if (imgTag<%= item.getProdotto().getId_prodotto() %>) {
-    imgTag<%= item.getProdotto().getId_prodotto() %>.src = immaginiProdotti[<%= item.getProdotto().getId_prodotto() %>] || "<%=baseURL%>/images/default.jpg";
-  }
-  <% } %>
+  //Slider immagini
+  document.addEventListener("DOMContentLoaded", function () {
+    document.querySelectorAll(".my-slider").forEach(slider => {
+      tns({
+        container: slider,
+        items: 1,
+        slideBy: "page",
+        autoplay: true,
+        controls: true,
+        nav: false,
+        autoplayButtonOutput: false,
+        controlsText: ['&#10094;', '&#10095;']
+      });
+    });
+  });
 </script>
 
 </body>

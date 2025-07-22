@@ -14,15 +14,14 @@ public class WishlistServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         Utente utente = (Utente) request.getSession().getAttribute("utente");
         if (utente == null) {
-            response.sendRedirect("login.jsp");
+            response.sendRedirect("userServlet");
             return;
         }
 
         WishlistDAO wishlistDAO = new WishlistDAO();
-        int idWishlist = wishlistDAO.doRetrieveIdWishlistByUtente(utente.getId());
         List<Prodotto> prodotti = wishlistDAO.doRetrieveWishlistByUtente(utente.getId());
 
         request.setAttribute("prodotti", prodotti);
-        request.getRequestDispatcher("/WEB-INF/jsp/AreaUtente.jsp").forward(request, response);
+        response.sendRedirect(request.getContextPath() + "/userServlet?sezione=wishlist");
     }
 }
