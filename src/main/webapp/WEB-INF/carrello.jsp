@@ -83,6 +83,7 @@
   </table>
   <h2>Totale carrello: € <%= String.format("%.2f", totale) %></h2>
   <form action="checkout" method="get">
+    <input type="hidden" name="totale" value="<%= String.format("%.2f", totale) %>">
     <button type="submit">Procedi al Checkout</button>
   </form>
   <% } %>

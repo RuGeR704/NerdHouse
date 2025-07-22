@@ -40,7 +40,7 @@ public class CheckoutServlet extends HttpServlet {
 
         if (prodottiCarrello == null || prodottiCarrello.isEmpty()) {
             request.setAttribute("errore", "Carrello vuoto");
-            request.getRequestDispatcher("/WEB-INF/checkout.jsp").forward(request, response);
+            request.getRequestDispatcher("/WEB-INF/jsp/checkout.jsp").forward(request, response);
             return;
         }
 
@@ -69,7 +69,7 @@ public class CheckoutServlet extends HttpServlet {
         carrelloDAO.doUpdate(carrello);
 
         request.setAttribute("messaggio", "Ordine effettuato con successo!");
-        request.getRequestDispatcher("/WEB-INF/ordineConfermato.jsp").forward(request, response);
+        request.getRequestDispatcher("/WEB-INF/jsp/ordineConfermato.jsp").forward(request, response);
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response)

@@ -4,10 +4,7 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * DAO per recuperare gli ordini di un utente con i dettagli del prodotto (titolo).
- * Utilizza una JOIN tra Ordine e Prodotto.
- */
+
 public class OrdineDAO {
 
     /**
@@ -21,10 +18,11 @@ public class OrdineDAO {
         List<OrdineDettaglio> ordini = new ArrayList<>();
 
         String sql = """
-            SELECT o.ID_Prodotto, p.Titolo, o.Pagamento, o.Indirizzo_Ordine,
+            SELECT co.ID_Prodotto, p.Titolo, o.Pagamento, o.Indirizzo_Ordine,
                    o.Stato, o.Data_Ordine
             FROM Ordine o
-            JOIN Prodotto p ON o.ID_Prodotto = p.ID_Prodotto
+            JOIN Contenuto_ordine co ON co.ID_Ordine = o.ID_Ordine
+            JOIN Prodotto p ON co.ID_Prodotto = p.ID_Prodotto
             WHERE o.ID_Utente = ?
             ORDER BY o.Data_Ordine DESC
         """;
