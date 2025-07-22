@@ -7,6 +7,8 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page import="Model.Prodotto, java.util.List" %>
+<%@ page import="Model.ImmagineProdotto" %>
+<%@ page import="Model.ImmagineProdottoDAO" %>
 <%
   List<Prodotto> prodotti = (List<Prodotto>) request.getAttribute("prodotti");
   List<String> tipi = (List<String>) request.getAttribute("tipi");
@@ -23,6 +25,8 @@
 <body>
 
 <jsp:include page="/WEB-INF/fragments/header.jsp"/>
+
+<div class="content-shop">
 
 <main style="display: flex; margin: 40px;">
   <aside style="width: 20%; padding: 20px; background: #f1f1f1; border-radius: 10px; margin-right: 20px;">
@@ -74,22 +78,64 @@
   <section style="flex: 1; display: flex; flex-wrap: wrap; gap: 20px;">
     <% if (prodotti != null && !prodotti.isEmpty()) {
       for (Prodotto p : prodotti) { %>
-    <div class="product-card" style="border: 1px solid #ccc; padding: 15px; width: 200px;">
-      <h3><%= p.getTitolo() %></h3>
-      <p><%= p.getDescrizione() %></p>
-      <p>€ <%= String.format("%.2f", p.getPrezzo()) %></p>
-      <form action="aggiungiCarrello" method="post">
+    <div class="product-card" style="flex: 1 1 200px; border: 2px solid #ddd; border-radius: 10px; padding: 15px; max-width: 250px; background: #fff;">
+      <div class="slider-container">
+        <div class="product-images my-slider" id="slider-<%= p.getId_prodotto() %>">
+          <%
+            List<ImmagineProdotto> immagini = new ImmagineProdottoDAO().doRetrieveByProdotto(p.getId_prodotto());
+            if (immagini != null && !immagini.isEmpty()) {
+              for (ImmagineProdotto img : immagini) {
+          %>
+          <a href="dettaglioProdotto?idProdotto=<%= p.getId_prodotto() %>">
+            <div><img class="img-prodotto" src="<%= baseURL + img.getPercorsoImmagine() %>" style="width:100%;" /></div>
+          </a>
+          <% } } else { %>
+          <a href="dettaglioProdotto?idProdotto=<%= p.getId_prodotto() %>">
+            <div><img src="<%= baseURL %>/images/default.jpg" style="width:100%;" /></div>
+          </a>
+          <% } %>
+        </div>
+      </div>
+      <h3 style="color: black;"><%= p.getTitolo() %></h3>
+      <p style="font-weight: bold; color: red; font-size: 26px">€ <%= String.format("%.2f", p.getPrezzo()) %></p>
+
+      <button onclick="aggiungiCarrelloAjax(<%= p.getId_prodotto() %>)">
+        <i class="fas fa-shopping-cart" style="margin-right: 6px;"></i> Aggiungi al carrello
+      </button>
+
+      <form action="aggiungiWishlist" method="post" style="margin-top: 10px;">
         <input type="hidden" name="idProdotto" value="<%= p.getId_prodotto() %>">
-        <button type="submit">Aggiungi al Carrello</button>
+        <button class="wishlist-btn">
+          <i class="fas fa-heart" style="color: red; margin-right: 6px;"></i> Wishlist
+        </button>
       </form>
     </div>
-    <% } } else { %>
-    <p>Nessun prodotto trovato.</p>
+    <% }} else { %>
+    <p style="color:red; font-weight:bold;">Nessun prodotto trovato con questi filtri.</p>
     <% } %>
   </section>
 </main>
+</div>
 
 <jsp:include page="/WEB-INF/fragments/footer.jsp"/>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    document.querySelectorAll(".my-slider").forEach(slider => {
+      tns({
+        container: slider,
+        items: 1,
+        slideBy: "page",
+        autoplay: true,
+        controls: true,
+        nav: false,
+        autoplayButtonOutput: false,
+        controlsText: ['&#10094;', '&#10095;']
+      });
+    });
+  });
+
+</script>
 
 </body>
 </html>

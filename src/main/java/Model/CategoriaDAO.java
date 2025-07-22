@@ -24,6 +24,7 @@ public class CategoriaDAO {
         }
     }
 
+
     public Categoria doRetrieveByTipo(String tipo) {
         try (Connection con = ConPool.getConnection()) {
             PreparedStatement ps = con.prepareStatement("SELECT * FROM categoria WHERE tipo = ?");
@@ -60,6 +61,29 @@ public class CategoriaDAO {
             throw new RuntimeException("Errore nel recupero delle categorie", e);
         }
 
+        return categorie;
+    }
+
+
+    public List<Categoria> doRetrievebyNome(String nome) {
+        List<Categoria> categorie = new ArrayList<>();
+        String sql = "SELECT * FROM categoria WHERE Nome = ?";
+
+        try (Connection con = ConPool.getConnection();
+             PreparedStatement ps = con.prepareStatement(sql)) {
+            ps.setString(1, nome);
+
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                Categoria categoria = new Categoria();
+                categoria.setIdCategoria(rs.getInt("id_categoria"));
+                categoria.setNome(rs.getString("Nome"));
+                categoria.setTipo(rs.getString("Tipo"));
+                categorie.add(categoria);
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException("Errore nel recuperare la categoria per nome", e);
+        }
         return categorie;
     }
 

@@ -104,6 +104,7 @@
           %>
         </select><br><br>
 
+
         <label>Disponibilità:</label>
         <select name="disponibilita">
           <option value="">Tutte</option>
@@ -114,6 +115,8 @@
         <button type="submit">Filtra</button>
       </form>
     </aside>
+
+
 
 
     <!-- Prodotti -->

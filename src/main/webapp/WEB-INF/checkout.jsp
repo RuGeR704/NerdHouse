@@ -18,7 +18,6 @@
   List<MetodoPagamento> metodi = (List<MetodoPagamento>) request.getAttribute("metodi");
 
   if (prodottiCarrello == null || prodottiCarrello.isEmpty()) {
-    System.out.println("<p>Il carrello è vuoto. Non puoi procedere con il checkout.</p>");
     return;
   }
 %>
