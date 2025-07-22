@@ -312,7 +312,7 @@ public class ProdottoDAO {
             e.printStackTrace();
             throw new RuntimeException("Errore nel recupero autori", e);
         }
-        System.out.println("[DEBUG DAO] Autori trovati: " + autori);
+
         return autori;
     }
 
@@ -339,7 +339,6 @@ public class ProdottoDAO {
             e.printStackTrace();
             throw new RuntimeException("Errore nel recupero editori", e);
         }
-        System.out.println("[DEBUG DAO] Editori trovati: " + editori);
         return editori;
     }
 
@@ -481,6 +480,39 @@ public List<Boolean> doRetrieveAllDisponibilita(int idCategoria) {
             throw new RuntimeException(e);
         }
         return disponibilita;
+    }
+
+    public List<Prodotto> getProdottiByCategoria(String categoria) {
+        List<Prodotto> prodotti = new ArrayList<>();
+        String sql = """
+            SELECT p.ID_Prodotto, p.Titolo, p.Descrizione, p.Prezzo, p.Disponibilita, p.ID_Categoria
+            FROM prodotto p
+            JOIN categoria c ON p.ID_Categoria = c.ID_Categoria
+            WHERE c.Nome = ?;
+        """;
+
+        try (Connection con = ConPool.getConnection();
+             PreparedStatement ps = con.prepareStatement(sql)) {
+
+            ps.setString(1, categoria);
+            try (ResultSet rs = ps.executeQuery()) {
+                while (rs.next()) {
+                    Prodotto p = new Prodotto();
+                    p.setId_prodotto(rs.getInt("ID_Prodotto"));
+                    p.setTitolo(rs.getString("Titolo"));
+                    p.setDescrizione(rs.getString("Descrizione"));
+                    p.setPrezzo(rs.getDouble("Prezzo"));
+                    p.setDisponibilita(rs.getBoolean("Disponibilita"));
+                    p.setId_categoria(rs.getInt("ID_Categoria"));  // Assumiamo che il prodotto abbia un ID_Categoria
+                    prodotti.add(p);
+                }
+            }
+
+        } catch (SQLException e) {
+            throw new RuntimeException("Errore nel recupero dei prodotti della categoria " + categoria, e);
+        }
+
+        return prodotti;
     }
 
 }
