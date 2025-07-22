@@ -176,7 +176,6 @@ footer {
 
 .search-results-dropdown {
     position: absolute;
-    padding: 8px 12px 8px 36px;
     top: 100%;
     left: 0;
     right: 0;
@@ -196,9 +195,9 @@ footer {
 }
 
 #searchResults a {
+    color: black;
     text-decoration: none;
     font-weight: bold;
-    color: black;
 }
 
 /* Contenitore principale delle icone */

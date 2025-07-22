@@ -292,7 +292,6 @@
 
   //Funzione per aprire la modifica prodotto
 
-  const baseURL = "<%= request.getContextPath() %>";
 
   function apriOverlayModifica(idProdotto) {
     const form = document.getElementById("modificaForm");
@@ -359,7 +358,6 @@
 
                 // Assicurati che percorsoImmagine sia URL completo o relativa corretta
                 const imageEl = document.createElement("img");
-                const baseURL = "<%= baseURL %>";
 
                 imageEl.src = img.percorsoImmagine.startsWith("/")
                         ? baseURL + img.percorsoImmagine

@@ -60,8 +60,6 @@
 </main>
 
 <script>
-  var baseURL = '<%= request.getContextPath() %>';
-
   function aggiungiCarrelloAjax(idProdotto) {
     fetch(baseURL + "/aggiungiCarrello", {
       method: 'POST',

@@ -9,6 +9,22 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
   <style>
+    body{
+      background-color: #121212;
+    }
+
+    h2 {
+      font-size: 2.2em;
+      font-weight: 700;
+      color: gold;
+      text-decoration-line: underline;
+      text-decoration-thickness: 5px;
+      text-decoration-color: darkred;
+      margin-bottom: 20px;
+      letter-spacing: 1px;
+      text-align: center;
+    }
+
     .banner-container {
       position: relative;
       width: 100%;
@@ -72,6 +88,7 @@
     }
 
     .products-container {
+      background-color: #121212;
       display: flex;
       flex-wrap: wrap;
       justify-content: center;
@@ -169,7 +186,10 @@
   <div class="dots" id="dots"></div>
 </div>
 
+<h2>Prodotti in evidenza</h2>
+
 <div class="products-container">
+
   <!-- Prodotto 1: Luffy -->
   <div class="product">
     <a href="prodotti.jsp?nome=luffy-gear-five">

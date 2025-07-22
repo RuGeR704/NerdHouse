@@ -112,13 +112,12 @@
     slideBy: 'page',
     autoplay: false,
     controls: true,
-    nav: true,
-    mouseDrag: true,
+    nav: false,
+    controlsText: ['&#10094;', '&#10095;'],
     gutter: 10,
     speed: 400
   });
 
-  var baseURL = '<%= request.getContextPath() %>';
 
   function aggiungiCarrelloAjax(idProdotto) {
     fetch(baseURL + "/aggiungiCarrello", {
