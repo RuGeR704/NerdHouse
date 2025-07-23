@@ -128,7 +128,7 @@
                 <p style="font-weight: bold; color: red; font-size: 26px">€ <%= String.format("%.2f", p.getPrezzo()) %></p>
 
                 <button onclick="aggiungiCarrelloAjax(<%= p.getId_prodotto() %>)">
-                    <i class="fas fa-shopping-cart" style="margin-right: 6px;"></i> Aggiungi al carrello
+                    <i class="fas fa-cart-plus" style="margin-right: 6px;"></i> Aggiungi al carrello
                 </button>
 
                 <form action="aggiungiWishlist" method="post" style="margin-top: 10px;">
