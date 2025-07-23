@@ -109,7 +109,7 @@
     console.log(searchInput);
     const resultsDropdown = document.getElementById('searchResults');
 
-    //const baseURL = window.location.origin + window.location.pathname.substring(0, window.location.pathname.indexOf('/', 1))
+    const baseURL = window.location.origin + window.location.pathname.substring(0, window.location.pathname.indexOf('/', 1))
 
     searchInput.addEventListener('input', function () {
       const query = this.value.trim();

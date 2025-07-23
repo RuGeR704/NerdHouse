@@ -163,12 +163,7 @@
         });
     });
 
-    // Funzione fittizia per esempio: sostituisci con tua implementazione Ajax
-    function aggiungiCarrelloAjax(idProdotto) {
-        alert("Prodotto " + idProdotto + " aggiunto al carrello!");
-        // Qui la chiamata ajax reale per aggiungere al carrello
-    }
 </script>
 
 </body>
-</html>//
+</html>

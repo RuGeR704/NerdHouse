@@ -495,7 +495,7 @@
       });
     });
   });
-//chiusura script
+
 </script>
 
 </body>
