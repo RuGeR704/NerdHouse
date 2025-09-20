@@ -24,7 +24,7 @@
 
     <h2>Dati di accesso</h2>
 
-    <input type="text" id="email" name="email" placeholder="E-Mail" required><br><br>
+    <input type="email" id="email" name="email" placeholder="E-Mail" required><br><br>
 
     <input type="password" id="password" name="password" placeholder="Password" required><br><br>
 
@@ -37,7 +37,7 @@
     <input type="text" id="indirizzo" name="indirizzo" placeholder="Via/Numero/Città/Provincia/CAP" required><br><br>
 
     <label for="telefono">Numero di telefono</label><br>
-    <input type="tel" id="telefono" name="telefono" placeholder="+39 XXXXXXXXXX"><br><br>
+    <input type="tel" id="telefono" name="telefono" placeholder="+39 XXXXXXXXXX" required><br><br>
 
     <button type="submit">Invia</button>
 </form>

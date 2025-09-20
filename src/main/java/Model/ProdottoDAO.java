@@ -517,7 +517,7 @@ public List<Boolean> doRetrieveAllDisponibilita(int idCategoria) {
 
     public List<Prodotto> doRetrieveUltimi(int n) {
         List<Prodotto> prodotti = new ArrayList<>();
-        String sql = "SELECT * FROM prodotto ORDER BY data_inserimento DESC LIMIT ?";
+        String sql = "SELECT * FROM prodotto ORDER BY data_uscita DESC LIMIT ?";
 
         try (Connection con = ConPool.getConnection();
              PreparedStatement ps = con.prepareStatement(sql)) {
@@ -530,7 +530,7 @@ public List<Boolean> doRetrieveAllDisponibilita(int idCategoria) {
                 p.setId_prodotto(rs.getInt("id_prodotto"));
                 p.setTitolo(rs.getString("titolo"));
                 p.setPrezzo(rs.getDouble("prezzo"));
-                p.setDataUscita(rs.getDate("data_inserimento"));
+                p.setDataUscita(rs.getDate("data_uscita"));
                 prodotti.add(p);
             }
         } catch (SQLException e) {

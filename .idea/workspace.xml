@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ArtifactsWorkspaceSettings">
     <artifacts-to-build>
+      <artifact name="russo-disalvio-greco_pj:war" />
       <artifact name="russo-disalvio-greco_pj:war exploded" />
     </artifacts-to-build>
   </component>
@@ -9,22 +10,20 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e68e6447-583a-4dc7-bf39-39fcf0f11fef" name="Changes" comment="Aggiunta navbar all'header (3)">
-      <change afterPath="$PROJECT_DIR$/src/main/java/Controller/AggiungiProdottoServlet.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/Controller/CartCountServlet.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/Controller/InitServlet.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/Controller/ModificaProdottoServlet.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/Controller/RimuoviProdottoServlet.java" afterDir="false" />
+    <list default="true" id="e68e6447-583a-4dc7-bf39-39fcf0f11fef" name="Changes" comment="ProdottoDAO aggiornato">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Controller/AggiornaUtenteServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controller/AggiornaUtenteServlet.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Controller/NovitàServlet.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Model/ConPool.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Model/ConPool.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Model/ProdottoDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Model/ProdottoDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Model/Utente.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Model/Utente.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Model/UtenteDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Model/UtenteDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/RegistrationSuccess.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/RegistrationSuccess.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/error.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/error.jsp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/fragments/header.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/fragments/header.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/css/styles.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/css/styles.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/fumetti.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/fumetti.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/web.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/web.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/index.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/index.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/novita.jsp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/novità.jsp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/promozioni.jsp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/registrazione.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/registrazione.jsp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/webapp/shop.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/shop.jsp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -35,8 +34,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Jsp File" />
         <option value="CSS File" />
+        <option value="Jsp File" />
         <option value="Class" />
       </list>
     </option>
@@ -124,7 +123,7 @@
     <configuration name="AreaUtente.jsp" type="JavascriptDebugType" temporary="true" nameIsGenerated="true" uri="http://localhost:8080/russo_disalvio_greco_pj_war_exploded/WEB-INF/AreaUtente.jsp">
       <method v="2" />
     </configuration>
-    <configuration name="error.jsp" type="JavascriptDebugType" temporary="true" nameIsGenerated="true" uri="http://localhost:8080/russo_disalvio_greco_pj_war_exploded/WEB-INF/error.jsp">
+    <configuration name="error.jsp" type="JavascriptDebugType" temporary="true" nameIsGenerated="true" uri="http://localhost:8080/russo_disalvio_greco_pj_war_exploded/error.jsp">
       <method v="2" />
     </configuration>
     <configuration name="AreaUtente.jsp" type="#com.intellij.j2ee.web.tomcat.TomcatRunConfigurationFactory" factoryName="Local" temporary="true" APPLICATION_SERVER_NAME="Tomcat " ALTERNATIVE_JRE_ENABLED="false">
@@ -269,7 +268,11 @@
       <workItem from="1752669354288" duration="7536000" />
       <workItem from="1752734263249" duration="20965000" />
       <workItem from="1752826777090" duration="2212000" />
-      <workItem from="1752915335890" duration="1831000" />
+      <workItem from="1752915335890" duration="15126000" />
+      <workItem from="1753023135674" duration="11933000" />
+      <workItem from="1753085874150" duration="43885000" />
+      <workItem from="1753176510252" duration="49034000" />
+      <workItem from="1753259335934" duration="1208000" />
     </task>
     <task id="LOCAL-00001" summary="inizio progetto">
       <option name="closed" value="true" />
@@ -399,7 +402,111 @@
       <option name="project" value="LOCAL" />
       <updated>1752678574166</updated>
     </task>
-    <option name="localTasksCounter" value="17" />
+    <task id="LOCAL-00017" summary="Aggiunta counter al carrello + initServlet per caricare tutti i prodotti nello shop + Implementazioni funzioni di amministratore: Aggiunta, modifica e rimozione dei prodotti">
+      <option name="closed" value="true" />
+      <created>1752929727366</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1752929727366</updated>
+    </task>
+    <task id="LOCAL-00018" summary="Aggiunta Immagini prodotto: aggiunta e rimozione di immagini per il prodotto (modifica immagini non disponibile) + slider automatico nello shop">
+      <option name="closed" value="true" />
+      <created>1752949325685</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1752949325685</updated>
+    </task>
+    <task id="LOCAL-00019" summary="slider fixato">
+      <option name="closed" value="true" />
+      <created>1753035570732</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1753035570732</updated>
+    </task>
+    <task id="LOCAL-00020" summary="Modifica Prodotti completata">
+      <option name="closed" value="true" />
+      <created>1753120936554</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1753120936554</updated>
+    </task>
+    <task id="LOCAL-00021" summary="slider prodotti corretto">
+      <option name="closed" value="true" />
+      <created>1753122450172</created>
+      <option name="number" value="00021" />
+      <option name="presentableId" value="LOCAL-00021" />
+      <option name="project" value="LOCAL" />
+      <updated>1753122450172</updated>
+    </task>
+    <task id="LOCAL-00022" summary="modifiche grafiche shop">
+      <option name="closed" value="true" />
+      <created>1753124165468</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1753124165468</updated>
+    </task>
+    <task id="LOCAL-00023" summary="Wishlist aggiornata">
+      <option name="closed" value="true" />
+      <created>1753139328788</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1753139328788</updated>
+    </task>
+    <task id="LOCAL-00024" summary="Modifiche al dettaglio del prodotto + modifiche grafiche shop + correzioni varie">
+      <option name="closed" value="true" />
+      <created>1753151604301</created>
+      <option name="number" value="00024" />
+      <option name="presentableId" value="LOCAL-00024" />
+      <option name="project" value="LOCAL" />
+      <updated>1753151604301</updated>
+    </task>
+    <task id="LOCAL-00025" summary="Implementazione Barra di Ricerca">
+      <option name="closed" value="true" />
+      <created>1753181737081</created>
+      <option name="number" value="00025" />
+      <option name="presentableId" value="LOCAL-00025" />
+      <option name="project" value="LOCAL" />
+      <updated>1753181737081</updated>
+    </task>
+    <task id="LOCAL-00026" summary="correzione bug">
+      <option name="closed" value="true" />
+      <created>1753194265384</created>
+      <option name="number" value="00026" />
+      <option name="presentableId" value="LOCAL-00026" />
+      <option name="project" value="LOCAL" />
+      <updated>1753194265384</updated>
+    </task>
+    <task id="LOCAL-00027" summary="Checkout completato + visualizzazione ordini + pagina di errore">
+      <option name="closed" value="true" />
+      <created>1753221371064</created>
+      <option name="number" value="00027" />
+      <option name="presentableId" value="LOCAL-00027" />
+      <option name="project" value="LOCAL" />
+      <updated>1753221371064</updated>
+    </task>
+    <task id="LOCAL-00028" summary="Pagine dello shop per categorie">
+      <option name="closed" value="true" />
+      <created>1753228424603</created>
+      <option name="number" value="00028" />
+      <option name="presentableId" value="LOCAL-00028" />
+      <option name="project" value="LOCAL" />
+      <updated>1753228424603</updated>
+    </task>
+    <task id="LOCAL-00029" summary="ProdottoDAO aggiornato">
+      <option name="closed" value="true" />
+      <created>1753228514224</created>
+      <option name="number" value="00029" />
+      <option name="presentableId" value="LOCAL-00029" />
+      <option name="project" value="LOCAL" />
+      <updated>1753228514224</updated>
+    </task>
+    <option name="localTasksCounter" value="30" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -417,10 +524,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="inizio progetto" />
-    <MESSAGE value="creazione beans" />
-    <MESSAGE value="correzione servlet" />
-    <MESSAGE value="servlet registrazione + html" />
     <MESSAGE value="UtenteDAO, pagina di successo per la registrazione, pagina di errore, pagina di login(da continuare), ConPool per la connessione al database (cambiare username e password del database altrimenti è impossibile accedere)" />
     <MESSAGE value="inizio css e AreaUtente, poi rifinitura login e registrazione" />
     <MESSAGE value="Logo aggiornato" />
@@ -433,6 +536,19 @@
     <MESSAGE value="Rimozione log di debug" />
     <MESSAGE value="Aggiunta navbar all'header + rifinimenti vari" />
     <MESSAGE value="Aggiunta navbar all'header (2)" />
-    <option name="LAST_COMMIT_MESSAGE" value="Aggiunta navbar all'header (2)" />
+    <MESSAGE value="Aggiunta counter al carrello + initServlet per caricare tutti i prodotti nello shop + Implementazioni funzioni di amministratore: Aggiunta, modifica e rimozione dei prodotti" />
+    <MESSAGE value="Aggiunta Immagini prodotto: aggiunta e rimozione di immagini per il prodotto (modifica immagini non disponibile) + slider automatico nello shop" />
+    <MESSAGE value="slider fixato" />
+    <MESSAGE value="Modifica Prodotti completata" />
+    <MESSAGE value="slider prodotti corretto" />
+    <MESSAGE value="modifiche grafiche shop" />
+    <MESSAGE value="Wishlist aggiornata" />
+    <MESSAGE value="Modifiche al dettaglio del prodotto + modifiche grafiche shop + correzioni varie" />
+    <MESSAGE value="Implementazione Barra di Ricerca" />
+    <MESSAGE value="correzione bug" />
+    <MESSAGE value="Checkout completato + visualizzazione ordini + pagina di errore" />
+    <MESSAGE value="Pagine dello shop per categorie" />
+    <MESSAGE value="ProdottoDAO aggiornato" />
+    <option name="LAST_COMMIT_MESSAGE" value="ProdottoDAO aggiornato" />
   </component>
 </project>

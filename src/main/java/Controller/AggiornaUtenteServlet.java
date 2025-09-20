@@ -25,8 +25,19 @@ public class AggiornaUtenteServlet extends HttpServlet {
         String email = request.getParameter("email");
         String indirizzo = request.getParameter("indirizzo");
         String dataNascita_str = request.getParameter("dataNascita");
-        Date dataNascita = Date.valueOf(dataNascita_str);
         String telefono = request.getParameter("telefono");
+
+        Date dataNascita = null;
+        if (dataNascita_str != null && !dataNascita_str.isEmpty()) {
+            try {
+                dataNascita = Date.valueOf(dataNascita_str); // formato yyyy-MM-dd
+            } catch (IllegalArgumentException e) {
+                e.printStackTrace();
+                request.setAttribute("errore", "Formato data non valido");
+                request.getRequestDispatcher("/WEB-INF/AreaUtente.jsp").forward(request, response);
+                return;
+            }
+        }
 
         utente.setNome(nome);
         utente.setCognome(cognome);
@@ -44,7 +55,7 @@ public class AggiornaUtenteServlet extends HttpServlet {
         }
 
         session.setAttribute("utente", utente);
-        request.getRequestDispatcher("/WEB-INF/AreaUtente.jsp").forward(request, response);
+        response.sendRedirect("userServlet");
 
     }
 
